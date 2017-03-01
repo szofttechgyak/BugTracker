@@ -1,0 +1,27 @@
+s1,s2,s3 kategóriák (ezek fontossági sorrendet jelentenek) - ha nem kezd el foglalkozni vele senki, akkor e-mail, hogy ejnye-bejnye a projekthez beállított default címre
+projektekhez lehet beállítani, hogy ezek a kategóriák milyn időintervallumot jelentsenek
+mikor egy felhasználó bejelent egy problémát, beállítja, hogy ez milyen kategóriába tartozik
+
+statisztika arról, hogy mennyit sikerül időben megcsinálni, illetve mennyit nem
+ezek kategóriákra bontva - projektekre bontva, havi bontásban
+
+összesen mennyi időt vett igénybe, illetve személyenként
+táblázatok ezekből 
+projektek és hónapok - elvégzett munkaidő a cellákban
+emberek és hónapok - munkaidő a cellákban
+
+extjs - front end
+közte rest api
+java - back end
+
+logolni a tevékenységeket
+
+törölni ne lehessen az adatbázisból
+
+kell egy jóváhagyó szerepkör is
+
+kötelező: linux szerveren megy, mysql adatbázis, java backend, aktív js kliens
+
+feltételezések és függőségek: hanyas jre, mysql verzió stb
+
+nem funkc: csak bejelentkezettek mehetnek, csak a hozzájuk rendelt projektben dolgozhatnak a userek, legalább 10 user egyszerre stb, UI legyen magyar
