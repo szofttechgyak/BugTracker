@@ -1,24 +1,59 @@
-# Login
+﻿# Bejelentkezés
 
-## HTTP k�r�s form�ja
+## HTTP kérés formája
 
-`POST http://host/login?id=username&pwd=password`
+`POST http://host/bugtracker/login`
 
-## A lek�rdez�s param�terei
+## A lekérdezés paraméterei
 
-  * *id* a felhaszn�l�
-  * *pwd* a felhaszn�l�hoz megadott jelsz�
+Nincs
 
-## HTTP st�tusz k�dok
+## HTTP státusz kódok
 
-  * *200 OK* sikeres bejelentkez�s
-  * *404 NOTFOUND* sikertelen bejelentkez�s, rossz felhaszn�l�n�v vagy jelsz�
+  * **200 OK** sikeres bejelentkezés
+  * **401 UNAUTHORIZED** sikertelen bejelentkezés, rossz felhasználónév vagy jelszó
   
-## Bek�ld�tt dokumentum
+## Beküldött dokumentum
 
 ```json
 {
-    id: "almafa"
-    pwd: "almafa123"
+    "id": "almafa"
+    "pwd": "almafa123"
+}
+```
+
+# Projektek megtekintése
+
+A felhasználó projektjeinek kilistázása
+
+## HTTP kérés formája
+
+  * `GET http://host/bugtracker/projects`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND** az erőforrás nem található 
+  
+## A lekért dokumentum
+
+A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
+
+```json
+{
+    data: [
+        {
+            "id": 1,
+            "name": "Bug Tracker"
+        },
+        {
+            "id": 3,
+            "name": "Bug Tracker teszt" 
+        }
+    ]
 }
 ```
