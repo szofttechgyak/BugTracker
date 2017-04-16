@@ -10,8 +10,8 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK** sikeres bejelentkezés
-  * **401 UNAUTHORIZED** sikertelen bejelentkezés, rossz felhasználónév vagy jelszó
+  * **200 OK:** sikeres bejelentkezés
+  * **401 UNAUTHORIZED:** sikertelen bejelentkezés, rossz felhasználónév vagy jelszó
   
 ## Beküldött dokumentum
 
@@ -36,8 +36,8 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK** az erőforrás rendelkezésre áll
-  * **404 NOTFOUND** az erőforrás nem található 
+  * **200 OK:** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND:** az erőforrás nem található 
   
 ## A lekért dokumentum
 
@@ -66,12 +66,12 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
 
 ## A lekérdezés paraméterei
 
-  * **id** a projekt azonosítója
+  * **id:** a projekt azonosítója
 
 ## HTTP státusz kódok
 
-  * **200 OK** az erőforrás rendelkezésre áll
-  * **404 NOTFOUND** az erőforrás nem található 
+  * **200 OK:** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND:** az erőforrás nem található 
   
 ## A lekért dokumentum
 
@@ -104,10 +104,11 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
                 "id": 3,
                 "name": "user1"
             },
-            "priority": "urgent",
+            "priority": "s1",
             "status": {
                 "description": "pending",
-                "start_time": "2017.15.04"
+                "start_time": "2017.04.15",
+                "end_time": ""
             }
         },
         {
@@ -121,11 +122,135 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
                 "id": 4,
                 "name": "user2"
             },
-            "priority": "urgent",
+            "priority": "s1",
             "status": {
                 "description": "pending",
-                "start_time": "2017.15.04"
+                "start_time": "2017.04.15",
+                "end_time": ""
             }
+        }
+    ],
+    "history": [
+        {
+            "id": 1,
+            "description": "Új hibajegy került felvételre: Hiányzik a REST API dokumentáció",
+            "date": "2017.04.15."
+        },
+        {
+            "id": 2,
+            "description": "Új hibajegy került felvételre: Hiányos az adatmodell",
+            "date": "2017.04.15."
+        }
+    ]
+}
+```
+
+# Projekt hozzáadása
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/new_project`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeres hozzáadás
+  * **400 BADREQUEST:** hiányos kitöltés
+  
+## Beküldött dokumentum
+
+```json
+{
+    "name": "Bug Tracker",
+    "description": "A Bug Tracker projekthez tartozó hibajegyek kezelése",
+    "default_approver": "almafa",
+    "default_developer": "almafa2",
+    "s1": 10,
+    "s2": 20,
+    "s3": 30
+}
+```
+
+# Felhasználó hozzáadása
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/new_user`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeres hozzáadás
+  * **400 BADREQUEST:** hiányos kitöltés
+  
+## Beküldött dokumentum
+
+```json
+{
+    "name": "almafa3",
+    "email": "almafa3@bugtracker.hu",
+    "role": "user",
+    "password": "1234"
+}
+```
+
+# Hibajegy megtekintése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/projects?id=1&ticketid=1`
+
+## A lekérdezés paraméterei
+
+  * **id:** a projekt azonosítója
+  * **ticketid:** a hibajegy azonosítója
+
+## HTTP státusz kódok
+
+  * **200 OK:** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND:** az erőforrás nem található 
+  
+## Lekért dokumentum
+
+A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
+
+```json
+{
+    "id": 1,
+    "name": "Hiányzik a REST API dokumentáció",
+    "owner": {
+        "id": 3,
+        "name": "user1"
+    },
+    "reporter": {
+        "id": 3,
+        "name": "user1"
+    },
+    "priority": "s1",
+    "status": {
+        "description": "pending",
+        "start_time": "2017.04.15",
+        "end_time": ""
+    },
+    "history": [
+        {
+            "id": 1,
+            "description": "A hibajegy felvételre került",
+            "date": "2017.04.15."
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "owner": "user1",
+            "description": "Nagyon sürgős, kérlek csináljátok meg",
+            "date": "2017.04.15."
         }
     ]
 }
