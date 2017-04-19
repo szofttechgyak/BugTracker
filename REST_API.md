@@ -198,6 +198,74 @@ Nincs
 ## A lekérdezés eredménye
 A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
 
+# Felhasználók lekérése
+
+A rendszerben szereplő felhasználók kilistázása.
+
+## HTTP kérés formája
+
+  * `GET http://host/bugtracker/users`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** a lekérdezés sikeres
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználók listázására
+  
+## A lekért dokumentum
+
+A lekért dokumentum tartalmazza a rendszerben szereplő felhasználók adatait
+
+```json
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Gipsz Jakab",
+            "email": "gipszjakab@gmail.com"
+        },
+        {
+            "id": 2,
+            "name": "Kert Elek",
+            "email": "kertelek@xyz.com"
+        }
+    ]
+}
+```
+
+# Konkrét felhasználó lekérése
+
+Egy rendszerben szereplő felhasználó adatainak lekérése.
+
+## HTTP kérés formája
+
+  * `GET http://host/bugtracker/user?id=1`
+
+## A lekérdezés paraméterei
+
+  * **id:** a projekt azonosítója
+
+## HTTP státusz kódok
+
+  * **200 OK:** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND:** az erőforrás nem található 
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználók listázására
+  
+## A lekért dokumentum
+
+A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait.
+
+```json
+{
+    "id": 1,
+    "name": "Gipsz Jakab",
+    "email": "gipszjakab@gmail.com"
+}
+```
+
 # Ügyfél / Fejlesztő / Jóváhagyó projekthez rendelése
 `POST http://host/bugtracker/assign?projectID=1&userID=1&role=client`
 
@@ -210,7 +278,7 @@ A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes j
 ## HTTP státusz kódok
 
   * **200 OK:** sikeresen hozzá lett rendelve a megadott szerepkörrel a felhasználó a projekthez
-  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó létrehozására
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó projekthez rendeléséhez
   
 # Hibajegy megtekintése
 
