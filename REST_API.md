@@ -21,7 +21,7 @@ Nincs
     "pwd": "almafa123"
 }
 ```
-
+[comment]: <> ------------------------------------------------------------------------------------------
 # Új ügyfél / fejlesztő / jóváhagyó hozzáadása
 `POST http://host/bugtracker/create_user`
 
@@ -39,13 +39,14 @@ Nincs
 ```json
 {
     "name": "Gipsz Jakab",
-    "email": "gipszjakab@company.com"
+    "email": "gipszjakab@company.com",
     "type": "client"
 }
 ```
 
 ## A lekérdezés eredménye
 A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
+[comment]: <> ------------------------------------------------------------------------------------------
 
 # Projektek megtekintése
 
