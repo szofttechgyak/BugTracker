@@ -301,7 +301,7 @@ Nincs
 ```json
 {
     "name": "Nem működik a hibajegyek rendezése",
-    "projectID": 21
+    "projectID": 21,
     "description": "Nem működik a gomb, amivel a hibajegyeket sürgősség szerint sorba tudnám rendezni.",
     "priority": "S3"
 }
@@ -328,7 +328,7 @@ Nincs
 ```json
 {
     "name": "Új szűrő felhasználókra",
-    "projectID": 10
+    "projectID": 10,
     "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
     "priority": "S2"
 }
@@ -389,3 +389,49 @@ A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
     ]
 }
 ```
+
+# Hibajegyhez / Igényhez megjegyzés fűzése
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/add_comment`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** az megjegyzés sikeresen a hibajegyhez / igényhez lett fűzve.
+  * **400 BADREQUEST:** hiányos kitöltés
+  * **404 NOT FOUND:** nem található megadott azonosítójú projektben megadott azonosítójú hibajegy / igény
+  
+## Beküldött dokumentum
+
+```json
+{
+    "project_id": 3,
+    "ticket_id": 224,
+    "comment": "Várható, hogy még ma elkészül a javítás?"
+}
+```
+
+# Hibajegyhez / Igényhez státuszának váltása
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/change_status?projectID=2&ticketID=34&old_status=pending&new_status=in_progress`
+
+## A lekérdezés paraméterei
+
+  * **projectID:** a projekt azonosítója
+  * **ticketID:** a hibajegy / igény azonosítója
+  * **old_status:** a hibajegy régi státusza
+  * **new_status:** a hibajegy új státusza
+
+## HTTP státusz kódok
+
+  * **200 OK:** a státusz változás sikeresen megtörtént
+  * **403 FORBIDDEN:** a megadott státusz változtatás nem engedélyezett
+  * **404 NOT FOUND:** nem található megadott azonosítójú projektben megadott azonosítójú hibajegy / igény
+  
