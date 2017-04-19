@@ -22,6 +22,31 @@ Nincs
 }
 ```
 
+# Új ügyfél / fejlesztő / jóváhagyó hozzáadása
+`POST http://host/bugtracker/create_user`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeresen létre lett hozva a felhasználó
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó létrehozására
+  * **403 FORBIDDEN:** a létrehozni kívánt felhasználó már létezik 
+  
+## Beküldött dokumentum
+```json
+{
+    "name": "Gipsz Jakab",
+    "email": "gipszjakab@company.com"
+    "type": "client"
+}
+```
+
+## A lekérdezés eredménye
+A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
+
 # Projektek megtekintése
 
 A felhasználó projektjeinek kilistázása
