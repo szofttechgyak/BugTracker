@@ -21,32 +21,6 @@ Nincs
     "pwd": "almafa123"
 }
 ```
-[comment]: <> ------------------------------------------------------------------------------------------
-# Új ügyfél / fejlesztő / jóváhagyó hozzáadása
-`POST http://host/bugtracker/create_user`
-
-## A lekérdezés paraméterei
-
-Nincs
-
-## HTTP státusz kódok
-
-  * **200 OK:** sikeresen létre lett hozva a felhasználó
-  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó létrehozására
-  * **403 FORBIDDEN:** a létrehozni kívánt felhasználó már létezik 
-  
-## Beküldött dokumentum
-```json
-{
-    "name": "Gipsz Jakab",
-    "email": "gipszjakab@company.com",
-    "type": "client"
-}
-```
-
-## A lekérdezés eredménye
-A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
-[comment]: <> ------------------------------------------------------------------------------------------
 
 # Projektek megtekintése
 
@@ -200,11 +174,8 @@ Nincs
 }
 ```
 
-# Felhasználó hozzáadása
-
-## HTTP kérés formája
-
-`POST http://host/bugtracker/new_user`
+# Új ügyfél / fejlesztő / jóváhagyó hozzáadása
+`POST http://host/bugtracker/create_user`
 
 ## A lekérdezés paraméterei
 
@@ -212,20 +183,35 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK:** sikeres hozzáadás
-  * **400 BADREQUEST:** hiányos kitöltés
+  * **200 OK:** sikeresen létre lett hozva a felhasználó
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó létrehozására
+  * **403 FORBIDDEN:** a létrehozni kívánt felhasználó már létezik 
   
 ## Beküldött dokumentum
-
 ```json
 {
-    "name": "almafa3",
-    "email": "almafa3@bugtracker.hu",
-    "role": "user",
-    "password": "1234"
+    "name": "Gipsz Jakab",
+    "email": "gipszjakab@company.com",
 }
 ```
 
+## A lekérdezés eredménye
+A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
+
+# Ügyfél / Fejlesztő / Jóváhagyó projekthez rendelése
+`POST http://host/bugtracker/assign?projectID=1&userID=1&role=client`
+
+## A lekérdezés paraméterei
+
+  * **projectID:** a projekt azonosítója
+  * **userID:** a felhasználó azonosítója
+  * **role:** a felhasználó szerepköre a projektben
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeresen hozzá lett rendelve a megadott szerepkörrel a felhasználó a projekthez
+  * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó létrehozására
+  
 # Hibajegy megtekintése
 
 ## HTTP kérés formája
