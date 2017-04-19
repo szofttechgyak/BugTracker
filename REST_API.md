@@ -416,7 +416,7 @@ Nincs
 }
 ```
 
-# Hibajegyhez / Igényhez státuszának váltása
+# Hibajegy / Igény státuszának váltása
 
 ## HTTP kérés formája
 
