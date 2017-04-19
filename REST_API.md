@@ -280,6 +280,60 @@ A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait
   * **200 OK:** sikeresen hozzá lett rendelve a megadott szerepkörrel a felhasználó a projekthez
   * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó projekthez rendeléséhez
   
+# Hibajegy létrehozása
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/create_ticket`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** a hibajegy létre lett hozva
+  * **400 BADREQUEST:** hiányos kitöltés
+  * **401 UNAUTHORIZED:** nincs megfelelő jog hibajegy létrehozására
+  
+## Beküldött dokumentum
+
+```json
+{
+    "name": "Nem működik a hibajegyek rendezése",
+    "projectID": 21
+    "description": "Nem működik a gomb, amivel a hibajegyeket sürgősség szerint sorba tudnám rendezni.",
+    "priority": "S3"
+}
+```
+
+# Igény létrehozása
+
+## HTTP kérés formája
+
+`POST http://host/bugtracker/create_feature_request`
+
+## A lekérdezés paraméterei
+
+Nincs
+
+## HTTP státusz kódok
+
+  * **200 OK:** az igény létre lett hozva
+  * **400 BADREQUEST:** hiányos kitöltés
+  * **401 UNAUTHORIZED:** nincs megfelelő jog igény létrehozására
+  
+## Beküldött dokumentum
+
+```json
+{
+    "name": "Új szűrő felhasználókra",
+    "projectID": 10
+    "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
+    "priority": "S2"
+}
+```
+  
 # Hibajegy megtekintése
 
 ## HTTP kérés formája
