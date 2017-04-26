@@ -2,7 +2,7 @@ package hu.elte.inf.software.technology.bugtracker.domain;
 
 public class Bug {
 
-    private final String description = "Hello, I am a bug";
+    private final String description = "Hello, I am a bug [from service]";
 
     public String getDescription() {
         return description;

@@ -21,6 +21,7 @@
 		<module>rest-api</module>
 		<module>application</module>
 		<module>domain</module>
+		<module>service</module>
 	</modules>
 
 	<repositories>
