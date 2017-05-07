@@ -15,7 +15,10 @@ Ext.define('Ticket', {
 		
 	proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/ticket',
+        url: 'http://localhost:8080/api/ticket',
+		headers: {
+			'authorization' : localStorage.getItem("JWT")
+		},
         reader: {
             type: 'json',
         },

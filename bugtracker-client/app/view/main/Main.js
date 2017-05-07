@@ -34,7 +34,7 @@ Ext.define('Bugtracker.view.main.Main', {
             xtype: 'button',
             text: 'Logout',
             margin: '10 0',
-            handler: 'onClickButton'
+            handler: 'onLogoutClicked'
         }]
     },
 

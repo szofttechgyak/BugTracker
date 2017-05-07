@@ -1,22 +1,33 @@
 Ext.define('Bugtracker.view.login.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.login',
-
+	
     onLoginClick: function() {
+		var authentication = {
+			username : Ext.getCmp("username").getValue(),
+			password : Ext.getCmp("password").getValue()
+		};
+		var displayField = Ext.getCmp("displayfield");
+		var _this = this;
 
-        // This would be the ideal location to verify the user's credentials via
-        // a server-side lookup. We'll just move forward for the sake of this example.
-
-        // Set the localStorage value to true
-        localStorage.setItem("TutorialLoggedIn", true);
-
-        // Remove Login Window
-        this.getView().destroy();
-
-        // Add the main view to the viewport
-        Ext.create({
-            xtype: 'app-main'
-        });
-
+		Ext.Ajax.request 
+		({ 
+			url: 'http://localhost:8080/login', 
+			method: 'POST',    
+			jsonData : authentication,
+			success: function(response) 
+			{ 
+			    localStorage.setItem("JWT", response.getResponseHeader('authorization'));
+				_this.getView().destroy();
+				Ext.create({
+					xtype: 'app-main'
+				});
+			}, 
+			failure: function(response) 
+			{ 
+				displayField.setValue("Wrong username or password");
+			}      
+		});  
+		
     }
 });

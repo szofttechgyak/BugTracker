@@ -22,18 +22,22 @@ Ext.define('Bugtracker.view.login.Login', {
         items: [{
             xtype: 'textfield',
             name: 'username',
+			id: 'username',
             fieldLabel: 'Username',
             allowBlank: false
         }, {
             xtype: 'textfield',
             name: 'password',
+			id: 'password',
             inputType: 'password',
             fieldLabel: 'Password',
             allowBlank: false
         }, {
             xtype: 'displayfield',
-            hideEmptyLabel: false,
-            value: 'Enter any non-blank password'
+			name: 'displayfield',
+			id: 'displayfield',
+            hideEmptyLabel: true,
+            value: ''
         }],
         buttons: [{
             text: 'Login',

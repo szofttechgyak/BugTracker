@@ -11,7 +11,12 @@ Ext.define('Bugtracker.store.AllTicketsStore', {
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/tickets',
+		
+		headers: {
+			'authorization' : localStorage.getItem("JWT")
+		},
+		
+        url: 'http://localhost:8080/api/tickets',
         reader: {
             type: 'json',
         },

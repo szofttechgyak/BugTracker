@@ -2,10 +2,6 @@ Ext.define('Bugtracker.view.main.AllTicketsList', {
     extend: 'Ext.grid.Panel',
     xtype: 'allticketslist',
 
-    requires: [
-        'Bugtracker.store.AllTicketsStore'
-    ],
-
     title: 'Tickets',
 
     store: {

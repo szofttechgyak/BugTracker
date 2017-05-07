@@ -13,14 +13,9 @@ Ext.define('Bugtracker.view.main.MainController', {
         }
     },
 
-    onClickButton: function () {
-        // Remove the localStorage key/value
-        localStorage.removeItem('TutorialLoggedIn');
-
-        // Remove Main View
+    onLogoutClicked: function () {
+        localStorage.removeItem("JWT");
         this.getView().destroy();
-
-        // Add the Login Window
         Ext.create({
             xtype: 'login'
         });

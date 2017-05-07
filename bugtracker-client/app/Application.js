@@ -7,13 +7,21 @@ Ext.define('Bugtracker.Application', {
     extend: 'Ext.app.Application',
     
     name: 'Bugtracker',
+	
+	requires: [
+		'Bugtracker.view.login.Login'
+    ],
 
     stores: [
         // TODO: add global / shared stores here
     ],
     
     launch: function () {
-        // TODO - Launch the application
+        var loggedIn;
+        loggedIn = localStorage.getItem("JWT");
+        Ext.create({
+            xtype: loggedIn ? 'app-main' : 'login'
+        });
     },
 
     onAppUpdate: function () {
