@@ -17,8 +17,8 @@ Ext.define('Bugtracker.Application', {
     ],
     
     launch: function () {
-        var loggedIn;
-        loggedIn = localStorage.getItem("JWT");
+        var loggedIn=true;
+        //loggedIn = localStorage.getItem("JWT");
         Ext.create({
             xtype: loggedIn ? 'app-main' : 'login'
         });
