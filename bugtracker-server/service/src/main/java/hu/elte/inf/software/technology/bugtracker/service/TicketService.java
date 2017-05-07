@@ -1,4 +1,4 @@
-package hu.elte.inf.software.technology.bugtracker.rest.api;
+package hu.elte.inf.software.technology.bugtracker.service;
 
 import java.util.ArrayList;
 import java.util.List;

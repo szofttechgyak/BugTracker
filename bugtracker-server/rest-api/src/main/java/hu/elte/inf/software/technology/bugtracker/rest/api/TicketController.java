@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.elte.inf.software.technology.bugtracker.domain.Ticket;
+import hu.elte.inf.software.technology.bugtracker.service.TicketService;
 
 @RestController
 public class TicketController {
