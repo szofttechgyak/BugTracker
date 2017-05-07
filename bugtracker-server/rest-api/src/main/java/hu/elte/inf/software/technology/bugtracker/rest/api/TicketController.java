@@ -14,13 +14,13 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
-    
-    @RequestMapping("/tickets")
+
+    @RequestMapping("/api/tickets")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
     }
-    
-    @RequestMapping("/ticket/{ticketId}")
+
+    @RequestMapping("/api/ticket/{ticketId}")
     public Ticket getTicket(@PathVariable int ticketId) {
         return ticketService.getTicketById(ticketId);
     }
