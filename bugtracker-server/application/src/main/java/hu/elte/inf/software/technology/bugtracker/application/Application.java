@@ -7,7 +7,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@SpringBootApplication(scanBasePackages = { "hu.elte.inf.software.technology.bugtracker.rest.api",
+@SpringBootApplication(scanBasePackages = { "hu.elte.inf.software.technology.bugtracker.service",
+                                            "hu.elte.inf.software.technology.bugtracker.rest.api",
                                             "hu.elte.inf.software.technology.bugtracker.application" })
 public class Application {
 
