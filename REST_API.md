@@ -445,7 +445,8 @@ Nincs
 {
     "project_id": 2,
     "ticket_id": 34,
-    "new_status": "in_progress"
+    "new_status": "in_progress",
+    "description": "Ide megy valami leírás"
 }
 ```
   
