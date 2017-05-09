@@ -267,18 +267,25 @@ A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait
 ```
 
 # Ügyfél / Fejlesztő / Jóváhagyó projekthez rendelése
-`POST http://host/bugtracker/assign?projectID=1&userID=1&role=client`
+`POST http://host/bugtracker/assign`
 
 ## A lekérdezés paraméterei
 
-  * **projectID:** a projekt azonosítója
-  * **userID:** a felhasználó azonosítója
-  * **role:** a felhasználó szerepköre a projektben
+Nincs
 
 ## HTTP státusz kódok
 
   * **200 OK:** sikeresen hozzá lett rendelve a megadott szerepkörrel a felhasználó a projekthez
   * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó projekthez rendeléséhez
+
+## Beküldött dokumentum
+```json
+{
+    "projectID": 1,
+    "userID": 1,
+    "role": "client"
+}
+```
   
 # Hibajegy létrehozása
 
@@ -420,18 +427,26 @@ Nincs
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/change_status?projectID=2&ticketID=34&old_status=pending&new_status=in_progress`
+`POST http://host/bugtracker/change_status`
 
 ## A lekérdezés paraméterei
 
-  * **projectID:** a projekt azonosítója
-  * **ticketID:** a hibajegy / igény azonosítója
-  * **old_status:** a hibajegy régi státusza
-  * **new_status:** a hibajegy új státusza
+Nincs
 
 ## HTTP státusz kódok
 
   * **200 OK:** a státusz változás sikeresen megtörtént
   * **403 FORBIDDEN:** a megadott státusz változtatás nem engedélyezett
   * **404 NOT FOUND:** nem található megadott azonosítójú projektben megadott azonosítójú hibajegy / igény
+  
+## Beküldött dokumentum
+
+```json
+{
+    "project_id": 2,
+    "ticket_id": 34,
+    "new_status": "in_progress",
+    "description": "Ide megy valami leírás"
+}
+```
   
