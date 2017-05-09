@@ -9,4 +9,22 @@
   <artifactId>dao</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>dao</name>
+  <dependencies>
+  <dependency>
+      <groupId>hu.elte.inf.software.technology</groupId>
+      <artifactId>domain</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>2.0.5</version>
+      </dependency>
+      <dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.2.10.Final</version>
+</dependency>
+    </dependencies>
 </project>
