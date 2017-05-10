@@ -1,11 +1,44 @@
 package hu.elte.inf.software.technology.bugtracker.domain;
 
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
 public class User {
 	
-	private long id;
+	@Id
+	@Column(name = "userId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
 	private String userName;
 	private String emailAddress;
 	private String password;
+	
+	
+	@OneToMany(mappedBy = "owner")
+	private Set<Ticket> ownedTickets;
+	
+	@OneToMany(mappedBy = "reporter")
+	private Set<Ticket> reportedTickets;
+	
+	
+	@OneToMany(mappedBy = "defaultApprover")
+	private Set<Ticket> approverTickets;
+	
+	
+	@OneToMany(mappedBy = "defaultDeveloper")
+	private Set<Ticket> developerTickets;
+	
+	
 	
 	public User(){
 	}
@@ -20,7 +53,7 @@ public class User {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -47,5 +80,38 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Set<Ticket> getOwnedTickets() {
+		return ownedTickets;
+	}
+
+	public void setOwnedTickets(Set<Ticket> ownedTickets) {
+		this.ownedTickets = ownedTickets;
+	}
+
+	public Set<Ticket> getReportedTickets() {
+		return reportedTickets;
+	}
+
+	public void setReportedTickets(Set<Ticket> reportedTickets) {
+		this.reportedTickets = reportedTickets;
+	}
+	
+	public Set<Ticket> getApproverTickets() {
+		return approverTickets;
+	}
+
+	public void setApproverTickets(Set<Ticket> approverTickets) {
+		this.approverTickets = approverTickets;
+	}
+
+	public Set<Ticket> getDeveloperTickets() {
+		return developerTickets;
+	}
+
+	public void setDeveloperTickets(Set<Ticket> developerTickets) {
+		this.developerTickets = developerTickets;
+	}
+
 	
 }
