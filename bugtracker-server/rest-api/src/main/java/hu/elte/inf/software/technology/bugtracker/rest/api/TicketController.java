@@ -3,6 +3,7 @@ package hu.elte.inf.software.technology.bugtracker.rest.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,8 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping("/api/tickets")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
