@@ -32,7 +32,7 @@ public class TicketDaoImpl implements TicketDao {
 	@SuppressWarnings("unchecked")
 	public List<Ticket> listTickets() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Ticket> ticketsList = session.createQuery("from Tickets").list();
+		List<Ticket> ticketsList = session.createQuery("from Ticket").list();
 		return ticketsList;
 	}
 

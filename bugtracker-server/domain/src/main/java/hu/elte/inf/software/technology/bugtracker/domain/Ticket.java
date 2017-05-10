@@ -1,24 +1,51 @@
 package hu.elte.inf.software.technology.bugtracker.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-//This is just a dummy entity for testing
+@Entity
+@Table(name = "Ticket")
 public class Ticket {
 
-    private long id;
+	
+	@Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ticketID")
+    private int id;
     private String ticketName;
     private String ticketType;
-    private User ownerId;
-    private User reporterId;
+    
+    @ManyToOne
+    @JoinColumn(name = "ownerId")
+    private User owner;
+    
+    @ManyToOne
+    @JoinColumn(name = "reporterId")
+    private User reporter;
+    
     private String priority;
     private int spentTime;
     private String ticketDescription;
-    private Project projectId;
     
-    public Ticket(){
+    @ManyToOne
+    @JoinColumn(name = "projectId")
+    private Project project;
+    
+    public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Ticket(){
     }
     
     public Ticket(String ticketName, String ticketType, User ownerId, 
@@ -26,22 +53,18 @@ public class Ticket {
     		      String ticketDescription, Project projectId) {
         this.ticketName = ticketName;
         this.ticketType = ticketType;
-        this.ownerId = ownerId;
-        this.reporterId = reporterId;
+        this.owner = ownerId;
+        this.reporter = reporterId;
         this.priority = priority;
         this.spentTime = spenTime;
         this.ticketDescription = ticketDescription;
-        this.projectId = projectId;
+        this.project = projectId;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ticketID", unique = true, nullable = false)
-    public long getId() {
+     public long getId() {
         return id;
     }
     
-    @Column(name = "ticketName", unique = true, nullable = false, length = 50)
     public String getName() {
         return ticketName;
     }
@@ -55,19 +78,19 @@ public class Ticket {
 	}
 
 	public User getOwnerId() {
-		return ownerId;
+		return owner;
 	}
 
 	public void setOwnerId(User ownerId) {
-		this.ownerId = ownerId;
+		this.owner = ownerId;
 	}
 
 	public User getReporterId() {
-		return reporterId;
+		return reporter;
 	}
 
 	public void setReporterId(User reporterId) {
-		this.reporterId = reporterId;
+		this.reporter = reporterId;
 	}
 
 	public String getPriority() {
@@ -95,11 +118,11 @@ public class Ticket {
 	}
 
 	public Project getProjectId() {
-		return projectId;
+		return project;
 	}
 
 	public void setProjectId(Project projectId) {
-		this.projectId = projectId;
+		this.project = projectId;
 	}
 
 }

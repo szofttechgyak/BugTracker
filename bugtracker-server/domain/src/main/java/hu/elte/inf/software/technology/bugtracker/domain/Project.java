@@ -1,16 +1,52 @@
 package hu.elte.inf.software.technology.bugtracker.domain;
 
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Project")
 public class Project {
 	
-	private long id;
+	@Id
+	@Column(name = "ProjectId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	private String projectName;
 	private String projectDescription;
-	private User defaultApproverId;
-	private User defaultDeveloperId;
+	
+	@ManyToOne
+    @JoinColumn(name = "defaultApproverId")
+	private User defaultApprover;
+	
+	@ManyToOne
+    @JoinColumn(name = "defaultDeveloperId")
+	private User defaultDeveloper;
+	
 	private int s1Time;
 	private int s2Time;
 	private int s3Time;
 	
+	@OneToMany(mappedBy = "project")
+	private Set<Ticket> tickets;
+	
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
 	public Project(){
 	}
 
@@ -18,8 +54,8 @@ public class Project {
 			       User defaultDeveloperId, int s1Time, int s2Time, int s3Time){
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
-	    this.defaultApproverId = defaultApproverId;
-	    this.defaultDeveloperId = defaultDeveloperId;
+	    this.defaultApprover = defaultApproverId;
+	    this.defaultDeveloper = defaultDeveloperId;
 	    this.s1Time = s1Time;
 	    this.s2Time = s2Time;
 	    this.s3Time = s3Time;
@@ -29,7 +65,7 @@ public class Project {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -50,19 +86,19 @@ public class Project {
 	}
 
 	public User getDefaultApproverId() {
-		return defaultApproverId;
+		return defaultApprover;
 	}
 
 	public void setDefaultApproverId(User defaultApproverId) {
-		this.defaultApproverId = defaultApproverId;
+		this.defaultApprover = defaultApproverId;
 	}
 
 	public User getDefaultDeveloperId() {
-		return defaultDeveloperId;
+		return defaultDeveloper;
 	}
 
 	public void setDefaultDeveloperId(User defaultDeveloperId) {
-		this.defaultDeveloperId = defaultDeveloperId;
+		this.defaultDeveloper = defaultDeveloperId;
 	}
 
 	public int getS1Time() {
