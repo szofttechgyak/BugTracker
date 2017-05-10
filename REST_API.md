@@ -78,6 +78,26 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nincs jogosultság a művelethez"
+}
+```
+
 # Konkrét projekt megtekintése
 
 ## HTTP kérés formája
@@ -162,6 +182,26 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
             "date": "2017.04.15."
         }
     ]
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt"
 }
 ```
 
@@ -296,13 +336,33 @@ A lekért dokumentum tartalmazza a rendszerben szereplő felhasználók adatait
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nincs jogosultság a művelethez"
+}
+```
+
 # Konkrét felhasználó lekérése
 
 Egy rendszerben szereplő felhasználó adatainak lekérése.
 
 ## HTTP kérés formája
 
-  * `GET http://host/bugtracker/user?id=1`
+  * `GET http://host/bugtracker/users?id=1`
 
 ## A lekérdezés paraméterei
 
@@ -323,6 +383,26 @@ A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait
     "id": 1,
     "name": "Gipsz Jakab",
     "email": "gipszjakab@gmail.com"
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező felhasználó"
 }
 ```
 
@@ -480,6 +560,26 @@ A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
             "date": "2017.04.15."
         }
     ]
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező jegy azonosító"
 }
 ```
 
