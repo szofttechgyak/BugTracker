@@ -22,6 +22,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Rossz felhasználó vagy jelszó"
+}
+```
+
 # Projektek megtekintése
 
 A felhasználó projektjeinek kilistázása
@@ -174,6 +194,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létezik a megadott felhasználó"
+}
+```
+
 # Új ügyfél / fejlesztő / jóváhagyó hozzáadása
 `POST http://host/bugtracker/create_user`
 
@@ -192,6 +232,26 @@ Nincs
 {
     "name": "Gipsz Jakab",
     "email": "gipszjakab@company.com",
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "A felhasználó már létezik"
 }
 ```
 
@@ -286,6 +346,26 @@ Nincs
     "role": "client"
 }
 ```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező felhasználó"
+}
+```
   
 # Hibajegy / Igény létrehozása
 
@@ -324,6 +404,26 @@ Nincs
     "type": "feature",
     "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
     "priority": "S2"
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt"
 }
 ```
   
@@ -409,6 +509,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező jegy azonosító"
+}
+```
+
 # Hibajegy / Igény státuszának váltása
 
 ## HTTP kérés formája
@@ -436,3 +556,22 @@ Nincs
 }
 ```
   
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező jegy azonosító"
+}
+```
