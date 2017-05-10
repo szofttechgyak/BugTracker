@@ -28,7 +28,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -37,7 +37,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Rossz felhasználó vagy jelszó"
 }
 ```
@@ -84,7 +84,7 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -93,7 +93,7 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nincs jogosultság a művelethez"
 }
 ```
@@ -191,7 +191,7 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -200,7 +200,7 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt"
 }
 ```
@@ -240,7 +240,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -249,7 +249,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létezik a megadott felhasználó"
 }
 ```
@@ -281,7 +281,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -290,7 +290,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "A felhasználó már létezik"
 }
 ```
@@ -342,7 +342,7 @@ A lekért dokumentum tartalmazza a rendszerben szereplő felhasználók adatait
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -351,7 +351,7 @@ A lekért dokumentum tartalmazza a rendszerben szereplő felhasználók adatait
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nincs jogosultság a művelethez"
 }
 ```
@@ -392,7 +392,7 @@ A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -401,7 +401,7 @@ A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező felhasználó"
 }
 ```
@@ -433,7 +433,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -442,7 +442,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt / Nem létező felhasználó"
 }
 ```
@@ -493,7 +493,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -502,7 +502,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt"
 }
 ```
@@ -569,7 +569,7 @@ A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -578,7 +578,7 @@ A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt / Nem létező jegy azonosító"
 }
 ```
@@ -615,7 +615,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -624,7 +624,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt / Nem létező jegy azonosító"
 }
 ```
@@ -662,7 +662,7 @@ Nincs
 
 ```json
 {
-    "status_code": "1",
+    "error_code": "0",
     "message": "OK"
 }
 ```
@@ -671,7 +671,7 @@ Nincs
 
 ```json
 {
-    "status_code": "0",
+    "error_code": "1",
     "message": "Nem létező projekt / Nem létező jegy azonosító"
 }
 ```
