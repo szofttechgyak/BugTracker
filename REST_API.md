@@ -246,7 +246,7 @@ Egy rendszerben szereplő felhasználó adatainak lekérése.
 
 ## A lekérdezés paraméterei
 
-  * **id:** a projekt azonosítója
+  * **id:** a felhasználó azonosítója
 
 ## HTTP státusz kódok
 
