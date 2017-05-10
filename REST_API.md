@@ -22,6 +22,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Rossz felhasználó vagy jelszó"
+}
+```
+
 # Projektek megtekintése
 
 A felhasználó projektjeinek kilistázása
@@ -174,6 +194,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létezik a megadott felhasználó"
+}
+```
+
 # Új ügyfél / fejlesztő / jóváhagyó hozzáadása
 `POST http://host/bugtracker/create_user`
 
@@ -192,6 +232,26 @@ Nincs
 {
     "name": "Gipsz Jakab",
     "email": "gipszjakab@company.com",
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "A felhasználó már létezik"
 }
 ```
 
@@ -246,7 +306,7 @@ Egy rendszerben szereplő felhasználó adatainak lekérése.
 
 ## A lekérdezés paraméterei
 
-  * **id:** a projekt azonosítója
+  * **id:** a felhasználó azonosítója
 
 ## HTTP státusz kódok
 
@@ -286,12 +346,32 @@ Nincs
     "role": "client"
 }
 ```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező felhasználó"
+}
+```
   
-# Hibajegy létrehozása
+# Hibajegy / Igény létrehozása
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/create_ticket`
+`POST http://host/bugtracker/create_issue`
 
 ## A lekérdezés paraméterei
 
@@ -299,9 +379,9 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK:** a hibajegy létre lett hozva
+  * **200 OK:** sikeres létrehozás
   * **400 BADREQUEST:** hiányos kitöltés
-  * **401 UNAUTHORIZED:** nincs megfelelő jog hibajegy létrehozására
+  * **401 UNAUTHORIZED:** nincs megfelelő a létrehozásra
   
 ## Beküldött dokumentum
 
@@ -309,35 +389,41 @@ Nincs
 {
     "name": "Nem működik a hibajegyek rendezése",
     "projectID": 21,
+    "type": "ticket",
     "description": "Nem működik a gomb, amivel a hibajegyeket sürgősség szerint sorba tudnám rendezni.",
     "priority": "S3"
 }
 ```
 
-# Igény létrehozása
-
-## HTTP kérés formája
-
-`POST http://host/bugtracker/create_feature_request`
-
-## A lekérdezés paraméterei
-
-Nincs
-
-## HTTP státusz kódok
-
-  * **200 OK:** az igény létre lett hozva
-  * **400 BADREQUEST:** hiányos kitöltés
-  * **401 UNAUTHORIZED:** nincs megfelelő jog igény létrehozására
-  
-## Beküldött dokumentum
+**vagy**
 
 ```json
 {
     "name": "Új szűrő felhasználókra",
     "projectID": 10,
+    "type": "feature",
     "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
     "priority": "S2"
+}
+```
+
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt"
 }
 ```
   
@@ -423,6 +509,26 @@ Nincs
 }
 ```
 
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező jegy azonosító"
+}
+```
+
 # Hibajegy / Igény státuszának váltása
 
 ## HTTP kérés formája
@@ -450,3 +556,22 @@ Nincs
 }
 ```
   
+## Válasz
+
+### Sikeres
+
+```json
+{
+    "status_code": "1",
+    "message": "OK"
+}
+```
+
+### Sikertelen
+
+```json
+{
+    "status_code": "0",
+    "message": "Nem létező projekt / Nem létező jegy azonosító"
+}
+```
