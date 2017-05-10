@@ -1,9 +1,12 @@
 package hu.elte.inf.software.technology.bugtracker.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,44 +17,47 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Project")
-public class Project {
+public class Project implements Serializable{
 	
-	@Id
-	@Column(name = "ProjectId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String projectName;
 	private String projectDescription;
-	
-	//@ManyToOne
-    //@JoinColumn(name = "defaultApproverId")
-	//private User defaultApprover;
-	
-	//@ManyToOne
-    //@JoinColumn(name = "defaultDeveloperId")
+	private User defaultApprover;
 	//private User defaultDeveloper;
-	
 	private int s1Time;
 	private int s2Time;
 	private int s3Time;
+	private Set<Ticket> tickets;
 	
-	//@OneToMany(mappedBy = "project")
-	//private Set<Ticket> tickets;
-/*	
+	public Project(){
+	}
+	
+	@Id
+	@Column(name = "projectId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public long getId() {
+		return id;
+	}
+	
+	@OneToMany(mappedBy = "project")
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", nullable = false)
+	public User getDefaultApprover() {
+		return defaultApprover;
+	}
+	
+/*	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", nullable = false)
+	public User getDefaultDeveloper() {
+		return defaultDeveloper;
+	}*/
 
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
-	}*/
-
-	public Project(){
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public void setId(int id) {
@@ -73,20 +79,12 @@ public class Project {
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
 	}
-/*
-	public User getDefaultApprover() {
-		return defaultApprover;
-	}
 
 	public void setDefaultApprover(User defaultApproverId) {
 		this.defaultApprover = defaultApproverId;
 	}
 
-	public User getDefaultDeveloper() {
-		return defaultDeveloper;
-	}
-
-	public void setDefaultDeveloper(User defaultDeveloperId) {
+/*	public void setDefaultDeveloper(User defaultDeveloperId) {
 		this.defaultDeveloper = defaultDeveloperId;
 	}*/
 

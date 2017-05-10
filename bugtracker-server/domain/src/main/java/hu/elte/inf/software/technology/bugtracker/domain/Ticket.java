@@ -2,8 +2,15 @@ package hu.elte.inf.software.technology.bugtracker.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,74 +18,86 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Ticket")
-public class Ticket {
+public class Ticket implements Serializable{
 
-	@Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ticketID")
     private int id;
     private String ticketName;
     private String ticketType;
-    
-    //@ManyToOne
-    //@JoinColumn(name = "ownerId")
-    //private User owner;
-    
-    //@ManyToOne
-    //@JoinColumn(name = "reporterId")
-    //private User reporter;
-    
+    private User owner;
+   // private User reporter;
+    private Project project;
     private String priority;
     private int spentTime;
     private String ticketDescription;
     
-    //@ManyToOne
-    //@JoinColumn(name = "projectId")
-    //private Project project;
-    
-    /*public Project getProject() {
+	public Ticket(){
+    }
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ticketId")
+    public long getId() {
+        return id;
+    }
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "projectId", nullable = false)
+    public Project getProject() {
 		return project;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", nullable = false)
+	public User getOwner() {
+		return owner;
+	}
+
+/*	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", nullable = false)
+	public User getReporter() {
+		return reporter;
+	}*/
+	
 	public void setProject(Project project) {
 		this.project = project;
-	}*/
-
-	public Ticket(){
-    }
-
-     public long getId() {
-        return id;
-    }
+	}
     
-    public String getName() {
-        return ticketName;
-    }
-    
-    public String getType() {
+    public String getTicketName() {
+		return ticketName;
+	}
+
+	public void setTicketName(String ticketName) {
+		this.ticketName = ticketName;
+	}
+
+	public String getTicketType() {
 		return ticketType;
 	}
 
-	public void setType(String type) {
-		this.ticketType = type;
+	public void setTicketType(String ticketType) {
+		this.ticketType = ticketType;
 	}
-/*
-	public User getOwner() {
-		return owner;
+
+	public String getTicketDescription() {
+		return ticketDescription;
+	}
+
+	public void setTicketDescription(String ticketDescription) {
+		this.ticketDescription = ticketDescription;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setOwner(User ownerId) {
 		this.owner = ownerId;
 	}
-
-	public User getReporter() {
-		return reporter;
-	}
-
-	public void setReporter(User reporterId) {
+	
+/*	public void setReporter(User reporterId) {
 		this.reporter = reporterId;
-	}
-*/
+	}*/
+	
 	public String getPriority() {
 		return priority;
 	}

@@ -1,5 +1,6 @@
 package hu.elte.inf.software.technology.bugtracker.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,46 +13,46 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "User")
-public class User {
+public class User implements Serializable{
 	
-	@Id
-	@Column(name = "userId")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
 	private String userName;
 	private String emailAddress;
 	private String password;
-	
-	
-	//@OneToMany(mappedBy = "owner")
-	//private Set<Ticket> ownedTickets;
-	
-	//@OneToMany(mappedBy = "reporter")
-//	private Set<Ticket> reportedTickets;
-	
-	
-	//@OneToMany(mappedBy = "defaultApprover")
-	//private Set<Ticket> approverTickets;
-	
-	
-	//@OneToMany(mappedBy = "defaultDeveloper")
-	//private Set<Ticket> developerTickets;
-	
-	
+	private Set<Ticket> ownedTickets;
+	//private Set<Ticket> reportedTickets;
+	private Set<Project> approvedProjects;
+	//private Set<Project> developedProjects;
 	
 	public User(){
 	}
 
-	public User(String userName, String emailAddress, String password){
-		this.userName = userName;
-		this.emailAddress = emailAddress;
-		this.password = password;
-	}
-
+	@Id
+	@Column(name = "userId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
+	
+	@OneToMany(mappedBy = "owner")
+	public Set<Ticket> getOwnedTickets() {
+		return ownedTickets;
+	}
+	/*
+	@OneToMany(mappedBy = "reporter")
+	public Set<Ticket> getReportedTickets() {
+		return reportedTickets;
+	}*/
+	
+	@OneToMany(mappedBy = "defaultApprover")
+	public Set<Project> getApproverTickets() {
+		return approvedProjects;
+	}
+	/*
+	@OneToMany(mappedBy = "defaultDeveloper")
+	public Set<Project> getDeveloperTickets() {
+		return developedProjects;
+	}*/
 
 	public void setId(int id) {
 		this.id = id;
@@ -80,38 +81,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/*
-	public Set<Ticket> getOwnedTickets() {
-		return ownedTickets;
-	}
 
 	public void setOwnedTickets(Set<Ticket> ownedTickets) {
 		this.ownedTickets = ownedTickets;
 	}
-
-	public Set<Ticket> getReportedTickets() {
-		return reportedTickets;
-	}
-
+/*
 	public void setReportedTickets(Set<Ticket> reportedTickets) {
 		this.reportedTickets = reportedTickets;
-	}
-	
-	public Set<Ticket> getApproverTickets() {
-		return approverTickets;
-	}
-
-	public void setApproverTickets(Set<Ticket> approverTickets) {
-		this.approverTickets = approverTickets;
-	}
-
-	public Set<Ticket> getDeveloperTickets() {
-		return developerTickets;
-	}
-
-	public void setDeveloperTickets(Set<Ticket> developerTickets) {
-		this.developerTickets = developerTickets;
 	}*/
 
+	public void setApproverTickets(Set<Project> approverTickets) {
+		this.approvedProjects = approverTickets;
+	}
+/*
+	public void setDeveloperTickets(Set<Project> developerTickets) {
+		this.developedProjects = developerTickets;
+	}*/
 	
 }
