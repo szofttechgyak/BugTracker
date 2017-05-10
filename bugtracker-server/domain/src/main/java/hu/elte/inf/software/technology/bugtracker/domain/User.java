@@ -24,19 +24,19 @@ public class User {
 	private String password;
 	
 	
-	@OneToMany(mappedBy = "owner")
-	private Set<Ticket> ownedTickets;
+	//@OneToMany(mappedBy = "owner")
+	//private Set<Ticket> ownedTickets;
 	
-	@OneToMany(mappedBy = "reporter")
-	private Set<Ticket> reportedTickets;
-	
-	
-	@OneToMany(mappedBy = "defaultApprover")
-	private Set<Ticket> approverTickets;
+	//@OneToMany(mappedBy = "reporter")
+//	private Set<Ticket> reportedTickets;
 	
 	
-	@OneToMany(mappedBy = "defaultDeveloper")
-	private Set<Ticket> developerTickets;
+	//@OneToMany(mappedBy = "defaultApprover")
+	//private Set<Ticket> approverTickets;
+	
+	
+	//@OneToMany(mappedBy = "defaultDeveloper")
+	//private Set<Ticket> developerTickets;
 	
 	
 	
@@ -80,7 +80,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	/*
 	public Set<Ticket> getOwnedTickets() {
 		return ownedTickets;
 	}
@@ -111,7 +111,7 @@ public class User {
 
 	public void setDeveloperTickets(Set<Ticket> developerTickets) {
 		this.developerTickets = developerTickets;
-	}
+	}*/
 
 	
 }

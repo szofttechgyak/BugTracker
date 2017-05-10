@@ -7,10 +7,14 @@
   </parent>
   <artifactId>domain</artifactId>
   <dependencies>
-  	<dependency>
+  	<!--   <dependency>
 	    <groupId>org.eclipse.persistence</groupId>
 	    <artifactId>javax.persistence</artifactId>
 	    <version>2.1.0</version>
-	</dependency>
+	</dependency> -->
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
   </dependencies>
 </project>

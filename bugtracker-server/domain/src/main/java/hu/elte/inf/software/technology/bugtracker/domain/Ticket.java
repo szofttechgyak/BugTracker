@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Table(name = "Ticket")
 public class Ticket {
 
-	
 	@Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ticketID")
@@ -21,44 +20,31 @@ public class Ticket {
     private String ticketName;
     private String ticketType;
     
-    @ManyToOne
-    @JoinColumn(name = "ownerId")
-    private User owner;
+    //@ManyToOne
+    //@JoinColumn(name = "ownerId")
+    //private User owner;
     
-    @ManyToOne
-    @JoinColumn(name = "reporterId")
-    private User reporter;
+    //@ManyToOne
+    //@JoinColumn(name = "reporterId")
+    //private User reporter;
     
     private String priority;
     private int spentTime;
     private String ticketDescription;
     
-    @ManyToOne
-    @JoinColumn(name = "projectId")
-    private Project project;
+    //@ManyToOne
+    //@JoinColumn(name = "projectId")
+    //private Project project;
     
-    public Project getProject() {
+    /*public Project getProject() {
 		return project;
 	}
 
 	public void setProject(Project project) {
 		this.project = project;
-	}
+	}*/
 
 	public Ticket(){
-    }
-    
-    public Ticket(String ticketName, String ticketType, User ownerId, 
-    		      User reporterId,String priority, int spenTime,
-    		      String ticketDescription, Project projectId) {
-        this.ticketName = ticketName;
-        this.ticketType = ticketType;
-        this.owner = ownerId;
-        this.reporter = reporterId;
-        this.priority = priority;
-        this.spentTime = spenTime;
-        this.ticketDescription = ticketDescription;
-        this.project = projectId;
     }
 
      public long getId() {
@@ -76,23 +62,23 @@ public class Ticket {
 	public void setType(String type) {
 		this.ticketType = type;
 	}
-
-	public User getOwnerId() {
+/*
+	public User getOwner() {
 		return owner;
 	}
 
-	public void setOwnerId(User ownerId) {
+	public void setOwner(User ownerId) {
 		this.owner = ownerId;
 	}
 
-	public User getReporterId() {
+	public User getReporter() {
 		return reporter;
 	}
 
-	public void setReporterId(User reporterId) {
+	public void setReporter(User reporterId) {
 		this.reporter = reporterId;
 	}
-
+*/
 	public String getPriority() {
 		return priority;
 	}
@@ -115,14 +101,6 @@ public class Ticket {
 
 	public void setDescription(String description) {
 		this.ticketDescription = description;
-	}
-
-	public Project getProjectId() {
-		return project;
-	}
-
-	public void setProjectId(Project projectId) {
-		this.project = projectId;
 	}
 
 }

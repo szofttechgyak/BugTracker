@@ -12,7 +12,7 @@
         <property name="show_sql">true</property>
         <property name="format_sql">false</property>
 	<property name="hibernate.hbm2ddl.auto">create</property>
-        <mapping class="hu.elte.inf.software.technology.bugtracker.domain.User"/>
+    <mapping class="hu.elte.inf.software.technology.bugtracker.domain.User"/>
 	<mapping class="hu.elte.inf.software.technology.bugtracker.domain.Project"/>
 	<mapping class="hu.elte.inf.software.technology.bugtracker.domain.Ticket"/>
     </session-factory>

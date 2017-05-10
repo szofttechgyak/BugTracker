@@ -24,41 +24,30 @@ public class Project {
 	private String projectName;
 	private String projectDescription;
 	
-	@ManyToOne
-    @JoinColumn(name = "defaultApproverId")
-	private User defaultApprover;
+	//@ManyToOne
+    //@JoinColumn(name = "defaultApproverId")
+	//private User defaultApprover;
 	
-	@ManyToOne
-    @JoinColumn(name = "defaultDeveloperId")
-	private User defaultDeveloper;
+	//@ManyToOne
+    //@JoinColumn(name = "defaultDeveloperId")
+	//private User defaultDeveloper;
 	
 	private int s1Time;
 	private int s2Time;
 	private int s3Time;
 	
-	@OneToMany(mappedBy = "project")
-	private Set<Ticket> tickets;
-	
+	//@OneToMany(mappedBy = "project")
+	//private Set<Ticket> tickets;
+/*	
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
 
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
-	}
+	}*/
 
 	public Project(){
-	}
-
-	public Project(String  projectName, String projectDescription, User defaultApproverId,
-			       User defaultDeveloperId, int s1Time, int s2Time, int s3Time){
-		this.projectName = projectName;
-		this.projectDescription = projectDescription;
-	    this.defaultApprover = defaultApproverId;
-	    this.defaultDeveloper = defaultDeveloperId;
-	    this.s1Time = s1Time;
-	    this.s2Time = s2Time;
-	    this.s3Time = s3Time;
 	}
 
 	public long getId() {
@@ -84,22 +73,22 @@ public class Project {
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
 	}
-
-	public User getDefaultApproverId() {
+/*
+	public User getDefaultApprover() {
 		return defaultApprover;
 	}
 
-	public void setDefaultApproverId(User defaultApproverId) {
+	public void setDefaultApprover(User defaultApproverId) {
 		this.defaultApprover = defaultApproverId;
 	}
 
-	public User getDefaultDeveloperId() {
+	public User getDefaultDeveloper() {
 		return defaultDeveloper;
 	}
 
-	public void setDefaultDeveloperId(User defaultDeveloperId) {
+	public void setDefaultDeveloper(User defaultDeveloperId) {
 		this.defaultDeveloper = defaultDeveloperId;
-	}
+	}*/
 
 	public int getS1Time() {
 		return s1Time;
