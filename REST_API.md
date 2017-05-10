@@ -287,11 +287,11 @@ Nincs
 }
 ```
   
-# Hibajegy létrehozása
+# Hibajegy / Igény létrehozása
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/create_ticket`
+`POST http://host/bugtracker/create_issue`
 
 ## A lekérdezés paraméterei
 
@@ -299,9 +299,9 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK:** a hibajegy létre lett hozva
+  * **200 OK:** sikeres létrehozás
   * **400 BADREQUEST:** hiányos kitöltés
-  * **401 UNAUTHORIZED:** nincs megfelelő jog hibajegy létrehozására
+  * **401 UNAUTHORIZED:** nincs megfelelő a létrehozásra
   
 ## Beküldött dokumentum
 
@@ -309,33 +309,19 @@ Nincs
 {
     "name": "Nem működik a hibajegyek rendezése",
     "projectID": 21,
+    "type": "ticket",
     "description": "Nem működik a gomb, amivel a hibajegyeket sürgősség szerint sorba tudnám rendezni.",
     "priority": "S3"
 }
 ```
 
-# Igény létrehozása
-
-## HTTP kérés formája
-
-`POST http://host/bugtracker/create_feature_request`
-
-## A lekérdezés paraméterei
-
-Nincs
-
-## HTTP státusz kódok
-
-  * **200 OK:** az igény létre lett hozva
-  * **400 BADREQUEST:** hiányos kitöltés
-  * **401 UNAUTHORIZED:** nincs megfelelő jog igény létrehozására
-  
-## Beküldött dokumentum
+**vagy**
 
 ```json
 {
     "name": "Új szűrő felhasználókra",
     "projectID": 10,
+    "type": "feature",
     "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
     "priority": "S2"
 }
