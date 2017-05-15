@@ -9,10 +9,14 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.Hibernate;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.elte.inf.software.technology.bugtracker.domain.Ticket;
 
 @Repository
+@Transactional
+@EnableTransactionManagement
 public class TicketDaoImpl extends HibernateDaoSupport implements TicketDao{
 
 	private HibernateTemplate hibernateTemplate;
