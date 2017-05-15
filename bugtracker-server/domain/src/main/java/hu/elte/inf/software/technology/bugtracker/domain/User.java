@@ -3,8 +3,10 @@ package hu.elte.inf.software.technology.bugtracker.domain;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "User")
+@Proxy(lazy = false)
 public class User implements Serializable{
 	
 	private int id;
@@ -36,7 +39,7 @@ public class User implements Serializable{
 		return id;
 	}
 	
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner" ,cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	public Set<Ticket> getOwnedTickets() {
 		return ownedTickets;
 	}
@@ -46,7 +49,7 @@ public class User implements Serializable{
 		return reportedTickets;
 	}*/
 	
-	@OneToMany(mappedBy = "defaultApprover")
+	@OneToMany(mappedBy = "defaultApprover", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	public Set<Project> getApproverTickets() {
 		return approvedProjects;
 	}

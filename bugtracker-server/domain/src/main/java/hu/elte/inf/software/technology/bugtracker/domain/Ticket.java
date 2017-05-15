@@ -20,6 +20,7 @@ import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "Ticket")
+@Proxy(lazy = false)
 public class Ticket implements Serializable{
 
     private int id;
@@ -42,13 +43,13 @@ public class Ticket implements Serializable{
         return id;
     }
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "projectId", nullable = false)
     public Project getProject() {
 		return project;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	public User getOwner() {
 		return owner;

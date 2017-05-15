@@ -17,9 +17,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "Project")
+@Proxy(lazy = false)
 public class Project implements Serializable{
 	
 	private int id;
@@ -42,12 +44,12 @@ public class Project implements Serializable{
 		return id;
 	}
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	public User getDefaultApprover() {
 		return defaultApprover;
