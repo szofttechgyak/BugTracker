@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/api/users")
-    public List<User> getAllTickets() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
