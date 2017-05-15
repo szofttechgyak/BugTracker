@@ -22,6 +22,10 @@ public class UserService {
     	return userDao.getUserById(id);
     }    
     
+    public void addUser(User user){
+    	userDao.addUser(user);
+    }
+    
     public UserDao getUserDao() {
 		return userDao;
 	}

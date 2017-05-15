@@ -28,4 +28,13 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @RequestMapping("/api/addUser")
+    public void addUser() {
+    	User user = new User();
+    	user.setUserName("belus");
+    	user.setEmailAddress("beci@gmail.com");
+    	user.setPassword("123");
+        userService.addUser(user);
+    }
+    
 }
