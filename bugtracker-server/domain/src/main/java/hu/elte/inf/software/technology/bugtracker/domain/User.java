@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annota
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name = "User")
 public class User implements Serializable{
