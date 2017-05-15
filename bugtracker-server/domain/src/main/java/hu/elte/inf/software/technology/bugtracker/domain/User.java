@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annota
 @Entity
 @Table(name = "User")
 public class User implements Serializable{
@@ -30,7 +31,7 @@ public class User implements Serializable{
 	@Id
 	@Column(name = "userId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	

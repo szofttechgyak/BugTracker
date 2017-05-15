@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "Project")
 public class Project implements Serializable{
@@ -35,7 +38,7 @@ public class Project implements Serializable{
 	@Id
 	@Column(name = "projectId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
