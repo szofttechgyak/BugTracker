@@ -1,4 +1,4 @@
-package hu.elte.inf.software.technology.bugtracker.dao;
+package hu.elte.inf.software.technology.bugtracker.ticketdao;
 
 import java.util.List;
 
@@ -16,16 +16,6 @@ import hu.elte.inf.software.technology.bugtracker.domain.Ticket;
 public class TicketDaoImpl extends HibernateDaoSupport implements TicketDao{
 
 	private HibernateTemplate hibernateTemplate;
-	//private SessionFactory sessionFactory;
-	
-//	public SessionFactory getSessionFactory() {
-//		return sessionFactory;
-//	}
-//	
-//	@Autowired
-//	public void setSessionFactory(SessionFactory sf){
-//		this.sessionFactory = sf;
-//	}
 	
 	public TicketDaoImpl(SessionFactory sf) {
 		setSessionFactory(sf);

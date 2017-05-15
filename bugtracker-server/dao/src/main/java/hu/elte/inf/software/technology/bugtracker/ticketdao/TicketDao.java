@@ -1,4 +1,4 @@
-package hu.elte.inf.software.technology.bugtracker.dao;
+package hu.elte.inf.software.technology.bugtracker.ticketdao;
 
 import java.util.List;
 

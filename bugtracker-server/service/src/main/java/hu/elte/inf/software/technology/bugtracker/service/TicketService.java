@@ -1,16 +1,12 @@
 package hu.elte.inf.software.technology.bugtracker.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hu.elte.inf.software.technology.bugtracker.dao.TicketDao;
-import hu.elte.inf.software.technology.bugtracker.dao.TicketDaoImpl;
-import hu.elte.inf.software.technology.bugtracker.domain.Project;
 import hu.elte.inf.software.technology.bugtracker.domain.Ticket;
-import hu.elte.inf.software.technology.bugtracker.domain.User;
+import hu.elte.inf.software.technology.bugtracker.ticketdao.TicketDao;
 
 @Service
 public class TicketService {
@@ -24,7 +20,7 @@ public class TicketService {
     
     public Ticket getTicketById(int id) {
     	return ticketDao.getTicketById(id);
-    }
+    }    
     
     public TicketDao getTicketDao() {
 		return ticketDao;
