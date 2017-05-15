@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name = "Ticket")
 public class Ticket implements Serializable{
@@ -36,7 +38,7 @@ public class Ticket implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticketId")
-    public long getId() {
+    public int getId() {
         return id;
     }
 	
