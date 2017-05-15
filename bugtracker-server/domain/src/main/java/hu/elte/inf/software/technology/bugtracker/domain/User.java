@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import org.hibernate.annotations.Proxy;
 
 @Entity
@@ -39,7 +42,8 @@ public class User implements Serializable{
 		return id;
 	}
 	
-	@OneToMany(mappedBy = "owner" ,cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner" ,fetch = FetchType.EAGER)
 	public Set<Ticket> getOwnedTickets() {
 		return ownedTickets;
 	}
@@ -48,8 +52,8 @@ public class User implements Serializable{
 	public Set<Ticket> getReportedTickets() {
 		return reportedTickets;
 	}*/
-	
-	@OneToMany(mappedBy = "defaultApprover", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER)
 	public Set<Project> getApproverTickets() {
 		return approvedProjects;
 	}

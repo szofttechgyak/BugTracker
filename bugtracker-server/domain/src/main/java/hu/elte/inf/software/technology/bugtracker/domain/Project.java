@@ -19,6 +19,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Project")
 @Proxy(lazy = false)
@@ -44,7 +46,8 @@ public class Project implements Serializable{
 		return id;
 	}
 	
-	@OneToMany(mappedBy = "project", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "project",  fetch = FetchType.EAGER)
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
