@@ -38,7 +38,7 @@ public class User implements Serializable{
 
 	@Id
 	@Column(name = "userId")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -55,13 +55,13 @@ public class User implements Serializable{
 	}*/
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Set<Project> getApprovedProjects() {
 		return approvedProjects;
 	}
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "defaultDeveloper", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "defaultDeveloper", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Set<Project> getDevelopedProjects() {
 		return developedProjects;
 	}
