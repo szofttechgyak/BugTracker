@@ -3,9 +3,9 @@ Ext.define('Bugtracker.view.main.UserMainController', {
 
     alias: 'controller.usermain',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-    },
+    onItemSelected: function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
+                console.log(iStore.data);
+		    },
 
     onConfirm: function (choice) {
         if (choice === 'yes') {
@@ -15,6 +15,7 @@ Ext.define('Bugtracker.view.main.UserMainController', {
 
     onLogoutClicked: function () {
         localStorage.removeItem("JWT");
+        localStorage.removeItem("role");
         this.getView().destroy();
         Ext.create({
             xtype: 'login'

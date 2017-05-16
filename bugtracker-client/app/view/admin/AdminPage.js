@@ -1,12 +1,10 @@
-Ext.define('Bugtracker.view.main.AdminPage', {
+Ext.define('Bugtracker.view.admin.AdminPage', {
     extend: 'Ext.tab.Panel',
-    xtype: 'admin-panel',
+    xtype: 'admin-main',
 
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
-        'Bugtracker.view.main.MainController',
-        'Bugtracker.view.main.MainModel'
     ],
 
     controller: 'main',
@@ -33,7 +31,6 @@ Ext.define('Bugtracker.view.main.AdminPage', {
         items: [{
             xtype: 'button',
             text: 'Logout',
-            margin: '10 0',
             handler: 'onLogoutClicked'
         }]
     },
@@ -74,28 +71,17 @@ Ext.define('Bugtracker.view.main.AdminPage', {
     },
 
     items: [{
-        title: 'All Tickets',
-        iconCls: 'fa-home',
+        title: 'Projects',
+        iconCls: 'fa-list',
         items: [{
-            xtype: 'allticketslist'
+            xtype: 'projects-tab',
         }]
-    }, {
-        title: 'Single Ticket',
-        iconCls: 'fa-home',
-        items: [{
-            xtype: 'singleticket'
-        }]
-    }, {
+    },
+	{
         title: 'Users',
         iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        items: [{
+            xtype: 'users-tab'
+        }]
     }]
 });

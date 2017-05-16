@@ -8,9 +8,19 @@ Ext.define('Bugtracker.view.main.UserProjectsList', {
         type: 'userprojects'
     },
 
-    columns: [
-        { text: 'ID',  dataIndex: 'id' },
-        { text: 'Name', dataIndex: 'name', flex: 1 }
-    ],
+    columns: {
+        items: [
+            { text: 'Name', dataIndex: 'projectName', flex: 2}
+        ],
+        defaults: {
+            layout: {
+                align: 'left'
+            } 
+        }
+    },
+
+    listeners: {
+		    'cellclick': 'onItemSelected'
+		}
 
 });

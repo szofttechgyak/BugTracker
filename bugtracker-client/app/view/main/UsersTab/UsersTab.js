@@ -34,6 +34,9 @@ Ext.define('Bugtracker.view.main.UsersTab.UsersTab', {
 						Ext.Ajax.request({
 							url : Urls.endpoint("/api/removeUser/" + selected.id),
 							method : 'POST',
+							headers: {
+								'authorization' : localStorage.getItem("JWT")
+							},
 							success : function(response) {
 								Ext.getCmp('userslist').getStore().load();
 								Ext.MessageBox.alert('Ok',

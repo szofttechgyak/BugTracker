@@ -1,4 +1,4 @@
-Ext.require(['Bugtracker.view.main.UsersList', 'Bugtracker.store.AllUsersStore']);
+Ext.require(['Bugtracker.view.main.UsersList']);
 
 Ext.define('Bugtracker.view.main.UsersTab.NewUserDialog', {
     extend: 'Ext.window.Window',
@@ -54,6 +54,9 @@ Ext.define('Bugtracker.view.main.UsersTab.NewUserDialog', {
 									url : Urls.endpoint("/api/addUser"),
 									method : 'POST',
 									jsonData : user,
+									headers: {
+										'authorization' : localStorage.getItem("JWT")
+									},
 									success : function(response) {
 										Ext.getCmp('userslist').getStore().load();
 										Ext.MessageBox.alert('Ok',

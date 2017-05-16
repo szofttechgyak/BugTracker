@@ -16,21 +16,32 @@ Ext.define('Bugtracker.view.login.LoginController', {
 			method: 'POST',    
 			jsonData : authentication,
 			success: function(response) 
-			{ 
-				var data = Ext.decode(response.responseText)
-        		//Ext.StoreManager.lookup('customerNameStore').loadData(data);
-			    localStorage.setItem("JWT", response.getResponseHeader('authorization'));
-				_this.getView().destroy();
-				if(data[admin] == true){
-					Ext.create({
-						xtype: 'app-main'
-					});
-				}else{
-					Ext.create({
-						xtype: 'user-main'
-					}); 
-				}
-				
+			{ 				
+				localStorage.setItem("JWT", response.getResponseHeader('authorization'));
+				Ext.Ajax.request 
+				({ 
+					url: 'http://localhost:8080/role', 
+					method: 'GET',    
+					
+					headers: {
+						'authorization' : localStorage.getItem("JWT")
+					},
+					
+					success: function(response) 
+					{ 
+						localStorage.setItem("role", response.responseText);
+						_this.getView().destroy();
+						if(localStorage.getItem("role") === "ROLE_ADMIN") {
+							Ext.create({
+								xtype: 'admin-main'
+							});
+						}else{
+							Ext.create({
+								xtype: 'user-main'
+							}); 
+						}	
+					}
+				});
 			}, 
 			failure: function(response) 
 			{ 
