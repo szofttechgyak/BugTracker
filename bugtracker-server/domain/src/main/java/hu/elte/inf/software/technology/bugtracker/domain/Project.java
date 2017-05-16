@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,7 +28,7 @@ public class Project implements Serializable{
 	private String projectName;
 	private String projectDescription;
 	private User defaultApprover;
-	//private User defaultDeveloper;
+	private User defaultDeveloper;
 	private int s1Time;
 	private int s2Time;
 	private int s3Time;
@@ -53,16 +51,16 @@ public class Project implements Serializable{
 	}
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId", nullable = false)
+	@JoinColumn(name = "defaultApproverId", nullable = false)
 	public User getDefaultApprover() {
 		return defaultApprover;
 	}
 	
-/*	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId", nullable = false)
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "defaultDeveloperId", nullable = false)
 	public User getDefaultDeveloper() {
 		return defaultDeveloper;
-	}*/
+	}
 
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
@@ -92,9 +90,9 @@ public class Project implements Serializable{
 		this.defaultApprover = defaultApproverId;
 	}
 
-/*	public void setDefaultDeveloper(User defaultDeveloperId) {
+	public void setDefaultDeveloper(User defaultDeveloperId) {
 		this.defaultDeveloper = defaultDeveloperId;
-	}*/
+	}
 
 	public int getS1Time() {
 		return s1Time;

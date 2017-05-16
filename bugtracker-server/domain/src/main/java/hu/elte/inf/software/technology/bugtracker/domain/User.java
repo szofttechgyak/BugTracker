@@ -30,14 +30,15 @@ public class User implements Serializable{
 	private Set<Ticket> ownedTickets;
 	//private Set<Ticket> reportedTickets;
 	private Set<Project> approvedProjects;
-	//private Set<Project> developedProjects;
+	private Set<Project> developedProjects;
+	private boolean admin;
 	
 	public User(){
 	}
 
 	@Id
 	@Column(name = "userId")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -52,16 +53,26 @@ public class User implements Serializable{
 	public Set<Ticket> getReportedTickets() {
 		return reportedTickets;
 	}*/
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER)
-	public Set<Project> getApproverTickets() {
+	public Set<Project> getApprovedProjects() {
 		return approvedProjects;
 	}
-	/*
-	@OneToMany(mappedBy = "defaultDeveloper")
-	public Set<Project> getDeveloperTickets() {
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "defaultDeveloper", fetch = FetchType.EAGER)
+	public Set<Project> getDevelopedProjects() {
 		return developedProjects;
-	}*/
+	}
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -94,17 +105,17 @@ public class User implements Serializable{
 	public void setOwnedTickets(Set<Ticket> ownedTickets) {
 		this.ownedTickets = ownedTickets;
 	}
-/*
-	public void setReportedTickets(Set<Ticket> reportedTickets) {
-		this.reportedTickets = reportedTickets;
-	}*/
 
 	public void setApproverTickets(Set<Project> approverTickets) {
 		this.approvedProjects = approverTickets;
 	}
-/*
-	public void setDeveloperTickets(Set<Project> developerTickets) {
-		this.developedProjects = developerTickets;
-	}*/
+	
+	public void setApprovedProjects(Set<Project> approvedProjects) {
+		this.approvedProjects = approvedProjects;
+	}
+
+	public void setDevelopedProjects(Set<Project> developedProjects) {
+		this.developedProjects = developedProjects;
+	}
 	
 }
