@@ -9,7 +9,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@SpringBootApplication(scanBasePackages = { "hu.elte.inf.software.technology.bugtracker"})
+@SpringBootApplication(scanBasePackages = { "hu.elte.inf.software.technology.bugtracker",
+                                            "hu.elte.inf.software.technology.bugtracker.application.security"})
 @ImportResource (value = { "classpath:spring-config.xml"} )
 public class Application {
 
