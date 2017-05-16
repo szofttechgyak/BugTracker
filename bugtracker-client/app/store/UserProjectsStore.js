@@ -6,14 +6,8 @@ Ext.define('Bugtracker.store.UserProjectsStore', {
     model: 'Project',
 
     fields: [
-        'id', 'name'
+        'id', 'projectName'
     ],
-
-    data : [
-         {id: 1,    name: 'BugTracker'},
-         {id: 2,    name: 'BugTracker Test'}
-     ],
-
     proxy: {
         type: 'rest',
 		
