@@ -3,6 +3,7 @@ $image-search-path: 'C:/Users/kalex1994/Documents/BugTracker/bugtracker-client/b
 $theme-name:  dynamic( 'theme-neptune' );
 $include-bugtracker-application: dynamic(true);;
 $include-bugtracker-store-allticketsstore: dynamic(true);;
+$include-bugtracker-store-allusersstore: dynamic(true);;
 $include-bugtracker-store-personnel: dynamic(true);;
 $include-bugtracker-view-login-login: dynamic(true);;
 $include-bugtracker-view-login-logincontroller: dynamic(true);;
@@ -15,7 +16,10 @@ $include-bugtracker-view-main-project: dynamic(true);;
 $include-bugtracker-view-main-projectlist: dynamic(true);;
 $include-bugtracker-view-main-projectscontroller: dynamic(true);;
 $include-bugtracker-view-main-singleticket: dynamic(true);;
-$include-bugtracker-view-main-userstab: dynamic(true);;
+$include-bugtracker-view-main-userslist: dynamic(true);;
+$include-bugtracker-view-main-userstab-newuserdialog: dynamic(true);;
+$include-bugtracker-view-main-userstab-updateuserdialog: dynamic(true);;
+$include-bugtracker-view-main-userstab-userstab: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -908,6 +912,7 @@ $include-ext-window-messagebox: dynamic(true);;
 $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
 $include-ticket: dynamic(true);;
+$include-urls: dynamic(true);;
 $include-user: dynamic(true);;
 $output-paths: ("path": "../resources");
 
