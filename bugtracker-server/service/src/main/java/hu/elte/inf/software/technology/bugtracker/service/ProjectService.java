@@ -20,7 +20,19 @@ public class ProjectService {
     
     public Project getProjectById(int id) {
     	return projectDao.getProjectById(id);
-    }    
+    }
+    
+    public void addProject(Project project){
+    	projectDao.addProject(project);
+    }
+    
+    public void updateProject(Project project){
+    	projectDao.updateProject(project);
+    }
+    
+    public void removeProject(int id){
+    	projectDao.removeProject(id);
+    }
     
     public ProjectDao getProjectDao() {
 		return projectDao;
