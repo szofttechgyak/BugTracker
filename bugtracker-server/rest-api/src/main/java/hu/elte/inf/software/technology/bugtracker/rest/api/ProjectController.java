@@ -12,8 +12,8 @@ import hu.elte.inf.software.technology.bugtracker.service.ProjectService;
 
 @RestController
 public class ProjectController {
-	
-	@Autowired
+
+    @Autowired
     private ProjectService projectService;
 
     @RequestMapping("/api/projects")

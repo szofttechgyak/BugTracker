@@ -6,11 +6,16 @@ $include-bugtracker-store-allticketsstore: dynamic(true);;
 $include-bugtracker-store-personnel: dynamic(true);;
 $include-bugtracker-view-login-login: dynamic(true);;
 $include-bugtracker-view-login-logincontroller: dynamic(true);;
+$include-bugtracker-view-main-adminpage: dynamic(true);;
 $include-bugtracker-view-main-allticketslist: dynamic(true);;
 $include-bugtracker-view-main-main: dynamic(true);;
 $include-bugtracker-view-main-maincontroller: dynamic(true);;
 $include-bugtracker-view-main-mainmodel: dynamic(true);;
+$include-bugtracker-view-main-project: dynamic(true);;
+$include-bugtracker-view-main-projectlist: dynamic(true);;
+$include-bugtracker-view-main-projectscontroller: dynamic(true);;
 $include-bugtracker-view-main-singleticket: dynamic(true);;
+$include-bugtracker-view-main-userstab: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -903,6 +908,7 @@ $include-ext-window-messagebox: dynamic(true);;
 $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
 $include-ticket: dynamic(true);;
+$include-user: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */
