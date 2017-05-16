@@ -57,7 +57,7 @@ public class UserController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(value = "/api/updateUser/{userId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/updateUser/{userId}", method = RequestMethod.POST)
     public ResponseEntity<User> updateUser(@PathVariable int userId, @RequestBody User user) {
     	User currUser = userService.getUserById(userId);
     	if (currUser==null) {
@@ -71,7 +71,7 @@ public class UserController {
         return new ResponseEntity<User>(currUser, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/api/removeUser/{userId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/removeUser/{userId}", method = RequestMethod.POST)
     public ResponseEntity<User> removeUser(@PathVariable int userId) {
         User user = userService.getUserById(userId);
         if (user == null) {
