@@ -1,4 +1,4 @@
-Ext.require(['Bugtracker.view.main.UsersList', 'Bugtracker.store.AllUsersStore']);
+Ext.require(['Bugtracker.view.main.UsersList']);
 
 Ext.define('Bugtracker.view.main.UsersTab.UpdateUserDialog', {
     extend: 'Ext.window.Window',
@@ -12,7 +12,6 @@ Ext.define('Bugtracker.view.main.UsersTab.UpdateUserDialog', {
 		
 	setUser : function(user) {
 		this.userID = user.id;
-		console.log(this.userID);
 		Ext.getCmp("username").setValue(user.userName);
 		Ext.getCmp("email").setValue(user.emailAddress);
 		Ext.getCmp("password").setValue(user.password);
@@ -62,6 +61,9 @@ Ext.define('Bugtracker.view.main.UsersTab.UpdateUserDialog', {
 									url : Urls.endpoint("/api/updateUser/" + this.up('updateuser').userID),
 									method : 'POST',
 									jsonData : user,
+									headers: {
+										'authorization' : localStorage.getItem("JWT")
+									},
 									success : function(response) {
 										Ext.getCmp('userslist').getStore().load();
 										Ext.MessageBox.alert('Ok',

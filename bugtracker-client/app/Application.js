@@ -17,10 +17,20 @@ Ext.define('Bugtracker.Application', {
     ],
     
     launch: function () {
-        var loggedIn=true;
-        //loggedIn = localStorage.getItem("JWT");
+        loggedIn = localStorage.getItem("JWT");
+        var view = "";
+    	if (loggedIn) {
+    		if (localStorage.getItem("role") === 'ROLE_ADMIN') {
+    			view = 'admin-main';
+    		} else {
+    			view = 'user-main';
+    		}
+    	} else {
+    		view = 'login';
+    	}
+    	
         Ext.create({
-            xtype: loggedIn ? 'user-main' : 'login'
+            xtype: view
         });
     },
 

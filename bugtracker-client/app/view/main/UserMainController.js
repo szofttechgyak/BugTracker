@@ -15,6 +15,7 @@ Ext.define('Bugtracker.view.main.UserMainController', {
 
     onLogoutClicked: function () {
         localStorage.removeItem("JWT");
+        localStorage.removeItem("role");
         this.getView().destroy();
         Ext.create({
             xtype: 'login'
