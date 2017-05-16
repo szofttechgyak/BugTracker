@@ -31,6 +31,7 @@ public class User implements Serializable{
 	//private Set<Ticket> reportedTickets;
 	private Set<Project> approvedProjects;
 	//private Set<Project> developedProjects;
+	private boolean admin;
 	
 	public User(){
 	}
@@ -62,6 +63,14 @@ public class User implements Serializable{
 	public Set<Project> getDeveloperTickets() {
 		return developedProjects;
 	}*/
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public void setId(int id) {
 		this.id = id;
