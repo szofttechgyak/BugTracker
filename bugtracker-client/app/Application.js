@@ -20,7 +20,7 @@ Ext.define('Bugtracker.Application', {
         var loggedIn=true;
         //loggedIn = localStorage.getItem("JWT");
         Ext.create({
-            xtype: loggedIn ? 'app-main' : 'login'
+            xtype: loggedIn ? 'user-main' : 'login'
         });
     },
 
