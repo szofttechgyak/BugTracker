@@ -6,7 +6,7 @@ Ext.define('Project', {
         name: 'id',
         type: 'int',
     },{
-        name: 'name',
+        name: 'projectName',
         type: 'string',
     },{
         name: 'default_approver',
@@ -15,13 +15,16 @@ Ext.define('Project', {
         name: 'default_developer',
         type: 'auto'
     },{
-        name: 's1',
+        name: 'projectDescription',
+        type: 'string'
+    },{
+        name: 's1Time',
         type: 'int'
     },{
-        name: 's2',
+        name: 's2Time',
         type: 'int'
     },{
-        name: 's3',
+        name: 's3Time',
         type: 'int'
     },{
         name: 'tickets',

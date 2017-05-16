@@ -3,20 +3,29 @@ $image-search-path: 'C:/Users/mike/Documents/BugTracker/bugtracker-client/build/
 $theme-name:  dynamic( 'theme-neptune' );
 $include-bugtracker-application: dynamic(true);;
 $include-bugtracker-store-allticketsstore: dynamic(true);;
+$include-bugtracker-store-allusersstore: dynamic(true);;
 $include-bugtracker-store-personnel: dynamic(true);;
 $include-bugtracker-store-userprojectsstore: dynamic(true);;
 $include-bugtracker-view-login-login: dynamic(true);;
 $include-bugtracker-view-login-logincontroller: dynamic(true);;
+$include-bugtracker-view-main-adminpage: dynamic(true);;
 $include-bugtracker-view-main-allticketslist: dynamic(true);;
 $include-bugtracker-view-main-main: dynamic(true);;
 $include-bugtracker-view-main-mainbase: dynamic(true);;
 $include-bugtracker-view-main-maincontroller: dynamic(true);;
 $include-bugtracker-view-main-mainmodel: dynamic(true);;
+$include-bugtracker-view-main-project: dynamic(true);;
+$include-bugtracker-view-main-projectlist: dynamic(true);;
+$include-bugtracker-view-main-projectscontroller: dynamic(true);;
 $include-bugtracker-view-main-singleticket: dynamic(true);;
 $include-bugtracker-view-main-usermain: dynamic(true);;
 $include-bugtracker-view-main-usermaincontroller: dynamic(true);;
 $include-bugtracker-view-main-usermainmodel: dynamic(true);;
 $include-bugtracker-view-main-userprojectslist: dynamic(true);;
+$include-bugtracker-view-main-userslist: dynamic(true);;
+$include-bugtracker-view-main-userstab-newuserdialog: dynamic(true);;
+$include-bugtracker-view-main-userstab-updateuserdialog: dynamic(true);;
+$include-bugtracker-view-main-userstab-userstab: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -910,6 +919,8 @@ $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
 $include-project: dynamic(true);;
 $include-ticket: dynamic(true);;
+$include-urls: dynamic(true);;
+$include-user: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */
