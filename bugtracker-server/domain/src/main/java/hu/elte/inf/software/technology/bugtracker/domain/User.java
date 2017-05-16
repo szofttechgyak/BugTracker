@@ -55,13 +55,13 @@ public class User implements Serializable{
 	}*/
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "defaultApprover") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Set<Project> getApprovedProjects() {
 		return approvedProjects;
 	}
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "defaultDeveloper", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "defaultDeveloper") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Set<Project> getDevelopedProjects() {
 		return developedProjects;
 	}

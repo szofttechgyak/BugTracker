@@ -50,14 +50,14 @@ public class Project implements Serializable{
 		return tickets;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "defaultApproverId", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "defaultApproverId") //, insertable = false, updatable = false, nullable=false)
 	public User getDefaultApprover() {
 		return defaultApprover;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "defaultDeveloperId", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "defaultDeveloperId") //, insertable = false, updatable = false)
 	public User getDefaultDeveloper() {
 		return defaultDeveloper;
 	}
