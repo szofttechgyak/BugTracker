@@ -27,7 +27,7 @@ public class Ticket implements Serializable{
     private String ticketName;
     private String ticketType;
     private User owner;
-   // private User reporter;
+    private User reporter;
     private Project project;
     private String priority;
     private int spentTime;
@@ -49,17 +49,17 @@ public class Ticket implements Serializable{
 		return project;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ownerId") 		//, nullable = false)
 	public User getOwner() {
 		return owner;
 	}
 
-/*	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reporterId")	//, nullable = false)
 	public User getReporter() {
 		return reporter;
-	}*/
+	}
 	
 	public void setProject(Project project) {
 		this.project = project;
@@ -97,9 +97,9 @@ public class Ticket implements Serializable{
 		this.owner = ownerId;
 	}
 	
-/*	public void setReporter(User reporterId) {
+	public void setReporter(User reporterId) {
 		this.reporter = reporterId;
-	}*/
+	}
 	
 	public String getPriority() {
 		return priority;

@@ -28,7 +28,7 @@ public class User implements Serializable{
 	private String emailAddress;
 	private String password;
 	private Set<Ticket> ownedTickets;
-	//private Set<Ticket> reportedTickets;
+	private Set<Ticket> reportedTickets;
 	private Set<Project> approvedProjects;
 	private Set<Project> developedProjects;
 	private boolean admin;
@@ -44,16 +44,21 @@ public class User implements Serializable{
 	}
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "owner" ,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "owner" ) 		//,fetch = FetchType.EAGER)
 	public Set<Ticket> getOwnedTickets() {
 		return ownedTickets;
 	}
-	/*
-	@OneToMany(mappedBy = "reporter")
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "reporter") 		//, fetch = FetchType.EAGER)
 	public Set<Ticket> getReportedTickets() {
 		return reportedTickets;
-	}*/
+	}
 	
+	public void setReportedTickets(Set<Ticket> reportedTickets) {
+		this.reportedTickets = reportedTickets;
+	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "defaultApprover") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Set<Project> getApprovedProjects() {

@@ -3,7 +3,6 @@ package hu.elte.inf.software.technology.bugtracker.domain;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

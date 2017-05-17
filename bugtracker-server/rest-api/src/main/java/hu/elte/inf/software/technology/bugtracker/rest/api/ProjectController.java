@@ -61,7 +61,24 @@ public class ProjectController {
     	projectService.addProject(project);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/project/{projectid}").buildAndExpand(project.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Void>(headers, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/api/updateProject/{projectId}",method = RequestMethod.POST, consumes="application/json")
+    public ResponseEntity<Project> updateProject(@PathVariable int projectId, @RequestBody Project project) {
+    	Project currProject = projectService.getProjectById(projectId);
+    	if (currProject==null) {
+            System.out.println("Project with id " + projectId + " not found");
+            return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
+        }
+    	User defaultApprover = userService.getUserById(project.getDefaultApprover().getId());
+    	User defaultDeveloper = userService.getUserById(project.getDefaultDeveloper().getId());
+    	currProject = project;
+    	currProject.setDefaultApprover(defaultApprover);
+    	currProject.setDefaultDeveloper(defaultDeveloper);
+    	currProject.setId(projectId);
+        projectService.updateProject(currProject);
+        return new ResponseEntity<Project>(currProject, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/api/removeProject/{projectId}", method = RequestMethod.POST)
@@ -72,7 +89,7 @@ public class ProjectController {
             return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
         }
         projectService.removeProject(projectId);
-        return new ResponseEntity<Project>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Project>(HttpStatus.OK);
     }
 
 }
