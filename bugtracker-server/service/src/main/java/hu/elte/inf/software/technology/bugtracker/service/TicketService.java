@@ -22,6 +22,18 @@ public class TicketService {
     	return ticketDao.getTicketById(id);
     }    
     
+    public void addTicket(Ticket ticket){
+    	ticketDao.addTicket(ticket);
+    }
+    
+    public void updateTicket(Ticket ticket){
+    	ticketDao.updateTicket(ticket);
+    }
+    
+    public void removeTicket(int ticketId){
+    	ticketDao.removeTicket(ticketId);
+    }
+    
     public TicketDao getTicketDao() {
 		return ticketDao;
 	}
