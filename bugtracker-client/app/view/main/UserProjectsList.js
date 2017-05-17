@@ -10,13 +10,13 @@ Ext.define('Bugtracker.view.main.UserProjectsList', {
 
     columns: {
         items: [
-            { text: 'Name', dataIndex: 'projectName', flex: 2}
+            { text: 'Name', dataIndex: 'projectName', flex : 1},            
         ],
-        defaults: {
-            layout: {
-                align: 'left'
-            } 
-        }
+//        defaults: {
+//            layout: {
+//                align: 'left'
+//            } 
+//        }
     },
 
     listeners: {

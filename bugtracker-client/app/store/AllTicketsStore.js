@@ -16,7 +16,7 @@ Ext.define('Bugtracker.store.AllTicketsStore', {
 			'authorization' : localStorage.getItem("JWT")
 		},
 		
-        url: 'http://localhost:8080/api/tickets',
+        url: 'http://157.181.161.108:8080/api/tickets',
         reader: {
             type: 'json',
         },

@@ -12,7 +12,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 
 		Ext.Ajax.request 
 		({ 
-			url: 'http://localhost:8080/login', 
+			url: 'http://157.181.161.108:8080/login', 
 			method: 'POST',    
 			jsonData : authentication,
 			success: function(response) 
@@ -20,7 +20,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 				localStorage.setItem("JWT", response.getResponseHeader('authorization'));
 				Ext.Ajax.request 
 				({ 
-					url: 'http://localhost:8080/role', 
+					url: 'http://157.181.161.108:8080/role', 
 					method: 'GET',    
 					
 					headers: {

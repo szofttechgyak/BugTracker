@@ -63,6 +63,20 @@ Ext.define('Bugtracker.view.main.UsersTab.UsersTab', {
 						dialog.show();
 					}
 				},
+			}, {
+				xtype : 'button',
+				text : 'Assign to project',
+				margin: '0px 2px 5px 0px',
+				handler : function() {
+					var selected = Ext.getCmp('userslist').selection;
+					if (selected === null) {
+						Ext.MessageBox.alert('Error', 'No selected user!');
+					} else {	
+						var dialog = Ext.create('Bugtracker.view.main.UsersTab.AssignToProjectDialog');
+						dialog.setUser(selected.data);
+						dialog.show();	
+					}
+				},
 			}
 		]
 	}, {
