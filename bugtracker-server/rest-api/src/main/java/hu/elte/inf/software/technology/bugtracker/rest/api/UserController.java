@@ -1,5 +1,6 @@
 package hu.elte.inf.software.technology.bugtracker.rest.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import hu.elte.inf.software.technology.bugtracker.domain.Project;
 import hu.elte.inf.software.technology.bugtracker.domain.User;
+import hu.elte.inf.software.technology.bugtracker.service.ProjectService;
 import hu.elte.inf.software.technology.bugtracker.service.UserService;
 
 @RestController
 public class UserController {
-	
-	@Autowired
+
+    @Autowired
     private UserService userService;
+    
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        if(users.isEmpty()){
+        if (users.isEmpty()) {
             return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
@@ -42,35 +49,65 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/addUser",method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/api/addUser", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-    	
-    	/* TODO isUserExist
-    	if (userService.isUserExist(user)) {
-            System.out.println("A User with name " + user.getName() + " already exist");
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }*/
-    	
+
+        /*
+         * TODO isUserExist if (userService.isUserExist(user)) { System.out.println("A User with name " + user.getName() + " already exist"); return new
+         * ResponseEntity<Void>(HttpStatus.CONFLICT); }
+         */
+
         userService.addUser(user);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{userid}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/api/assignToProject", method = RequestMethod.POST)
+    public void assignUserToProject(@RequestParam(value = "userId") String userId,
+                                    @RequestParam(value = "projectId") String projectId,
+                                    @RequestParam(value = "role") String role) {
+        try {
+            User user = userService.getUserById(Integer.parseInt(userId));
+            Project project = projectService.getProjectById(Integer.parseInt(projectId));
+            user.getDevelopedProjects().add(project);
+//            switch(role) {
+//            case "developer":
+//                user.getDevelopedProjects().add(project);
+//                break;
+//            case "approver":
+//                user.getApprovedProjects().add(project);
+//                break;
+//            case "client":
+//                break;
+//            }
+            userService.updateUser(user);
+            projectService.updateProject(project);
+        } catch (Exception ex) {
+        }
+    }
     
+    @RequestMapping(value = "/api/developedProject/{userId}", method = RequestMethod.GET)
+    public List<Project> getDevelopedProjects(@PathVariable int userId) {
+        User user = userService.getUserById(userId);
+        System.out.println(user.getDevelopedProjects().isEmpty() ? "eeempty" : "neem eeempty");
+        return new ArrayList<>(user.getDevelopedProjects());
+    }
+
     @RequestMapping(value = "/api/updateUser/{userId}", method = RequestMethod.POST)
     public ResponseEntity<User> updateUser(@PathVariable int userId, @RequestBody User user) {
-    	User currUser = userService.getUserById(userId);
-    	if (currUser==null) {
+        User currUser = userService.getUserById(userId);
+        if (currUser == null) {
             System.out.println("User with id " + userId + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }    	
-    	currUser.setUserName(user.getUserName());
-    	currUser.setEmailAddress(user.getEmailAddress());
-    	currUser.setPassword(user.getPassword());
+        }
+        currUser.setUserName(user.getUserName());
+        currUser.setEmailAddress(user.getEmailAddress());
+        currUser.setPassword(user.getPassword());
         userService.updateUser(currUser);
         return new ResponseEntity<User>(currUser, HttpStatus.OK);
     }
-    
+
     @RequestMapping(value = "/api/removeUser/{userId}", method = RequestMethod.POST)
     public ResponseEntity<User> removeUser(@PathVariable int userId) {
         User user = userService.getUserById(userId);
@@ -81,5 +118,5 @@ public class UserController {
         userService.removeUser(userId);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
-    
+
 }

@@ -4,14 +4,14 @@ Ext.define('Bugtracker.view.main.UserMainController', {
     alias: 'controller.usermain',
 
     onItemSelected: function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
-                console.log(iStore.data);
-		    },
-
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
-        }
+                //console.log(iStore.data);
     },
+
+//    onConfirm: function (choice) {
+//        if (choice === 'yes') {
+//            
+//        }
+//    },
 
     onLogoutClicked: function () {
         localStorage.removeItem("JWT");
