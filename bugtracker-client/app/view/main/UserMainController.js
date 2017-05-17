@@ -4,7 +4,7 @@ Ext.define('Bugtracker.view.main.UserMainController', {
     alias: 'controller.usermain',
 
     onItemSelected: function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
-                //console.log(iStore.data);
+                console.log(iStore.data);
     },
 
 //    onConfirm: function (choice) {

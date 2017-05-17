@@ -32,5 +32,6 @@ Ext.define('Project', {
     },{
         name: 'history',
         type: 'auto'
-    }]
+    }
+    ]
 });
