@@ -71,7 +71,7 @@ public class ProjectController {
             System.out.println("Unable to delete. Project with id " + projectId + " not found");
             return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
         }
-        userService.removeUser(projectId);
+        projectService.removeProject(projectId);
         return new ResponseEntity<Project>(HttpStatus.NO_CONTENT);
     }
 
