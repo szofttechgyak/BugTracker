@@ -63,5 +63,16 @@ public class ProjectController {
         headers.setLocation(ucBuilder.path("/api/project/{projectid}").buildAndExpand(project.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+    
+    @RequestMapping(value = "/api/removeProject/{projectId}", method = RequestMethod.POST)
+    public ResponseEntity<Project> removeProject(@PathVariable int projectId) {
+        Project project = projectService.getProjectById(projectId);
+        if (project == null) {
+            System.out.println("Unable to delete. Project with id " + projectId + " not found");
+            return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
+        }
+        userService.removeUser(projectId);
+        return new ResponseEntity<Project>(HttpStatus.NO_CONTENT);
+    }
 
 }
