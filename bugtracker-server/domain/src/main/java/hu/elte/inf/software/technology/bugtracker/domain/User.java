@@ -15,104 +15,107 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "User")
 @Proxy(lazy = false)
-public class User implements Serializable {
+public class User implements Serializable{
+	
+	private int id;
+	private String userName;
+	private String emailAddress;
+	private String password;
+	private Set<Ticket> ownedTickets;
+	//private Set<Ticket> reportedTickets;
+	private Set<Project> approvedProjects;
+	private Set<Project> developedProjects;
+	private boolean admin;
+	
+	public User(){
+	}
 
-    private int id;
-    private String userName;
-    private String emailAddress;
-    private String password;
-    private Set<Ticket> ownedTickets;
-    // private Set<Ticket> reportedTickets;
-    private Set<Project> approvedProjects;
-    private Set<Project> developedProjects;
-    private boolean admin;
+	@Id
+	@Column(name = "userId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getId() {
+		return id;
+	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner" ,fetch = FetchType.EAGER)
+	public Set<Ticket> getOwnedTickets() {
+		return ownedTickets;
+	}
+	/*
+	@OneToMany(mappedBy = "reporter")
+	public Set<Ticket> getReportedTickets() {
+		return reportedTickets;
+	}*/
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "defaultApprover") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	public Set<Project> getApprovedProjects() {
+		return approvedProjects;
+	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "defaultDeveloper") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	public Set<Project> getDevelopedProjects() {
+		return developedProjects;
+	}
+	
+	public boolean isAdmin() {
+		return admin;
+	}
 
-    public User() {
-    }
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
-    @Id
-    @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    public Set<Ticket> getOwnedTickets() {
-        return ownedTickets;
-    }
-    /*
-     * @OneToMany(mappedBy = "reporter") public Set<Ticket> getReportedTickets() { return reportedTickets; }
-     */
+	public String getUserName() {
+		return userName;
+	}
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "defaultApprover", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<Project> getApprovedProjects() {
-        return approvedProjects;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "defaultDeveloper", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<Project> getDevelopedProjects() {
-        return developedProjects;
-    }
+	public String getEmailAddress() {
+		return emailAddress;
+	}
 
-    public boolean isAdmin() {
-        return admin;
-    }
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public void setOwnedTickets(Set<Ticket> ownedTickets) {
+		this.ownedTickets = ownedTickets;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setApproverTickets(Set<Project> approverTickets) {
+		this.approvedProjects = approverTickets;
+	}
+	
+	public void setApprovedProjects(Set<Project> approvedProjects) {
+		this.approvedProjects = approvedProjects;
+	}
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setOwnedTickets(Set<Ticket> ownedTickets) {
-        this.ownedTickets = ownedTickets;
-    }
-
-    public void setApproverTickets(Set<Project> approverTickets) {
-        this.approvedProjects = approverTickets;
-    }
-
-    public void setApprovedProjects(Set<Project> approvedProjects) {
-        this.approvedProjects = approvedProjects;
-    }
-
-    public void setDevelopedProjects(Set<Project> developedProjects) {
-        this.developedProjects = developedProjects;
-    }
-
+	public void setDevelopedProjects(Set<Project> developedProjects) {
+		this.developedProjects = developedProjects;
+	}
+	
 }
