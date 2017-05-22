@@ -43,8 +43,8 @@ public class Ticket implements Serializable{
         return id;
     }
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "projectId", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY) //(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "projectId" ) //, nullable = false)
     public Project getProject() {
 		return project;
 	}
@@ -115,14 +115,6 @@ public class Ticket implements Serializable{
 
 	public void setSpentTime(int spentTime) {
 		this.spentTime = spentTime;
-	}
-
-	public String getDescription() {
-		return ticketDescription;
-	}
-
-	public void setDescription(String description) {
-		this.ticketDescription = description;
 	}
 
 }

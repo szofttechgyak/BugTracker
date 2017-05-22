@@ -44,7 +44,7 @@ public class Project implements Serializable{
 	}
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "project",  fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "project") //,  fetch = FetchType.EAGER)
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
