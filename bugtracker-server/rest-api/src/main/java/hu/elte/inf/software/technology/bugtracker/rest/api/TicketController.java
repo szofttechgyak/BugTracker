@@ -72,4 +72,34 @@ public class TicketController {
         headers.setLocation(ucBuilder.path("/api/ticket/{ticketid}").buildAndExpand(ticket.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/api/updateTicket/{ticketId}",method = RequestMethod.POST, consumes="application/json")
+    public ResponseEntity<Ticket> updateTicket(@PathVariable int ticketId, @RequestBody Ticket ticket) {
+    	Ticket currTicket = ticketService.getTicketById(ticketId);
+    	if (currTicket == null) {
+            System.out.println("Ticket with id " + ticketId + " not found");
+            return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+        }
+    	User owner = userService.getUserById(ticket.getOwner().getId());
+    	User reporter = userService.getUserById(ticket.getReporter().getId());
+    	Project project = projectService.getProjectById(ticket.getProject().getId());
+    	currTicket = ticket;
+    	currTicket.setOwner(owner);
+    	currTicket.setReporter(reporter);
+    	currTicket.setProject(project);  
+    	currTicket.setId(ticketId);
+        ticketService.updateTicket(currTicket);
+        return new ResponseEntity<Ticket>(currTicket, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/api/removeTicket/{ticketId}", method = RequestMethod.POST)
+    public ResponseEntity<Ticket> removeTicket(@PathVariable int ticketId) {
+        Ticket ticket = ticketService.getTicketById(ticketId);
+        if (ticket == null) {
+            System.out.println("Unable to delete. Ticket with id " + ticketId + " not found");
+            return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+        }
+        ticketService.removeTicket(ticketId);
+        return new ResponseEntity<Ticket>(HttpStatus.OK);
+    }
 }
