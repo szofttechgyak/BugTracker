@@ -32,6 +32,7 @@ public class Project implements Serializable{
 	private int s2Time;
 	private int s3Time;
 	private Set<Ticket> tickets;
+	private Set<ProjectUser> projectUser;
 	
 	public Project(){
 	}
@@ -44,21 +45,31 @@ public class Project implements Serializable{
 	}
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "project") //,  fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "project")
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "defaultApproverId") //, insertable = false, updatable = false, nullable=false)
+	@JoinColumn(name = "defaultApproverId")
 	public User getDefaultApprover() {
 		return defaultApprover;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "defaultDeveloperId") //, insertable = false, updatable = false)
+	@JoinColumn(name = "defaultDeveloperId")
 	public User getDefaultDeveloper() {
 		return defaultDeveloper;
+	}
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "project")
+	public Set<ProjectUser> getProjectUser() {
+		return projectUser;
+	}
+
+	public void setProjectUser(Set<ProjectUser> projectUser) {
+		this.projectUser = projectUser;
 	}
 
 	public void setTickets(Set<Ticket> tickets) {

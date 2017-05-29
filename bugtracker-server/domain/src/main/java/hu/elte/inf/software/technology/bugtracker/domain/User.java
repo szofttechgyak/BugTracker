@@ -31,6 +31,7 @@ public class User implements Serializable{
 	private Set<Ticket> reportedTickets;
 	private Set<Project> approvedProjects;
 	private Set<Project> developedProjects;
+	private Set<ProjectUser> projectUser;
 	private boolean admin;
 	
 	public User(){
@@ -71,6 +72,16 @@ public class User implements Serializable{
 		return developedProjects;
 	}
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user") //,  fetch = FetchType.EAGER)
+	public Set<ProjectUser> getProjectUser() {
+		return projectUser;
+	}
+
+	public void setProjectUser(Set<ProjectUser> projectUser) {
+		this.projectUser = projectUser;
+	}
+
 	public boolean isAdmin() {
 		return admin;
 	}
