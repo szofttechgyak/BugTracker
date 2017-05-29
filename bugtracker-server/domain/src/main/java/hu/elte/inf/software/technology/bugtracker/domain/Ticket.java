@@ -9,14 +9,18 @@ import javax.persistence.GenerationType;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Ticket")
@@ -24,7 +28,7 @@ import org.hibernate.annotations.Proxy;
 public class Ticket implements Serializable{
 
     private int id;
-    private String ticketName;
+	private String ticketName;
     private String ticketType;
     private User owner;
     private User reporter;
@@ -32,6 +36,7 @@ public class Ticket implements Serializable{
     private String priority;
     private int spentTime;
     private String ticketDescription;
+    private Set<Status> status;
     
 	public Ticket(){
     }
@@ -64,6 +69,17 @@ public class Ticket implements Serializable{
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ticket")
+	public Set<Status> getStatus() {
+		return status;
+	}
+
+	public void setStatus(Set<Status> status) {
+		this.status = status;
+	}
+
     
     public String getTicketName() {
 		return ticketName;

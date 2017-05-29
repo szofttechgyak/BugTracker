@@ -32,6 +32,7 @@ public class User implements Serializable{
 	private Set<Project> approvedProjects;
 	private Set<Project> developedProjects;
 	private Set<ProjectUser> projectUser;
+	private Set<Status> status;	
 	private boolean admin;
 	
 	public User(){
@@ -80,6 +81,16 @@ public class User implements Serializable{
 
 	public void setProjectUser(Set<ProjectUser> projectUser) {
 		this.projectUser = projectUser;
+	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	public Set<Status> getStatus() {
+		return status;
+	}
+
+	public void setStatus(Set<Status> status) {
+		this.status = status;
 	}
 
 	public boolean isAdmin() {
