@@ -17,5 +17,6 @@
 	<mapping class="hu.elte.inf.software.technology.bugtracker.domain.Ticket"/>
 	<mapping class="hu.elte.inf.software.technology.bugtracker.domain.ProjectUser"/>
     <mapping class="hu.elte.inf.software.technology.bugtracker.domain.Status"/>
+	<mapping class="hu.elte.inf.software.technology.bugtracker.domain.Comment"/>	
 	</session-factory>
 </hibernate-configuration>

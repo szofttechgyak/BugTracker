@@ -33,6 +33,7 @@ public class User implements Serializable{
 	private Set<Project> developedProjects;
 	private Set<ProjectUser> projectUser;
 	private Set<Status> status;	
+	private Set<Comment> writtenComments;
 	private boolean admin;
 	
 	public User(){
@@ -60,6 +61,20 @@ public class User implements Serializable{
 	public void setReportedTickets(Set<Ticket> reportedTickets) {
 		this.reportedTickets = reportedTickets;
 	}
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner") 		//, fetch = FetchType.EAGER)
+	public Set<Comment> getWrittenComments() {
+		return writtenComments;
+	}
+	
+	public void setWrittenComments(Set<Comment> writtenComments) {
+		this.writtenComments = writtenComments;
+	}
+
+	
+	
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "defaultApprover") //, fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -37,6 +37,7 @@ public class Ticket implements Serializable{
     private int spentTime;
     private String ticketDescription;
     private Set<Status> status;
+    private Set<Comment> comment;
     
 	public Ticket(){
     }
@@ -78,6 +79,17 @@ public class Ticket implements Serializable{
 
 	public void setStatus(Set<Status> status) {
 		this.status = status;
+	}
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ticket")
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
 	}
 
     

@@ -18,6 +18,7 @@
 				<value>hu.elte.inf.software.technology.bugtracker.domain.Ticket</value>
 				<value>hu.elte.inf.software.technology.bugtracker.domain.ProjectUser</value>
 				<value>hu.elte.inf.software.technology.bugtracker.domain.Status</value>
+				<value>hu.elte.inf.software.technology.bugtracker.domain.Comment</value>
 			</list>
         </property>
         <property name="hibernateProperties">
