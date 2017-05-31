@@ -1,4 +1,4 @@
-﻿# Bejelentkezés
+# Bejelentkezés
 
 ## HTTP kérés formája
 
@@ -17,28 +17,21 @@ Nincs
 
 ```json
 {
-    "id": "almafa",
-    "pwd": "almafa123"
+    "username": "almafa",
+    "password": "almafa123"
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+...
 }
 ```
-
-### Sikertelen
-
+- Nem sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "Rossz felhasználó vagy jelszó"
+...
 }
 ```
 
@@ -48,7 +41,7 @@ A felhasználó projektjeinek kilistázása
 
 ## HTTP kérés formája
 
-  * `GET http://host/bugtracker/projects`
+  * `GET http://host/bugtracker/api/projects`
 
 ## A lekérdezés paraméterei
 
@@ -59,42 +52,17 @@ Nincs
   * **200 OK:** az erőforrás rendelkezésre áll
   * **404 NOTFOUND:** az erőforrás nem található 
   
-## A lekért dokumentum
-
-A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "data": [
-        {
-            "id": 1,
-            "name": "Bug Tracker"
-        },
-        {
-            "id": 3,
-            "name": "Bug Tracker teszt" 
-        }
-    ]
+...
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
-}
-```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nincs jogosultság a művelethez"
+...
 }
 ```
 
@@ -102,7 +70,7 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
 
 ## HTTP kérés formája
 
-  * `GET http://host/bugtracker/projects?id=1`
+  * `GET http://host/bugtracker/api/project/id
 
 ## A lekérdezés paraméterei
 
@@ -113,95 +81,17 @@ A lekért dokumentum tartalmazza a projektek azonosítóit és neveit
   * **200 OK:** az erőforrás rendelkezésre áll
   * **404 NOTFOUND:** az erőforrás nem található 
   
-## A lekért dokumentum
-
-A lekért dokumentum tartalmazza a projekthez tartozó információkat
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "id": 1,
-    "name": "Bug Tracker",
-    "default_approver": {
-        "id": 1,
-        "name": "almafa",
-    },
-    "default_developer": {
-        "id": 2,
-        "name": "almafa2",
-    },
-    "s1": 10,
-    "s2": 20,
-    "s3": 30,
-    "tickets": [
-        {
-            "id": 1,
-            "name": "Hiányzik a REST API dokumentáció",
-            "owner": {
-                "id": 3,
-                "name": "user1"
-            },
-            "reporter": {
-                "id": 3,
-                "name": "user1"
-            },
-            "priority": "s1",
-            "status": {
-                "description": "pending",
-                "start_time": "2017.04.15",
-                "end_time": ""
-            }
-        },
-        {
-            "id": 2,
-            "name": "Hiányos az adatmodell",
-            "owner": {
-                "id": 4,
-                "name": "user2"
-            },
-            "reporter": {
-                "id": 4,
-                "name": "user2"
-            },
-            "priority": "s1",
-            "status": {
-                "description": "pending",
-                "start_time": "2017.04.15",
-                "end_time": ""
-            }
-        }
-    ],
-    "history": [
-        {
-            "id": 1,
-            "description": "Új hibajegy került felvételre: Hiányzik a REST API dokumentáció",
-            "date": "2017.04.15."
-        },
-        {
-            "id": 2,
-            "description": "Új hibajegy került felvételre: Hiányos az adatmodell",
-            "date": "2017.04.15."
-        }
-    ]
+...
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
-}
-```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nem létező projekt"
+...
 }
 ```
 
@@ -209,7 +99,7 @@ A lekért dokumentum tartalmazza a projekthez tartozó információkat
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/new_project`
+`POST http://host/bugtracker/api/addProject`
 
 ## A lekérdezés paraméterei
 
@@ -224,38 +114,26 @@ Nincs
 
 ```json
 {
-    "name": "Bug Tracker",
-    "description": "A Bug Tracker projekthez tartozó hibajegyek kezelése",
-    "default_approver": "almafa",
-    "default_developer": "almafa2",
-    "s1": 10,
-    "s2": 20,
-    "s3": 30
+...
 }
 ```
 
-## Válasz
-
-### Sikeres
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+...
 }
 ```
-
-### Sikertelen
-
+- Nem sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "Nem létezik a megadott felhasználó"
+...
 }
 ```
 
 # Új ügyfél / fejlesztő / jóváhagyó hozzáadása
-`POST http://host/bugtracker/create_user`
+`POST http://host/bugtracker/api/addUser`
 
 ## A lekérdezés paraméterei
 
@@ -271,32 +149,27 @@ Nincs
 ```json
 {
     "name": "Gipsz Jakab",
+    "password": "pass",
     "email": "gipszjakab@company.com",
 }
 ```
 
-## Válasz
-
-### Sikeres
-
+## Válasz 
+- Sikerült - A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+    "id": 1,
+    "name": "Gipsz Jakab",
+    "password": "pass",
+    "email": "gipszjakab@gmail.com"
 }
 ```
-
-### Sikertelen
-
+- Nem sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "A felhasználó már létezik"
+...
 }
 ```
-
-## A lekérdezés eredménye
-A felhasználó e-mail címére megkapja az automatikusan generált ideiglenes jelszavát, melyet az első belépés után kötelezően meg kell változtatnia.
 
 # Felhasználók lekérése
 
@@ -304,7 +177,7 @@ A rendszerben szereplő felhasználók kilistázása.
 
 ## HTTP kérés formája
 
-  * `GET http://host/bugtracker/users`
+  * `GET http://host/bugtracker/api/users`
 
 ## A lekérdezés paraméterei
 
@@ -315,44 +188,17 @@ Nincs
   * **200 OK:** a lekérdezés sikeres
   * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználók listázására
   
-## A lekért dokumentum
-
-A lekért dokumentum tartalmazza a rendszerben szereplő felhasználók adatait
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Gipsz Jakab",
-            "email": "gipszjakab@gmail.com"
-        },
-        {
-            "id": 2,
-            "name": "Kert Elek",
-            "email": "kertelek@xyz.com"
-        }
-    ]
+...
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
-}
-```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nincs jogosultság a művelethez"
+...
 }
 ```
 
@@ -362,52 +208,37 @@ Egy rendszerben szereplő felhasználó adatainak lekérése.
 
 ## HTTP kérés formája
 
-  * `GET http://host/bugtracker/users?id=1`
+  * `GET http://host/bugtracker/api/user/id`
 
 ## A lekérdezés paraméterei
 
-  * **id:** a felhasználó azonosítója
+  * **id:** a projekt azonosítója
 
 ## HTTP státusz kódok
 
   * **200 OK:** az erőforrás rendelkezésre áll
   * **404 NOTFOUND:** az erőforrás nem található 
   * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználók listázására
-  
-## A lekért dokumentum
 
-A lekért dokumentum tartalmazza a megadott azonosítójú felhasználó adatait.
-
+## Válasz 
+- Sikerült
 ```json
 {
     "id": 1,
     "name": "Gipsz Jakab",
+    "password": "pass",
     "email": "gipszjakab@gmail.com"
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
-}
-```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nem létező felhasználó"
+...
 }
 ```
 
 # Ügyfél / Fejlesztő / Jóváhagyó projekthez rendelése
-`POST http://host/bugtracker/assign`
+`POST http://host/bugtracker/api/addProjectUser`
 
 ## A lekérdezés paraméterei
 
@@ -419,39 +250,39 @@ Nincs
   * **401 UNAUTHORIZED:** nincs megfelelő jog felhasználó projekthez rendeléséhez
 
 ## Beküldött dokumentum
-```json
-{
-    "projectID": 1,
-    "userID": 1,
-    "role": "client"
-}
-```
-
-## Válasz
-
-### Sikeres
 
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+	"user":{
+		"id": 11,
+        ...
+	},
+	"project":{
+		"id":4
+        ...
+	},
+	"role":"developer"
 }
 ```
-
-### Sikertelen
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "Nem létező projekt / Nem létező felhasználó"
+...
 }
 ```
-  
-# Hibajegy / Igény létrehozása
+- Nem sikerült
+```json
+{
+...
+}
+```
+
+#  Hibajegy / Igény létrehozása
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/create_issue`
+`POST http://host/bugtracker/api/addTicket`
 
 ## A lekérdezés paraméterei
 
@@ -459,135 +290,83 @@ Nincs
 
 ## HTTP státusz kódok
 
-  * **200 OK:** sikeres létrehozás
+  * **200 OK:** az igény létre lett hozva
   * **400 BADREQUEST:** hiányos kitöltés
-  * **401 UNAUTHORIZED:** nincs megfelelő a létrehozásra
+  * **401 UNAUTHORIZED:** nincs megfelelő jog igény létrehozására
   
 ## Beküldött dokumentum
 
 ```json
 {
-    "name": "Nem működik a hibajegyek rendezése",
-    "projectID": 21,
-    "type": "ticket",
-    "description": "Nem működik a gomb, amivel a hibajegyeket sürgősség szerint sorba tudnám rendezni.",
-    "priority": "S3"
+    ....
 }
 ```
-
-**vagy**
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "name": "Új szűrő felhasználókra",
-    "projectID": 10,
-    "type": "feature",
-    "description": "Szeretnénk egy szűrőt, amivel az elmúlt 1 hónapban hozzáadott felhasználókat tudjuk megjeleníteni",
-    "priority": "S2"
+...
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
-}
-```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nem létező projekt"
+...
 }
 ```
   
-# Hibajegy megtekintése
+# Hibajegy / Igény megtekintése
 
 ## HTTP kérés formája
 
-`GET http://host/bugtracker/projects?id=1&ticketid=1`
+`GET http://host/bugtracker/api/ticket/id`
 
 ## A lekérdezés paraméterei
 
-  * **id:** a projekt azonosítója
-  * **ticketid:** a hibajegy azonosítója
+  * **id:** a hibajegy azonosítója
 
 ## HTTP státusz kódok
 
   * **200 OK:** az erőforrás rendelkezésre áll
   * **404 NOTFOUND:** az erőforrás nem található 
-  
-## Lekért dokumentum
-
-A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
-
+ 
+## Válasz 
+- Sikerült : A lekért dokumentum tartalmazza a hibajegyhez tartozó információkat
 ```json
 {
     "id": 1,
-    "name": "Hiányzik a REST API dokumentáció",
+    "ticketName": "Hiányzik a REST API dokumentáció",
+    "ticketType": "Bug"
     "owner": {
         "id": 3,
-        "name": "user1"
+        "name": "user1",
+        .....
     },
     "reporter": {
         "id": 3,
-        "name": "user1"
+        "name": "user1",
+        ....
     },
-    "priority": "s1",
-    "status": {
-        "description": "pending",
-        "start_time": "2017.04.15",
-        "end_time": ""
-    },
-    "history": [
-        {
-            "id": 1,
-            "description": "A hibajegy felvételre került",
-            "date": "2017.04.15."
-        }
-    ],
-    "comments": [
-        {
-            "id": 1,
-            "owner": "user1",
-            "description": "Nagyon sürgős, kérlek csináljátok meg",
-            "date": "2017.04.15."
-        }
-    ]
+    "project": {
+    	"id": 4,
+        "projectName": "Project Name"
+        ...
+    }
+    ...
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+- Nem sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+...
 }
 ```
-
-### Sikertelen
-
-```json
-{
-    "error_code": "1",
-    "message": "Nem létező projekt / Nem létező jegy azonosító"
-}
-```
-
+  
 # Hibajegyhez / Igényhez megjegyzés fűzése
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/add_comment`
+`POST http://host/bugtracker/api/addComment`
 
 ## A lekérdezés paraméterei
 
@@ -603,29 +382,27 @@ Nincs
 
 ```json
 {
-    "project_id": 3,
-    "ticket_id": 224,
-    "comment": "Várható, hogy még ma elkészül a javítás?"
+	"owner":{
+		"id": 11
+	},
+	"ticket":{
+		"id":1
+	},
+	"description":"developer",
+	"date":"2017-05-30"
 }
 ```
-
-## Válasz
-
-### Sikeres
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "error_code": "0",
-    "message": "OK"
+...
 }
 ```
-
-### Sikertelen
-
+- Nem sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "Nem létező projekt / Nem létező jegy azonosító"
+...
 }
 ```
 
@@ -633,45 +410,40 @@ Nincs
 
 ## HTTP kérés formája
 
-`POST http://host/bugtracker/change_status`
-
-## A lekérdezés paraméterei
-
-Nincs
+`POST http://host/bugtracker/api/addStatus`
 
 ## HTTP státusz kódok
 
   * **200 OK:** a státusz változás sikeresen megtörtént
   * **403 FORBIDDEN:** a megadott státusz változtatás nem engedélyezett
   * **404 NOT FOUND:** nem található megadott azonosítójú projektben megadott azonosítójú hibajegy / igény
-  
+
 ## Beküldött dokumentum
 
 ```json
 {
-    "project_id": 2,
-    "ticket_id": 34,
-    "new_status": "in_progress",
-    "description": "Ide megy valami leírás"
-}
-```
-  
-## Válasz
-
-### Sikeres
-
-```json
-{
-    "error_code": "0",
-    "message": "OK"
+	"user":{
+		"id": 11
+	},
+	"ticket":{
+		"id":1
+	},
+	"description":"someStatus",
+	"endTime":"2017-05-30",
+	"statusName":"Closed"
 }
 ```
 
-### Sikertelen
-
+## Válasz 
+- Sikerült
 ```json
 {
-    "error_code": "1",
-    "message": "Nem létező projekt / Nem létező jegy azonosító"
+...
+}
+```
+- Nem sikerült
+```json
+{
+...
 }
 ```
