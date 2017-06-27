@@ -2,6 +2,7 @@ package hu.elte.inf.software.technology.bugtracker.ticketdao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.elte.inf.software.technology.bugtracker.domain.Ticket;
+import hu.elte.inf.software.technology.bugtracker.domain.User;
 
 @Repository
 @Transactional
@@ -59,6 +61,16 @@ public class TicketDaoImpl extends HibernateDaoSupport implements TicketDao{
 		if(null != ticket){
 			session.delete(ticket);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Ticket> listTicketsByUserId(int userid) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createQuery("from Ticket where ownerId = :id or reporterId = :id");
+		query.setParameter("id", userid);
+		List<Ticket> ticketsList = query.list();
+		return ticketsList;
 	}
 
 }

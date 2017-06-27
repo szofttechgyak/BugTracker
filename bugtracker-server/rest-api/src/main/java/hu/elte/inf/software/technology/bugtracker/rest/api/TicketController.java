@@ -102,4 +102,13 @@ public class TicketController {
         ticketService.removeTicket(ticketId);
         return new ResponseEntity<Ticket>(HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/api/ticketByUser/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Ticket>> getTicketByUserId(@PathVariable int userId) {
+    	List<Ticket> tickets = ticketService.listTicketsByUserId(userId);
+        if(tickets.isEmpty()){
+            return new ResponseEntity<List<Ticket>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
+    }
 }
