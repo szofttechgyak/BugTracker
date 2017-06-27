@@ -34,6 +34,10 @@ public class TicketService {
     	ticketDao.removeTicket(ticketId);
     }
     
+    public List<Ticket> listTicketsByUserId(int userId){
+    	return ticketDao.listTicketsByUserId(userId);
+    }
+    
     public TicketDao getTicketDao() {
 		return ticketDao;
 	}
