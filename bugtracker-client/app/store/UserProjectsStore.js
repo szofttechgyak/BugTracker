@@ -4,6 +4,7 @@ Ext.define('Bugtracker.store.UserProjectsStore', {
 	autoLoad: true,
     autoSync: true,
     model: 'Project',
+    storeId: 'userprojectsstore',
 
     proxy: {
         type: 'rest',

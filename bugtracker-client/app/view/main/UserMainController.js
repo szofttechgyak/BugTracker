@@ -7,6 +7,7 @@ Ext.define('Bugtracker.view.main.UserMainController', {
         var popup = Ext.create('Bugtracker.view.main.ProjectDetail', {projectInfo: iStore});
         // var popup = new Bugtracker.view.main.ProjectDetail();
         popup.show();
+        console.log(localStorage.getItem("JWT"));
         console.log(popup.projectInfo.data);
     },
 

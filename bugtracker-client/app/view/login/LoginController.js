@@ -30,6 +30,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 					success: function(response) 
 					{ 
 						localStorage.setItem("role", response.responseText);
+						localStorage.setItem("username", authentication.username);
 						_this.getView().destroy();
 						if(localStorage.getItem("role") === "ROLE_ADMIN") {
 							Ext.create({

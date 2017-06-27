@@ -5,10 +5,6 @@ Ext.define('Bugtracker.store.AllTicketsStore', {
     autoSync: true,
     model: 'Ticket',
 
-    fields: [
-        'id', 'name', 'owner'
-    ],
-
     proxy: {
         type: 'rest',
 		

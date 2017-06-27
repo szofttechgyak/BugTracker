@@ -4,6 +4,7 @@ Ext.define('Bugtracker.store.AllUsersStore', {
 	autoLoad: true,
     autoSync: true,
     model: 'User',
+    storeId: 'allusersstore',
 
     requires: [
     	'Urls'

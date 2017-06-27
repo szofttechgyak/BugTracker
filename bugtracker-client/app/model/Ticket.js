@@ -6,24 +6,31 @@ Ext.define('Ticket', {
         name: 'id',
         type: 'int',
     },{
-        name: 'name',
+        name: 'ticketName',
         type: 'string',
     },{
         name: 'owner',
+        type: 'auto',
+        mapping: 'owner.userName'
+    },{
+        name: 'reporter',
+        type: 'auto',
+        mapping: 'reporter.userName'
+    },{
+        name: 'project',
+        type: 'auto',
+        mapping: 'project.projectName'
+    },{
+        name: 'priority',
         type: 'string',
-    }],
-		
-	proxy: {
-        type: 'rest',
-        url: 'http://localhost:8080/api/ticket',
-		headers: {
-			'authorization' : localStorage.getItem("JWT")
-		},
-        reader: {
-            type: 'json',
-        },
-        writer: {
-            type: 'json'
-        }
-    }
+    },{
+        name: 'spentTime',
+        type: 'int',
+    },{
+        name: 'status',
+        type: 'auto'
+    },{
+        name: 'comment',
+        type: 'auto'
+    }]
 });
