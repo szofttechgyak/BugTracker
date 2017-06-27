@@ -1,4 +1,4 @@
-Ext.define('Bugtracker.view.main.UsersList', {
+Ext.define('Bugtracker.view.main.UsersTab.UsersList', {
     extend: 'Ext.grid.Panel',
     xtype: 'userslist',
     id: 'userslist',

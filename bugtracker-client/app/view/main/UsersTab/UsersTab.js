@@ -2,7 +2,7 @@ Ext.define('Bugtracker.view.main.UsersTab.UsersTab', {
 	extend : 'Ext.panel.Panel',
 	xtype : 'users-tab',
 
-	requires : [ 'Ext.button.Button', 'Ext.Viewport', 'Ext.data.Model', 'Bugtracker.view.main.UsersList',
+	requires : [ 'Ext.button.Button', 'Ext.Viewport', 'Ext.data.Model', 'Bugtracker.view.main.UsersTab.UsersList',
 			'Bugtracker.view.main.UsersTab.NewUserDialog', 'Bugtracker.view.main.UsersTab.UpdateUserDialog', 'Urls' ],
 
 	items : [ {

@@ -1,4 +1,4 @@
-Ext.require(['Bugtracker.view.main.UsersList']);
+Ext.require(['Bugtracker.view.main.UsersTab.UsersList']);
 
 Ext.define('Bugtracker.view.main.UsersTab.UpdateUserDialog', {
     extend: 'Ext.window.Window',

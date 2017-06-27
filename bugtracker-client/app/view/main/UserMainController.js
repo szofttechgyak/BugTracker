@@ -4,7 +4,10 @@ Ext.define('Bugtracker.view.main.UserMainController', {
     alias: 'controller.usermain',
 
     onItemSelected: function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
-                console.log(iStore.data);
+        var popup = Ext.create('Bugtracker.view.main.ProjectDetail', {projectInfo: iStore});
+        // var popup = new Bugtracker.view.main.ProjectDetail();
+        popup.show();
+        console.log(popup.projectInfo.data);
     },
 
 //    onConfirm: function (choice) {
