@@ -19,6 +19,18 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 				fieldLabel : 'Ticket name'
 			},
 			{
+				xtype : 'textfield',
+				name : 'ticketdescription',
+				id : 'ticketdescription',
+				fieldLabel : 'Ticket description'
+			},
+			{
+				xtype : 'textfield',
+				name : 'tickettype',
+				id : 'tickettype',
+				fieldLabel : 'Ticket type'
+			},
+			{
 				xtype : 'projectselector',
 				name : 'projectname',
 				id : 'projectname',
@@ -41,16 +53,20 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 							iconCls : 'x-fa fa-check',
 							formBind : true,
 							handler : function() {
-								console.log(localStorage.getItem("username"))
-								console.log(Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")))
+								console.log(Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data)
 								var ticket = {
 									ticketName : Ext.getCmp("ticketname")
+											.getValue(),
+									ticketType : Ext.getCmp("tickettype")
 											.getValue(),
 									owner : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
 									reporter : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
                                     projectName : Ext.getStore('userprojectsstore').findRecord('id',Ext.getCmp("projectname")
 											.getValue()).data,
                                     priority : Ext.getCmp("priority").getValue(),
+									spentTime: 0,
+									ticketDescription : Ext.getCmp("ticketdescription")
+											.getValue(),
 								};
 
 								Ext.Ajax.request({

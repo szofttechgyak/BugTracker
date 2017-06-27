@@ -9,6 +9,9 @@ Ext.define('Ticket', {
         name: 'ticketName',
         type: 'string',
     },{
+        name: 'ticketType',
+        type: 'string',
+    },{
         name: 'owner',
         type: 'auto',
         mapping: 'owner.userName'
@@ -26,6 +29,9 @@ Ext.define('Ticket', {
     },{
         name: 'spentTime',
         type: 'int',
+    },{
+        name: 'ticketDescription',
+        type: 'string',
     },{
         name: 'status',
         type: 'auto'
