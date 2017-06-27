@@ -1,6 +1,7 @@
 Ext.define('Bugtracker.view.main.ProjectsTab.ProjectsList', {
 	extend : 'Ext.grid.Panel',
-	xtype : 'projects-list',
+	xtype : 'projectslist',
+	id: 'projectslist',
 	title : 'Projects',
 	height : Ext.getBody().getViewSize().height,
 
@@ -32,6 +33,16 @@ Ext.define('Bugtracker.view.main.ProjectsTab.ProjectsList', {
 	}, {
 		text : 'S3 Time',
 		dataIndex : 's3Time',
+		flex : 1,
+		align : 'center'
+	}, {
+		text : 'Default developer',
+		dataIndex : 'defaultDeveloper',
+		flex : 1,
+		align : 'center'
+	}, {
+		text : 'Default approver',
+		dataIndex : 'defaultApprover',
 		flex : 1,
 		align : 'center'
 	} ],

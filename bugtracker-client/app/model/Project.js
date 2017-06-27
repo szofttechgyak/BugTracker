@@ -9,11 +9,13 @@ Ext.define('Project', {
         name: 'projectName',
         type: 'string',
     },{
-        name: 'default_approver',
-        type: 'auto'
+        name: 'defaultApprover',
+        type: 'auto',
+        mapping: 'defaultApprover.userName'
     },{
-        name: 'default_developer',
-        type: 'auto'
+        name: 'defaultDeveloper',
+        type: 'string',
+		mapping: 'defaultDeveloper.userName'
     },{
         name: 'projectDescription',
         type: 'string'

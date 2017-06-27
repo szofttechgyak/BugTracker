@@ -10,7 +10,9 @@ Ext.define('Bugtracker.view.main.UserProjectsList', {
 
     columns: {
         items: [
-            { text: 'Name', dataIndex: 'projectName', flex : 1},            
+            { text: 'Name', dataIndex: 'projectName', flex: 1},      
+            { text: 'Default developer', dataIndex: 'defaultDeveloper', flex: 1},      
+            { text: 'Default approver', dataIndex: 'defaultApprover', flex: 1},      
         ],
 //        defaults: {
 //            layout: {

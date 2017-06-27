@@ -21,7 +21,7 @@ Ext.define('User', {
 		
 	proxy: {
         type: 'rest',
-        url: 'http://localhost:8080/api/user',
+        url: 'http://157.181.161.108:8080/api/user',
 		headers: {
 			'authorization' : localStorage.getItem("JWT")
 		},

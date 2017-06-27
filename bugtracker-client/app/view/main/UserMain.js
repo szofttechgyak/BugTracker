@@ -24,9 +24,5 @@ Ext.define('Bugtracker.view.main.UserMain', {
         bind: {
             html: '{bogus}'
         }
-    }],
-
-    onUserSave: function() {
-                        console.log('user saved');
-                }
+    }]
 });
