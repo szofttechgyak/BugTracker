@@ -295,10 +295,22 @@ Nincs
   * **401 UNAUTHORIZED:** nincs megfelelő jog igény létrehozására
   
 ## Beküldött dokumentum
-
 ```json
 {
-    ....
+    "ticketName": "Postman TicketTestName",
+    "ticketType": "Bug",
+    "owner": {
+      "id": 11
+    },
+    "reporter": {
+      "id": 12
+    },
+    "project": {
+      "id": 4
+    },
+    "priority": "C",
+    "spentTime": 1,
+    "ticketDescription": "Postman TestDescription"
 }
 ```
 ## Válasz 
