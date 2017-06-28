@@ -25,16 +25,16 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 				fieldLabel : 'Ticket description'
 			},
 			{
-				xtype : 'textfield',
+				xtype : 'tickettypeselector',
 				name : 'tickettype',
 				id : 'tickettype',
 				fieldLabel : 'Ticket type'
 			},
 			{
 				xtype : 'projectselector',
-				name : 'projectname',
-				id : 'projectname',
-				fieldLabel : 'Project name'
+				name : 'project',
+				id : 'project',
+				fieldLabel : 'Project'
 			},
 			{
 				xtype : 'priorityselector',
@@ -55,18 +55,17 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 							handler : function() {
 								console.log(Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data)
 								var ticket = {
-									ticketName : Ext.getCmp("ticketname")
-											.getValue(),
-									ticketType : Ext.getCmp("tickettype")
-											.getValue(),
-									owner : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
-									reporter : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
-                                    projectName : Ext.getStore('userprojectsstore').findRecord('id',Ext.getCmp("projectname")
-											.getValue()).data,
+									ticketName : Ext.getCmp("ticketname").getValue(),
+									ticketType : Ext.getCmp("tickettype").getValue(),
+									owner: {"id": Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data.id},
+									reporter: {"id": Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data.id},
+									project: {"id": Ext.getCmp("project").getValue()},
+									// owner : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
+									// reporter : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
+                                    // projectName : Ext.getStore('userprojectsstore').findRecord('id',Ext.getCmp("projectname").getValue()).data,
                                     priority : Ext.getCmp("priority").getValue(),
 									spentTime: 0,
-									ticketDescription : Ext.getCmp("ticketdescription")
-											.getValue(),
+									ticketDescription : Ext.getCmp("ticketdescription").getValue(),
 								};
 
 								Ext.Ajax.request({

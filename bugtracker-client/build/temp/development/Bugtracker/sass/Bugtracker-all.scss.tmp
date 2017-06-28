@@ -25,6 +25,7 @@ $include-bugtracker-view-main-projectstab-projectstab: dynamic(true);;
 $include-bugtracker-view-main-projectstab-updateprojectdialog: dynamic(true);;
 $include-bugtracker-view-main-projectstab-userselector: dynamic(true);;
 $include-bugtracker-view-main-singleticket: dynamic(true);;
+$include-bugtracker-view-main-tickettypeselector: dynamic(true);;
 $include-bugtracker-view-main-usermain: dynamic(true);;
 $include-bugtracker-view-main-usermaincontroller: dynamic(true);;
 $include-bugtracker-view-main-usermainmodel: dynamic(true);;

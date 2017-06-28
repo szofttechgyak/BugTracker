@@ -22,35 +22,7 @@ Ext.define('Bugtracker.view.main.UserTicketsTab', {
 					var dialog = Ext.create('Bugtracker.view.main.NewTicketDialog');
 					dialog.show();		
 				},
-			}, 	{
-				xtype : 'button',
-				text : 'Filter',
-				margin: '0px 2px 5px 0px',
-				handler : function() {
-					var selected = Ext.getCmp('projectslist').selection;
-					if (selected === null) {
-						Ext.MessageBox.alert('Error', 'No selected project!');
-					} else {		
-						Ext.Ajax.request({
-							url : Urls.endpoint("/api/removeProject/" + selected.id),
-							method : 'POST',
-							headers: {
-								'authorization' : localStorage.getItem("JWT")
-							},
-							success : function(response) {
-								Ext.getCmp('projectslist').getStore().load();
-								Ext.MessageBox.alert('Ok',
-										'Project successfully deleted!');
-							},
-							failure : function(response) {
-								Ext.MessageBox.alert('Error',
-										'Cannot delete project');
-							}
-						});						
-					}
-				},
-			}
-		]
+			}]
 	}, {
 		xtype : 'userticketslist', autoScroll: true
 	} ],
