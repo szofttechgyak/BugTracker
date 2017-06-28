@@ -1,3 +1,4 @@
+Ext.require(['Bugtracker.view.main.UsersTab.UsersList']);
 Ext.define('Bugtracker.view.main.UserTicketsTab', {
     extend: 'Ext.panel.Panel',
     xtype: 'tickets-tab',
@@ -24,7 +25,28 @@ Ext.define('Bugtracker.view.main.UserTicketsTab', {
 				},
 			}]
 	}, {
-		xtype : 'userticketslist', autoScroll: true
+		xtype : Ext.create('Ext.tab.Panel', {
+			items: [
+				{
+					xtype: 'userticketslist', autoScroll: true,
+				},
+				{
+					xtype: Ext.create('Bugtracker.view.main.UserTicketsList', {
+						store: Ext.create('Bugtracker.store.AllTicketsStore', {
+								proxy: {
+									url: 'http://157.181.161.108:8080/api/tickets'
+								}
+							}),
+						listeners: {
+							beforerender: function(){
+								this.getStore().getProxy().setUrl('http://157.181.161.108:8080/api/ticketByUser/' + Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data.id);
+								this.getStore().load();
+							}
+						}
+					})
+				}
+			]			
+		})
 	} ],
 
 	listeners: {       

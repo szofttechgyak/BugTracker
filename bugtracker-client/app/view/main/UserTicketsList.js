@@ -1,7 +1,6 @@
 Ext.define('Bugtracker.view.main.UserTicketsList', {
     extend: 'Ext.grid.Panel',
     xtype: 'userticketslist',
-    id: 'userticketslist',
     height : Ext.getBody().getViewSize().height,
 
     title: 'Tickets',

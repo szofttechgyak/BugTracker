@@ -1,7 +1,7 @@
 Ext.define('Bugtracker.view.main.PrioritySelector', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'priorityselector',
-    fieldLabel: 'Choose User',
+    fieldLabel: 'Choose Priority',
     queryMode: 'local',
     displayField: 'priority',
     valueField: 'priority',
