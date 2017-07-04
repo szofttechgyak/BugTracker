@@ -1,6 +1,3 @@
-Ext.require(['Bugtracker.view.main.ProjectsTab.ProjectsList']);
-Ext.require(['Bugtracker.view.main.UsersTab.UsersList']);
-
 Ext.define('Bugtracker.view.main.ProjectsTab.NewProjectDialog', {
     extend: 'Ext.window.Window',
     xtype: 'newproject',

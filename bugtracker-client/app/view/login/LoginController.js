@@ -31,6 +31,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 					{ 
 						localStorage.setItem("role", response.responseText);
 						localStorage.setItem("username", authentication.username);
+						localStorage.setItem("id", _this.getUserID(authentication.username));
 						_this.getView().destroy();
 						if(localStorage.getItem("role") === "ROLE_ADMIN") {
 							Ext.create({
@@ -50,5 +51,25 @@ Ext.define('Bugtracker.view.login.LoginController', {
 			}      
 		});  
 		
-    }
+    },
+
+	getUserID: function(username){
+		var _id = null;
+		Ext.Ajax.request 
+				({ 
+					async: false,
+					url: 'http://157.181.161.108:8080/api/userByUserName/' + username, 
+					method: 'GET',    
+					
+					headers: {
+						'authorization' : localStorage.getItem("JWT")
+					},
+					
+					success: function(response) 
+					{ 
+						_id = Ext.decode(response.responseText).id;
+					}
+				});
+		return _id;
+	}
 });

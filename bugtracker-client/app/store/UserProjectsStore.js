@@ -6,6 +6,10 @@ Ext.define('Bugtracker.store.UserProjectsStore', {
     model: 'Project',
     storeId: 'userprojectsstore',
 
+    requires: [
+    	'Urls'
+    ],
+
     proxy: {
         type: 'rest',
 		
@@ -13,7 +17,7 @@ Ext.define('Bugtracker.store.UserProjectsStore', {
 			'authorization' : localStorage.getItem("JWT")
 		},
 		
-        url: 'http://157.181.161.108:8080/api/projects',
+        url: Urls.endpoint('/api/projects'),
         reader: {
             type: 'json',
         },

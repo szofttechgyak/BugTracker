@@ -9,10 +9,6 @@ Ext.define('Bugtracker.store.AllUsersStore', {
     requires: [
     	'Urls'
     ],
-    
-    fields: [
-        'id', 'userName', 'emailAddress', 'admin', 'password'
-    ],
 
     proxy: {
         type: 'rest',

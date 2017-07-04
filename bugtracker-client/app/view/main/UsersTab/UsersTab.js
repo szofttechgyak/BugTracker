@@ -80,6 +80,6 @@ Ext.define('Bugtracker.view.main.UsersTab.UsersTab', {
 			}
 		]
 	}, {
-		xtype : 'userslist'
+		xtype : 'userslist', autoScroll: true
 	} ]
 });

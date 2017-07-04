@@ -4,6 +4,11 @@ Ext.define('Bugtracker.store.AllTicketsStore', {
 	autoLoad: true,
     autoSync: true,
     model: 'Ticket',
+    storeId: 'allticketsstore',
+
+    requires: [
+    	'Urls'
+    ],
 
     proxy: {
         type: 'rest',
@@ -12,7 +17,7 @@ Ext.define('Bugtracker.store.AllTicketsStore', {
 			'authorization' : localStorage.getItem("JWT")
 		},
 		
-        url: 'http://157.181.161.108:8080/api/tickets',
+        url: Urls.endpoint('/api/tickets'),
         reader: {
             type: 'json',
         },

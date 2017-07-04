@@ -1,5 +1,3 @@
-Ext.require(['Bugtracker.view.main.UsersTab.UsersList']);
-
 Ext.define('Bugtracker.view.main.UsersTab.NewUserDialog', {
     extend: 'Ext.window.Window',
     xtype: 'newuser',

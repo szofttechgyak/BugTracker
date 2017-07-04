@@ -1,5 +1,3 @@
-Ext.require(['Bugtracker.view.main.ProjectsTab.ProjectsList']);
-Ext.require(['Bugtracker.view.main.UsersTab.UsersList']);
 Ext.require(['Bugtracker.view.main.UserTicketsList']);
 
 Ext.define('Bugtracker.view.main.NewTicketDialog', {
@@ -7,6 +5,9 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
     xtype: 'newticket',
 	reference : 'form',
 	title : 'Create Ticket',
+	requires: [
+		'Bugtracker.store.AllUsersStore', 'Ext.data.StoreManager', 'Bugtracker.view.main.UserTicketsList'
+	],
 	floating : true,
 	centered : true,
 	width : 300,
@@ -53,12 +54,12 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 							iconCls : 'x-fa fa-check',
 							formBind : true,
 							handler : function() {
-								console.log(Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data)
+								// console.log(Ext.getStore('allusers').findRecord('userName',localStorage.getItem("username")).data)
 								var ticket = {
 									ticketName : Ext.getCmp("ticketname").getValue(),
 									ticketType : Ext.getCmp("tickettype").getValue(),
-									owner: {"id": Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data.id},
-									reporter: {"id": Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data.id},
+									owner: {"id": localStorage.getItem("id")},
+									reporter: {"id": localStorage.getItem("id")},
 									project: {"id": Ext.getCmp("project").getValue()},
 									// owner : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
 									// reporter : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
@@ -76,7 +77,7 @@ Ext.define('Bugtracker.view.main.NewTicketDialog', {
 										'authorization' : localStorage.getItem("JWT")
 									},
 									success : function(response) {
-										Ext.getCmp('userticketslist').getStore().load();
+										Ext.getStore('allticketsstore').load();
 										Ext.MessageBox.alert('Ok',
 												'Ticket successfully created!');
 									},

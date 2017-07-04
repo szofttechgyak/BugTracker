@@ -48,6 +48,16 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/api/userByUserName/{userName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUserByUserName(@PathVariable String userName) {
+        User user = userService.getUserByUserName(userName);
+        if (user == null) {
+            System.out.println("User with id " + userName + " not found");
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/api/addUser", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
@@ -118,5 +128,4 @@ public class UserController {
         userService.removeUser(userId);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
-
 }
