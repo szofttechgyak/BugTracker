@@ -1,9 +1,10 @@
-Ext.define('Bugtracker.view.main.ProjectsTab.ProjectsList', {
+Ext.define('Bugtracker.view.project.admin.ProjectsList', {
 	extend : 'Ext.grid.Panel',
 	xtype : 'projectslist',
 	id: 'projectslist',
 	title : 'Projects',
-	height : Ext.getBody().getViewSize().height,
+	// height : Ext.getBody().getViewSize().height,
+	autoScroll: true,
 
 	listeners : {
 		itemclick : function(e) {

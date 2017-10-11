@@ -1,4 +1,4 @@
-Ext.define('Bugtracker.view.main.ProjectsTab.UserSelector', {
+Ext.define('Bugtracker.view.project.admin.UserSelector', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'userselector',
     fieldLabel: 'Choose User',

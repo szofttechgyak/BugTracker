@@ -9,7 +9,7 @@ Ext.define('Bugtracker.view.main.UserMain', {
         'Bugtracker.view.main.UserMainModel'
     ],
 
-    controller: 'usermain',
+    controller: 'usermaincontroller',
     viewModel: 'usermain',
 
     items: [{

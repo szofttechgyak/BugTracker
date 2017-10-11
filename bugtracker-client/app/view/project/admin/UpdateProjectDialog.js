@@ -1,6 +1,6 @@
-Ext.define('Bugtracker.view.main.ProjectsTab.UpdateProjectDialog', {
+Ext.define('Bugtracker.view.project.admin.UpdateProjectDialog', {
     extend: 'Ext.window.Window',
-    xtype: 'updateproject',
+    xtype: 'updateprojectdialog',
 	reference : 'form',
 	title : 'Update Project',
 	floating : true,
@@ -72,43 +72,7 @@ Ext.define('Bugtracker.view.main.ProjectsTab.UpdateProjectDialog', {
 							text : 'Submit',
 							iconCls : 'x-fa fa-check',
 							formBind : true,
-							handler : function() {
-								var project = {
-									projectName : Ext.getCmp("projectname")
-											.getValue(),
-									projectDescription : Ext.getCmp("description")
-											.getValue(),
-									defaultApprover : Ext.getCmp('userslist').getStore().findRecord('id',Ext.getCmp("defaultapprover")
-											.getValue()).data,
-                                    defaultDeveloper : Ext.getCmp('userslist').getStore().findRecord('id',Ext.getCmp("defaultdeveloper")
-											.getValue()).data,
-                                    s1Time : Ext.getCmp("s1time")
-											.getValue(),
-                                    s2Time : Ext.getCmp("s2time")
-											.getValue(),
-                                    s3Time : Ext.getCmp("s3time")
-											.getValue(),
-								};
-
-								Ext.Ajax.request({
-									url : Urls.endpoint("/api/updateProject/" + this.up('updateproject').projectID),
-									method : 'POST',
-									jsonData : project,
-									headers: {
-										'authorization' : localStorage.getItem("JWT")
-									},
-									success : function(response) {
-										Ext.getCmp('projectslist').getStore().load();
-										Ext.MessageBox.alert('Ok',
-												'Project successfully updated!');
-									},
-									failure : function(response) {
-										Ext.MessageBox.alert('Error',
-												'Cannot update project!');
-									}
-								});
-								this.up('window').destroy();
-							}
+							handler : 'updateProject'
 						}, {
 							xtype : 'button',
 							text : 'Cancel',

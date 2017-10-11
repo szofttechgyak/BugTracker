@@ -1,7 +1,7 @@
 Ext.define('Bugtracker.view.main.UserMainController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Bugtracker.view.main.ControllerBase',
 
-    alias: 'controller.usermain',
+    alias: 'controller.usermaincontroller',
     config: {
         stores: ['Bugtracker.store.AllUsersStore']
     },
@@ -12,21 +12,5 @@ Ext.define('Bugtracker.view.main.UserMainController', {
         popup.show();
         console.log(localStorage.getItem("JWT"));
         console.log(popup.projectInfo.data);
-    },
-
-//    onConfirm: function (choice) {
-//        if (choice === 'yes') {
-//            
-//        }
-//    },
-
-    onLogoutClicked: function () {
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("username");
-        localStorage.removeItem("role");
-        this.getView().destroy();
-        Ext.create({
-            xtype: 'login'
-        });
     }
 });
