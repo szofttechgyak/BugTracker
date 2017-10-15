@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import hu.elte.inf.software.technology.bugtracker.domain.Project;
 import hu.elte.inf.software.technology.bugtracker.domain.User;
 import hu.elte.inf.software.technology.bugtracker.service.ProjectService;
+import hu.elte.inf.software.technology.bugtracker.service.ProjectUserService;
 import hu.elte.inf.software.technology.bugtracker.service.UserService;
 
 @RestController
@@ -27,6 +28,9 @@ public class ProjectController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private ProjectUserService projectUserService;
 
     @RequestMapping(value = "/api/projects", method = RequestMethod.GET)
     public ResponseEntity<List<Project>> getAllProjects() {
@@ -90,6 +94,11 @@ public class ProjectController {
         }
         projectService.removeProject(projectId);
         return new ResponseEntity<Project>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/api/assignedUsers/{projectId}", method = RequestMethod.GET)
+    public List<User> getAssignedUsers(@PathVariable int projectId) {
+        return projectUserService.getAssignedUsers(projectId);
     }
 
 }
