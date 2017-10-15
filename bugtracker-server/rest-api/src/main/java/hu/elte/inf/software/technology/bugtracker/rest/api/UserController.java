@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import hu.elte.inf.software.technology.bugtracker.domain.Project;
 import hu.elte.inf.software.technology.bugtracker.domain.User;
 import hu.elte.inf.software.technology.bugtracker.service.ProjectService;
+import hu.elte.inf.software.technology.bugtracker.service.ProjectUserService;
 import hu.elte.inf.software.technology.bugtracker.service.UserService;
 
 @RestController
@@ -29,6 +30,9 @@ public class UserController {
     
     @Autowired
     private ProjectService projectService;
+    
+    @Autowired
+    private ProjectUserService projectUserService;
 
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
@@ -97,11 +101,9 @@ public class UserController {
         }
     }
     
-    @RequestMapping(value = "/api/developedProject/{userId}", method = RequestMethod.GET)
-    public List<Project> getDevelopedProjects(@PathVariable int userId) {
-        User user = userService.getUserById(userId);
-        System.out.println(user.getDevelopedProjects().isEmpty() ? "eeempty" : "neem eeempty");
-        return new ArrayList<>(user.getDevelopedProjects());
+    @RequestMapping(value = "/api/assignedProjects/{userId}", method = RequestMethod.GET)
+    public List<Project> getAssignedProjects(@PathVariable int userId) {
+        return projectUserService.getAssignedProjects(userId);
     }
 
     @RequestMapping(value = "/api/updateUser/{userId}", method = RequestMethod.POST)
