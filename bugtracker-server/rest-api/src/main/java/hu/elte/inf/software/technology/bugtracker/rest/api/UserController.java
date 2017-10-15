@@ -76,30 +76,6 @@ public class UserController {
         headers.setLocation(ucBuilder.path("/api/user/{userid}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
-
-    @RequestMapping(value = "/api/assignToProject", method = RequestMethod.POST)
-    public void assignUserToProject(@RequestParam(value = "userId") String userId,
-                                    @RequestParam(value = "projectId") String projectId,
-                                    @RequestParam(value = "role") String role) {
-        try {
-            User user = userService.getUserById(Integer.parseInt(userId));
-            Project project = projectService.getProjectById(Integer.parseInt(projectId));
-            user.getDevelopedProjects().add(project);
-//            switch(role) {
-//            case "developer":
-//                user.getDevelopedProjects().add(project);
-//                break;
-//            case "approver":
-//                user.getApprovedProjects().add(project);
-//                break;
-//            case "client":
-//                break;
-//            }
-            userService.updateUser(user);
-            projectService.updateProject(project);
-        } catch (Exception ex) {
-        }
-    }
     
     @RequestMapping(value = "/api/assignedProjects/{userId}", method = RequestMethod.GET)
     public List<Project> getAssignedProjects(@PathVariable int userId) {
