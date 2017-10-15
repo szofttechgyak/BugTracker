@@ -21,7 +21,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Autowired
-    private  UserDetailsService userDetailsService;// = new BugTrackerUserDetailService();
+    private  UserDetailsService userDetailsService;
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,7 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration config = new CorsConfiguration();
                 config.setAllowCredentials(true);
-                //config.addAllowedOrigin("http://localhost:1841");
+                config.addAllowedOrigin("http://localhost:1841");
                 config.addAllowedOrigin("http://157.181.161.108:1841");
                 config.addAllowedHeader("*");
                 config.addAllowedMethod("*");
@@ -56,15 +56,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-    
-    
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        return userDetailsService;
-//    }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("a").password("a").roles("ADMIN");
-//    }
 }
