@@ -1,31 +1,21 @@
-Ext.define('Bugtracker.view.main.UsersTab.NewUserDialog', {
+Ext.define('Bugtracker.view.user.admin.AssignToProjectDialog', {
     extend: 'Ext.window.Window',
-    xtype: 'newuser',
+    xtype: 'assign-to-project',
 	reference : 'form',
-	title : 'Create User',
+	title : 'Assign user to project',
 	floating : true,
 	centered : true,
 	width : 300,
 	modal : true,
+	
+	setUser : function(user) {
+		this.user = user;
+	},
+	
 	items : [
 			{
-				xtype : 'textfield',
-				name : 'username',
-				id : 'username',
-				fieldLabel : 'Username'
-			},
-			{
-				xtype : 'textfield',
-				name : 'email',
-				id : 'email',
-				fieldLabel : 'E-mail'
-			},
-			{
-				xtype : 'textfield',
-				name : 'password',
-				id : 'password',
-				inputType : 'password',
-				fieldLabel : 'Password'
+				xtype : 'userprojectslist',
+				id : 'userprojectslist'
 			},
 			{
 				xtype : 'toolbar',
@@ -38,31 +28,27 @@ Ext.define('Bugtracker.view.main.UsersTab.NewUserDialog', {
 							iconCls : 'x-fa fa-check',
 							formBind : true,
 							handler : function() {
-								var user = {
-									userName : Ext.getCmp("username")
-											.getValue(),
-									emailAddress : Ext.getCmp("email")
-											.getValue(),
-									password : Ext.getCmp("password")
-											.getValue(),
-									admin : false
-								};
-
+								var selectedProject = Ext.getCmp('userprojectslist').selection;
+								if (selectedProject === null) {
+									Ext.MessageBox.alert('Error', 'No selected project!');
+									return;
+								} 
 								Ext.Ajax.request({
-									url : Urls.endpoint("/api/addUser"),
+									url : Urls.endpoint("/api/assignToProject?userId="
+											+this.up('assign-to-project').user.id
+											+"&projectId="+selectedProject.id+"&role=developer"),
 									method : 'POST',
-									jsonData : user,
 									headers: {
 										'authorization' : localStorage.getItem("JWT")
 									},
 									success : function(response) {
 										Ext.getCmp('userslist').getStore().load();
 										Ext.MessageBox.alert('Ok',
-												'User successfully created!');
+												'User successfully assigned to project!');
 									},
 									failure : function(response) {
 										Ext.MessageBox.alert('Error',
-												'Cannot create user');
+												'Cannot assign user');
 									}
 								});
 								this.up('window').destroy();

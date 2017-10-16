@@ -1,4 +1,4 @@
-Ext.define('Bugtracker.view.main.UsersTab.DevelopedProjectsDialog', {
+Ext.define('Bugtracker.view.user.admin.DevelopedProjectsDialog', {
     extend: 'Ext.window.Window',
     xtype: 'developed-projects',
 	reference : 'form',
