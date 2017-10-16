@@ -12,7 +12,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   },
 
   showUpdateProjectDialog: function() {
-    var selected = Ext.getCmp("projectslist").selection;
+    var selected = this.lookupReference("projectslist-ref").selection;
     if (selected === null) {
       Ext.MessageBox.alert("Error", "No selected project!");
     } else {
@@ -20,13 +20,14 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       this.dialog = view.add({
         xtype: "updateprojectdialog"
       });
-      this.dialog.setProject(selected.data);
+      this.setProject(this.dialog, selected.data);
       this.dialog.show();
     }
   },
 
   deleteProject: function() {
-    var selected = Ext.getCmp("projectslist").selection;
+    var me = this;
+    var selected = this.lookupReference("projectslist-ref").selection;
     if (selected === null) {
       Ext.MessageBox.alert("Error", "No selected project!");
     } else {
@@ -37,9 +38,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
           authorization: localStorage.getItem("JWT")
         },
         success: function(response) {
-          Ext.getCmp("projectslist")
-            .getStore()
-            .load();
+          me.loadProjectStore();
           Ext.MessageBox.alert("Ok", "Project successfully deleted!");
         },
         failure: function(response) {
@@ -50,14 +49,15 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   },
 
   createNewProject: function() {
+    var me = this;
     var project = {
       projectName: Ext.getCmp("projectname").getValue(),
       projectDescription: Ext.getCmp("description").getValue(),
-      defaultApprover: Ext.getCmp("userslist")
-        .getStore()
+      defaultApprover: this.getViewModel()
+        .getStore("Users")
         .findRecord("id", Ext.getCmp("defaultapprover").getValue()).data,
-      defaultDeveloper: Ext.getCmp("userslist")
-        .getStore()
+      defaultDeveloper: this.getViewModel()
+        .getStore("Users")
         .findRecord("id", Ext.getCmp("defaultdeveloper").getValue()).data,
       s1Time: Ext.getCmp("s1time").getValue(),
       s2Time: Ext.getCmp("s2time").getValue(),
@@ -72,9 +72,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
         authorization: localStorage.getItem("JWT")
       },
       success: function(response) {
-        Ext.getCmp("projectslist")
-          .getStore()
-          .load();
+        me.loadProjectStore();
         Ext.MessageBox.alert("Ok", "Project successfully created!");
       },
       failure: function(response) {
@@ -85,14 +83,15 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   },
 
   updateProject: function() {
+    var me = this;
     var project = {
       projectName: Ext.getCmp("projectname").getValue(),
       projectDescription: Ext.getCmp("description").getValue(),
-      defaultApprover: Ext.getCmp("userslist")
-        .getStore()
+      defaultApprover: this.getViewModel()
+        .getStore("Users")
         .findRecord("id", Ext.getCmp("defaultapprover").getValue()).data,
-      defaultDeveloper: Ext.getCmp("userslist")
-        .getStore()
+      defaultDeveloper: this.getViewModel()
+        .getStore("Users")
         .findRecord("id", Ext.getCmp("defaultdeveloper").getValue()).data,
       s1Time: Ext.getCmp("s1time").getValue(),
       s2Time: Ext.getCmp("s2time").getValue(),
@@ -107,9 +106,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
         authorization: localStorage.getItem("JWT")
       },
       success: function(response) {
-        Ext.getCmp("projectslist")
-          .getStore()
-          .load();
+        me.loadProjectStore();
         Ext.MessageBox.alert("Ok", "Project successfully updated!");
       },
       failure: function(response) {
@@ -119,8 +116,40 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     this.dialog.destroy();
   },
 
-  loadStore: function(panel, eOpts) {
-    var store = this.getViewModel().getStore("Projects");
+  setProject: function(dialog, project) {
+    dialog.projectID = project.id;
+    Ext.getCmp("projectname").setValue(project.projectName);
+    Ext.getCmp("description").setValue(project.projectDescription);
+    Ext.getCmp("defaultapprover").setValue(
+      this.getViewModel()
+        .getStore("Users")
+        .findRecord("userName", project.defaultApprover).data.id
+    );
+    Ext.getCmp("defaultdeveloper").setValue(
+      this.getViewModel()
+        .getStore("Users")
+        .findRecord("userName", project.defaultDeveloper).data.id
+    );
+    Ext.getCmp("s1time").setValue(project.s1Time);
+    Ext.getCmp("s2time").setValue(project.s2Time);
+    Ext.getCmp("s3time").setValue(project.s3Time);
+  },
+
+  onRender: function() {
+    this.loadProjectStore();
+    this.loadUserStore();
+  },
+
+  loadProjectStore: function(panel, eOpts) {
+    this.loadStore("Projects");
+  },
+
+  loadUserStore: function(panel, eOpts) {
+    this.loadStore("Users");
+  },
+
+  loadStore: function(type) {
+    var store = this.getViewModel().getStore(type);
     var proxy = store.getProxy();
     proxy.headers.authorization = localStorage.getItem("JWT");
     store.setProxy(proxy);

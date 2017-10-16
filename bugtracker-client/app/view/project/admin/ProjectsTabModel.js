@@ -1,10 +1,13 @@
-Ext.define('Bugtracker.view.project.admin.ProjectsTabModel', {
-    extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.project.admin.projectstabmodel',
+Ext.define("Bugtracker.view.project.admin.ProjectsTabModel", {
+  extend: "Ext.app.ViewModel",
+  alias: "viewmodel.project.admin.projectstabmodel",
 
-    stores : {
-        Projects : {
-            type : 'userprojects'
-        }
-	},
+  stores: {
+    Projects: {
+      type: "userprojects"
+    },
+    Users: {
+      type: "allusers"
+    }
+  }
 });

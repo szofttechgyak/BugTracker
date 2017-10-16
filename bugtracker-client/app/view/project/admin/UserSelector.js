@@ -1,12 +1,9 @@
-Ext.define('Bugtracker.view.project.admin.UserSelector', {
-    extend: 'Ext.form.field.ComboBox',
-    xtype: 'userselector',
-    fieldLabel: 'Choose User',
-    queryMode: 'local',
-    displayField: 'userName',
-    valueField: 'id',
-    store: {
-        type: 'allusers'
-    },
-    renderTo: Ext.getBody()
-})
+Ext.define("Bugtracker.view.project.admin.UserSelector", {
+  extend: "Ext.form.field.ComboBox",
+  xtype: "userselector",
+  fieldLabel: "Choose User",
+  queryMode: "local",
+  displayField: "userName",
+  valueField: "id",
+  renderTo: Ext.getBody()
+});
