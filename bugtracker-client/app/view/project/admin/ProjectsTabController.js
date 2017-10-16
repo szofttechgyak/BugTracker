@@ -124,5 +124,14 @@ Ext.define('Bugtracker.view.project.admin.ProjectsTabController', {
             }
         });
         this.dialog.destroy();
+    },
+
+    loadStore: function(panel, eOpts)
+    {
+        var store = this.getViewModel().getStore('Projects');
+        var proxy = store.getProxy();
+        proxy.headers.authorization = localStorage.getItem("JWT");
+        store.setProxy(proxy);
+        store.load();
     }
 });

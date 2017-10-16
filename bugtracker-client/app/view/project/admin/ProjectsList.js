@@ -12,10 +12,6 @@ Ext.define('Bugtracker.view.project.admin.ProjectsList', {
 		}
 	},
 
-	store : {
-		type : 'userprojects'
-	},
-
 	columns : [ {
 		text : 'Name',
 		dataIndex : 'projectName',

@@ -5,6 +5,13 @@ Ext.define('Bugtracker.view.project.admin.ProjectsTab', {
 	requires : [ 'Ext.button.Button', 'Ext.Viewport', 'Ext.data.Model', 'Urls' ],
 
 	controller: 'project.admin.projectstabcontroller',
+	viewModel: {
+        type: 'project.admin.projectstabmodel'
+	},
+	
+	listeners: {
+		render: 'loadStore'
+	},
 
 	items : [ {
 		layout: {
@@ -33,6 +40,9 @@ Ext.define('Bugtracker.view.project.admin.ProjectsTab', {
 			}
 		]
 	}, {
-		xtype : 'projectslist'
+		xtype : 'projectslist',
+		bind: {
+			store: '{Projects}'
+		},
 	} ]
 });

@@ -1,7 +1,7 @@
 Ext.define('Bugtracker.store.UserProjectsStore', {
     extend: 'Ext.data.Store',
     alias: 'store.userprojects',
-	autoLoad: true,
+	autoLoad: false,
     autoSync: true,
     model: 'Project',
     storeId: 'userprojectsstore',
