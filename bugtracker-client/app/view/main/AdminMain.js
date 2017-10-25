@@ -10,13 +10,13 @@ Ext.define('Bugtracker.view.main.AdminMain', {
     ],
 
     controller: 'adminmaincontroller',
-    viewModel: 'main',
+    viewModel: 'adminmainmodel',
 
     items: [{
         title: 'Projects',
         iconCls: 'fa-list',
         items: [{
-            xtype: 'projects-tab',
+            xtype: 'adminprojectstab',
         }]
     },
 	{

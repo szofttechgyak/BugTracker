@@ -1,14 +1,8 @@
-Ext.define('Bugtracker.view.main.UserTicketsList', {
+Ext.define('Bugtracker.view.ticket.TicketsFilteredList', {
     extend: 'Ext.grid.Panel',
-    xtype: 'userticketslist',
+	xtype: 'ticketsfilteredlist', 
+    title: 'My tickets',
     height : Ext.getBody().getViewSize().height,
-
-    title: 'Tickets',
-
-    store: {
-        type: 'alltickets'
-    },
-
     columns: {
         items: [
             { text: 'Name', dataIndex: 'ticketName', flex: 1, align : 'center'},      
@@ -20,11 +14,8 @@ Ext.define('Bugtracker.view.main.UserTicketsList', {
             { text: 'Priority', dataIndex: 'priority', flex: 1, align : 'center'},      
             { text: 'Spent Time', dataIndex: 'spentTime', flex: 1, align : 'center'}    
         ],
-//        defaults: {
-//            layout: {
-//                align: 'left'
-//            } 
-//        }
+    },
+    listeners: {
+        activate: 'filterStore'
     }
-
 });

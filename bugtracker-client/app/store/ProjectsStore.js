@@ -1,6 +1,6 @@
-Ext.define("Bugtracker.store.UserProjectsStore", {
+Ext.define("Bugtracker.store.ProjectsStore", {
   extend: "Ext.data.Store",
-  alias: "store.userprojects",
+  alias: "store.projects",
   autoLoad: false,
   autoSync: true,
   model: "Project",

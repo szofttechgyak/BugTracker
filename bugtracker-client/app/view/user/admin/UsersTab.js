@@ -5,9 +5,6 @@ Ext.define("Bugtracker.view.user.admin.UsersTab", {
   requires: ["Ext.button.Button", "Ext.Viewport", "Ext.data.Model", "Urls"],
 
   controller: "user.admin.userstabcontroller",
-  viewModel: {
-    type: "user.admin.userstabmodel"
-  },
 
   listeners: {
     render: "loadStore"

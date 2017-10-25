@@ -1,4 +1,4 @@
-Ext.define('Bugtracker.view.main.PrioritySelector', {
+Ext.define('Bugtracker.view.ticket.PrioritySelector', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'priorityselector',
     fieldLabel: 'Choose Priority',
@@ -9,9 +9,9 @@ Ext.define('Bugtracker.view.main.PrioritySelector', {
         autoLoad: true,
         fields: ['priority'],
         data: [
-            {"priority":"A"},
-            {"priority":"B"},
-            {"priority":"C"}
+            {"priority":"S1"},
+            {"priority":"S2"},
+            {"priority":"S3"}
             ]
     }),
     renderTo: Ext.getBody()

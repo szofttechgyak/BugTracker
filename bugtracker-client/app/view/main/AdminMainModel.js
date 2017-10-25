@@ -4,7 +4,16 @@
 Ext.define('Bugtracker.view.main.AdminMainModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.main',
+    alias: 'viewmodel.adminmainmodel',
+
+    stores: {
+        Projects: {
+          type: "projects"
+        },
+        Users: {
+          type: "users"
+        }
+      },
 
     data: {
         name: 'Bugtracker',

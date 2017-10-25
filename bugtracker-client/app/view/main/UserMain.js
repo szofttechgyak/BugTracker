@@ -10,19 +10,19 @@ Ext.define('Bugtracker.view.main.UserMain', {
     ],
 
     controller: 'usermaincontroller',
-    viewModel: 'usermain',
+    viewModel: 'usermainmodel',
 
     items: [{
         title: 'My Projects',
         iconCls: 'fa-home',
         items: [{
-            xtype: 'userprojectslist'
+            xtype: 'userprojectstab'
         }]
     }, {
         title: 'Tickets',
         iconCls: 'fa-ticket',
         items: [{
-            xtype: 'tickets-tab'
+            xtype: 'ticketstab'
         }]
     }, {
         title: 'Settings',

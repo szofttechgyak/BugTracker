@@ -1,10 +1,9 @@
-Ext.define('Bugtracker.store.AllTicketsStore', {
+Ext.define('Bugtracker.store.TicketsStore', {
     extend: 'Ext.data.Store',
-    alias: 'store.alltickets',
-	autoLoad: true,
+    alias: 'store.tickets',
+	autoLoad: false,
     autoSync: true,
     model: 'Ticket',
-    storeId: 'allticketsstore',
 
     requires: [
     	'Urls'

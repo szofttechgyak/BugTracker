@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.project.admin.ProjectsList", {
   extend: "Ext.grid.Panel",
-  xtype: "projectslist",
+  xtype: "adminprojectslist",
   title: "Projects",
   // height : Ext.getBody().getViewSize().height,
   autoScroll: true,

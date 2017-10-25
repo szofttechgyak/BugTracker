@@ -1,4 +1,4 @@
-Ext.define('Bugtracker.view.main.TicketTypeSelector', {
+Ext.define('Bugtracker.view.ticket.TicketTypeSelector', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'tickettypeselector',
     fieldLabel: 'Choose Type',

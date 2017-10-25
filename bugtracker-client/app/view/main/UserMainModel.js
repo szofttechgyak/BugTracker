@@ -4,12 +4,19 @@
 Ext.define('Bugtracker.view.main.UserMainModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.usermain',
+    alias: 'viewmodel.usermainmodel',
+
+    stores: {
+        Tickets: {
+          type: "tickets"
+        },
+        Projects: {
+          type: "projects"
+        }
+      },
 
     data: {
-        name: 'Bugtracker',
-
-        bogus: 'Bogus text'
+        name: 'Bugtracker'
     }
 
     //TODO - add data, formulas and/or methods to support your view

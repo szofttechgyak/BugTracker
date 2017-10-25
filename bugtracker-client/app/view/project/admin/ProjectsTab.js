@@ -1,13 +1,10 @@
 Ext.define("Bugtracker.view.project.admin.ProjectsTab", {
   extend: "Ext.panel.Panel",
-  xtype: "projects-tab",
+  xtype: "adminprojectstab",
 
   requires: ["Ext.button.Button", "Ext.Viewport", "Ext.data.Model", "Urls"],
 
   controller: "project.admin.projectstabcontroller",
-  viewModel: {
-    type: "project.admin.projectstabmodel"
-  },
 
   listeners: {
     render: "onRender"
@@ -45,7 +42,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTab", {
       ]
     },
     {
-      xtype: "projectslist",
+      xtype: "adminprojectslist",
       reference: "projectslist-ref",
       bind: {
         store: "{Projects}"
