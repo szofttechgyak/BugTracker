@@ -1,6 +1,8 @@
 Ext.define('Bugtracker.view.login.LoginController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.login',
+	alias: 'controller.login',
+	
+	requires: ["Urls"],
 	
     onLoginClick: function() {
 		var authentication = {
@@ -12,7 +14,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 
 		Ext.Ajax.request 
 		({ 
-			url: 'http://157.181.161.108:8080/login', 
+			url: Urls.endpoint('/login'), 
 			method: 'POST',    
 			jsonData : authentication,
 			success: function(response) 
@@ -20,7 +22,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 				localStorage.setItem("JWT", response.getResponseHeader('authorization'));
 				Ext.Ajax.request 
 				({ 
-					url: 'http://157.181.161.108:8080/role', 
+					url: Urls.endpoint('/role'), 
 					method: 'GET',    
 					
 					headers: {
@@ -58,7 +60,7 @@ Ext.define('Bugtracker.view.login.LoginController', {
 		Ext.Ajax.request 
 				({ 
 					async: false,
-					url: 'http://157.181.161.108:8080/api/userByUserName/' + username, 
+					url: Urls.endpoint('/api/userByUserName/') + username, 
 					method: 'GET',    
 					
 					headers: {

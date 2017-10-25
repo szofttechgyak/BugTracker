@@ -1,10 +1,7 @@
 Ext.define('Bugtracker.view.main.UserMainController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Bugtracker.view.main.ControllerBase',
 
-    alias: 'controller.usermain',
-    config: {
-        stores: ['Bugtracker.store.AllUsersStore']
-    },
+    alias: 'controller.usermaincontroller',
 
     onItemSelected: function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
         var popup = Ext.create('Bugtracker.view.main.ProjectDetail', {projectInfo: iStore});
@@ -12,21 +9,5 @@ Ext.define('Bugtracker.view.main.UserMainController', {
         popup.show();
         console.log(localStorage.getItem("JWT"));
         console.log(popup.projectInfo.data);
-    },
-
-//    onConfirm: function (choice) {
-//        if (choice === 'yes') {
-//            
-//        }
-//    },
-
-    onLogoutClicked: function () {
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("username");
-        localStorage.removeItem("role");
-        this.getView().destroy();
-        Ext.create({
-            xtype: 'login'
-        });
     }
 });
