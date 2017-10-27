@@ -48,7 +48,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     }
   },
 
-  createNewProject: function() {
+  createNewProject: function(btn, event) {
     var me = this;
     var project = {
       projectName: Ext.getCmp("projectname").getValue(),

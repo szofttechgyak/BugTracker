@@ -15,6 +15,7 @@ Ext.define("Bugtracker.view.project.admin.NewProjectDialog", {
             name: "projectname",
             id: "projectname",
             fieldLabel: "Project name",
+            allowBlank: false,
             maxLength: 30
           },
           {
@@ -30,6 +31,7 @@ Ext.define("Bugtracker.view.project.admin.NewProjectDialog", {
             name: "defaultapprover",
             id: "defaultapprover",
             fieldLabel: "Default approver",
+            allowBlank: false,
             bind: {
               store: "{Users}"
             }
@@ -39,6 +41,7 @@ Ext.define("Bugtracker.view.project.admin.NewProjectDialog", {
             name: "defaultdeveloper",
             id: "defaultdeveloper",
             fieldLabel: "Default developer",
+            allowBlank: false,
             bind: {
               store: "{Users}"
             }
@@ -72,29 +75,29 @@ Ext.define("Bugtracker.view.project.admin.NewProjectDialog", {
             allowBlank: false,
             blankText: 'Set time',
             emptyText : 'in hours'
+          },
+          {
+            xtype: "toolbar",
+            docked: "bottom",
+            items: [
+              "->",
+              {
+                xtype: "button",
+                text: "Submit",
+                iconCls: "x-fa fa-check",
+                formBind: true,
+                handler: "createNewProject"
+              },
+              {
+                xtype: "button",
+                text: "Cancel",
+                iconCls: "x-fa fa-close",
+                handler: function() {
+                  this.up("window").destroy();
+                }
+              }
+            ]
           }
-      ]
-    },
-    {
-      xtype: "toolbar",
-      docked: "bottom",
-      items: [
-        "->",
-        {
-          xtype: "button",
-          text: "Submit",
-          iconCls: "x-fa fa-check",
-          formBind: true,
-          handler: "createNewProject"
-        },
-        {
-          xtype: "button",
-          text: "Cancel",
-          iconCls: "x-fa fa-close",
-          handler: function() {
-            this.up("window").destroy();
-          }
-        }
       ]
     }
   ]
