@@ -1,6 +1,8 @@
 # Bugtracker
 
 Running:
+- sencha app upgrade -ext
+- sencha app build
 - sencha app watch
 - localhost:1841
 
