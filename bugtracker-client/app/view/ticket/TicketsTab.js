@@ -8,7 +8,7 @@ Ext.define('Bugtracker.view.ticket.TicketsTab', {
 	
 	listeners: {
 		render: "onRender"
-	  },
+	},
 
 	items : [ {
 		layout: {

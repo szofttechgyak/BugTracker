@@ -4,6 +4,10 @@ Ext.define("Bugtracker.view.project.user.ProjectsList", {
   title: "Projects",
   autoScroll: true,
 
+  listeners: {
+		rowdblclick: 'onProjectClick'
+	},
+
   columns: [
     {
       text: "Name",
