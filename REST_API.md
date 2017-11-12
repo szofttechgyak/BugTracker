@@ -353,6 +353,56 @@ Nincs
 }
 ```
 
+# Felhasználóhoz rendelt projektek lekérése
+`GET http://host/bugtracker/api/assignedProjects/id`
+
+## A lekérdezés paraméterei
+
+  * **id:** a felhasználó azonosítója
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeresen visszakaptuk a felhasználóhoz rendelt projektek listáját
+  * **401 UNAUTHORIZED:** nincs megfelelő jog a lekérdezés végrehajtására
+
+## Válasz 
+- Sikerült
+```json
+[
+  {
+    "id": 5,
+    "projectName": "Bugtracker",
+    "projectDescription": "Bugtracker Project",
+    "defaultApprover": {
+      "id": 27,
+      "userName": "kiraly",
+      "emailAddress": "alex@alex",
+      "password": "123",
+      "admin": false
+    },
+    "defaultDeveloper": {
+      "id": 12,
+      "userName": "bec1ke",
+      "emailAddress": "beci@gmail.com"
+    },
+    "s1Time": 2,
+    "s2Time": 5,
+    "s3Time": 7
+  }
+]
+```
+- Nem sikerült
+```json
+{
+  "timestamp": 1509911823555,
+  "status": 401,
+  "error": "Unauthorized",
+  "exception": "exception",
+  "message": "exception message",
+  "path": "/api//assignedProjects/27"
+}
+```
+
 #  Hibajegy / Igény létrehozása
 
 ## HTTP kérés formája
