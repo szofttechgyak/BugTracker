@@ -376,9 +376,7 @@ Nincs
     "defaultApprover": {
       "id": 27,
       "userName": "kiraly",
-      "emailAddress": "alex@alex",
-      "password": "123",
-      "admin": false
+      "emailAddress": "alex@alex"
     },
     "defaultDeveloper": {
       "id": 12,
@@ -399,7 +397,7 @@ Nincs
   "error": "Unauthorized",
   "exception": "exception",
   "message": "exception message",
-  "path": "/api//assignedProjects/27"
+  "path": "/api/assignedProjects/27"
 }
 ```
 
