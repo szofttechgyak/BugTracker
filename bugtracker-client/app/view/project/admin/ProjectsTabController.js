@@ -14,7 +14,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   showUpdateProjectDialog: function() {
     var selected = this.lookupReference("projectslist-ref").selection;
     if (selected === null) {
-      Ext.MessageBox.alert("Error", "No selected project!");
+      Ext.MessageBox.alert("Error", "No selected project");
     } else {
       var view = this.getView();
       this.dialog = view.add({
@@ -52,7 +52,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
         },
         success: function(response) {
           me.loadProjectStore();
-          Ext.MessageBox.alert("Ok", "Project successfully deleted!");
+          Ext.MessageBox.alert("Ok", "Project successfully deleted");
         },
         failure: function(response) {
           Ext.MessageBox.alert("Error", "Cannot delete project");
@@ -86,7 +86,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       },
       success: function(response) {
         me.loadProjectStore();
-        Ext.MessageBox.alert("Ok", "Project successfully created!");
+        Ext.MessageBox.alert("Ok", "Project successfully created");
       },
       failure: function(response) {
         Ext.MessageBox.alert("Error", "Cannot create project");
@@ -120,10 +120,10 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       },
       success: function(response) {
         me.loadProjectStore();
-        Ext.MessageBox.alert("Ok", "Project successfully updated!");
+        Ext.MessageBox.alert("Ok", "Project successfully updated");
       },
       failure: function(response) {
-        Ext.MessageBox.alert("Error", "Cannot update project!");
+        Ext.MessageBox.alert("Error", "Cannot update project");
       }
     });
     this.dialog.destroy();
@@ -144,7 +144,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       role: Ext.getCmp("userrole").getValue()
     };
     if (selected === null) {
-      Ext.MessageBox.alert("Error", "No selected project!");
+      Ext.MessageBox.alert("Error", "No selected project");
     } else {
       Ext.Ajax.request({
         url: Urls.endpoint("/api/addProjectUser"),
@@ -155,10 +155,10 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
         },
         success: function(response) {
           me.loadProjectStore();
-          Ext.MessageBox.alert("Ok", "Successfully asigned to project!!");
+          Ext.MessageBox.alert("Ok", "Successfully assigned to project");
         },
         failure: function(response) {
-          Ext.MessageBox.alert("Error", "Cannot assign to project!");
+          Ext.MessageBox.alert("Error", "Cannot assign to project");
         }
       });
     }

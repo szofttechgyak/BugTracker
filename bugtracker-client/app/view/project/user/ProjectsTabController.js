@@ -8,28 +8,29 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
   },
 
   loadProjectStore: function(panel, eOpts) {
-    var projectsStore = this.getViewModel().getStore("Projects");
-    var proxy = projectsStore.getProxy();
-    proxy.headers.authorization = localStorage.getItem("JWT");
-    proxy.api.read = Urls.endpoint("/api/assignedProjects/" + localStorage.getItem("id")),
-    projectsStore.setProxy(proxy);
-    projectsStore.load();
+    this.loadStore('Projects', "/api/assignedProjects/" + localStorage.getItem("id"))
   },
 
   loadTicketsStore: function(panel, eOpts) {
-    this.loadStore("Tickets");
+    this.loadStore("Tickets", '/api/tickets');
   },
 
-  loadStore: function(type) {
+  loadProjectTicketsStore: function(id) {
+    this.loadStore('Tickets', "/api/ticketsByProject/" + id)
+  },
+
+  loadStore: function(type, endpoint) {
     var store = this.getViewModel().getStore(type);
     var proxy = store.getProxy();
     proxy.headers.authorization = localStorage.getItem("JWT");
+    proxy.api.read = Urls.endpoint(endpoint),
     store.setProxy(proxy);
     store.load();
   },
 
   onProjectClick: function(record, element, rowIndex, e, eOpts) {
     var view = this.getView();
+    this.loadProjectTicketsStore(element.data.id);
     this.dialog = view.add({
       xtype: "userprojectdetails",
       title: element.data.projectName,

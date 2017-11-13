@@ -4,6 +4,8 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
     xtype: "userprojectdetails",
     floating: true,
     width: '80%',
+    y: '1%',
+    region : 'center',
     requires: [
         'Ext.layout.container.Table'
     ],
@@ -11,12 +13,11 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
     layout: {
         type: 'table',
         columns: 5,
-        tdAttrs: { style: 'padding: 10px; vertical-align: top;' }
+        tdAttrs: { style: 'width: 100%; padding: 10px; vertical-align: top;' }
     },
 
     defaults: {
         xtype: 'panel',
-        width: 200,
         autoHeight: true,
         bodyPadding: 10
     },

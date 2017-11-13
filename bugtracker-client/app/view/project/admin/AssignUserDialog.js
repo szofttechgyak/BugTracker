@@ -20,9 +20,9 @@ Ext.define("Bugtracker.view.project.admin.AssignUserDialog", {
       store: Ext.create('Ext.data.Store', {
         fields: ['name'],
         data : [
-            {"name":"developer"},
-            {"name":"approver"},
-            {"name":"user"}
+            {"name":"Developer"},
+            {"name":"Approver"},
+            {"name":"Customer"}
         ]
       })
     },
