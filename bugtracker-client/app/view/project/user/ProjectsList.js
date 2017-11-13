@@ -1,7 +1,7 @@
 Ext.define("Bugtracker.view.project.user.ProjectsList", {
   extend: "Ext.grid.Panel",
   xtype: "userprojectslist",
-  title: "Projects",
+  title: "My Projects",
   autoScroll: true,
 
   columns: [
