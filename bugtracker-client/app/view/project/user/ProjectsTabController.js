@@ -8,7 +8,12 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
   },
 
   loadProjectStore: function(panel, eOpts) {
-    this.loadStore("Projects");
+    var projectsStore = this.getViewModel().getStore("Projects");
+    var proxy = projectsStore.getProxy();
+    proxy.headers.authorization = localStorage.getItem("JWT");
+    proxy.api.read = Urls.endpoint("/api/assignedProjects/" + localStorage.getItem("id")),
+    projectsStore.setProxy(proxy);
+    projectsStore.load();
   },
 
   loadTicketsStore: function(panel, eOpts) {

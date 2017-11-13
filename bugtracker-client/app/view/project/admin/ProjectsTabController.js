@@ -25,6 +25,19 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     }
   },
 
+  showAssignUserDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "assignuserdialog"
+      });
+      this.dialog.show();
+    }
+  },
+
   deleteProject: function() {
     var me = this;
     var selected = this.lookupReference("projectslist-ref").selection;
@@ -116,6 +129,42 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     this.dialog.destroy();
   },
 
+  assignToProject: function() {
+    var me = this;
+    var selected = this.lookupReference("projectslist-ref").selection;
+    var projectUser = {
+      project: {
+        id: selected.id
+      },
+      user: {
+        id: this.getViewModel()
+          .getStore("Users")
+          .findRecord("id", Ext.getCmp("selecteduser").getValue()).data.id,
+      },
+      role: Ext.getCmp("userrole").getValue()
+    };
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      Ext.Ajax.request({
+        url: Urls.endpoint("/api/addProjectUser"),
+        jsonData: projectUser,
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("JWT")
+        },
+        success: function(response) {
+          me.loadProjectStore();
+          Ext.MessageBox.alert("Ok", "Successfully asigned to project!!");
+        },
+        failure: function(response) {
+          Ext.MessageBox.alert("Error", "Cannot assign to project!");
+        }
+      });
+    }
+    this.dialog.destroy();
+  },
+
   setProject: function(dialog, project) {
     dialog.projectID = project.id;
     Ext.getCmp("projectname").setValue(project.projectName);
@@ -146,6 +195,11 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
 
   loadUserStore: function(panel, eOpts) {
     this.loadStore("Users");
+  },
+
+  loadRolesStore: function(panel, eOpts) {
+    var store = this.getViewModel().getStore("Roles");
+    store.load();
   },
 
   loadStore: function(type) {
