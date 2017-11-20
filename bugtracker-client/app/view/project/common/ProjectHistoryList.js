@@ -1,4 +1,4 @@
-Ext.define("Bugtracker.view.project.user.ProjectHistoryList", {
+Ext.define("Bugtracker.view.project.common.ProjectHistoryList", {
   extend: "Ext.grid.Panel",
   xtype: "projecthistorylist",
   title: "Project history",

@@ -1,4 +1,4 @@
-Ext.define("Bugtracker.view.project.admin.ProjectHistoryDialog", {
+Ext.define("Bugtracker.view.project.common.ProjectHistoryDialog", {
   extend: "Ext.window.Window",
   xtype: "showprojecthistorydialog",
   reference: "form",
@@ -7,6 +7,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectHistoryDialog", {
   centered: true,
   width: 600,
   height: 400,
+  y: 100,
   modal: true,
   layout:'fit',
   items: [

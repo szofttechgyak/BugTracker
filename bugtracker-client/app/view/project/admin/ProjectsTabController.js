@@ -1,7 +1,8 @@
 Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   extend: "Ext.app.ViewController",
-
   alias: "controller.project.admin.projectstabcontroller",
+
+  requires: ["Bugtracker.view.project.common.ProjectHistoryDialog"],
 
   showNewProjectDialog: function() {
     var view = this.getView();
