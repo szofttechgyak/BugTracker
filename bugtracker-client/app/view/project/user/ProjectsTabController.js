@@ -41,7 +41,8 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
   },
 
   loadTicketsStore: function(panel, eOpts) {
-    this.loadStore("Tickets");
+    var projectId = this.lookupReference("projectslist-ref").selection.id;
+    this.loadStore("Tickets", Urls.endpoint("/api/ticketsByProject/" + projectId));
   },
 
   loadTicketHistoryStore: function(ticketId) {
