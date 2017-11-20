@@ -5,5 +5,4 @@ Ext.define("Bugtracker.view.project.admin.UserSelector", {
   queryMode: "local",
   displayField: "userName",
   valueField: "id",
-  renderTo: Ext.getBody()
 });
