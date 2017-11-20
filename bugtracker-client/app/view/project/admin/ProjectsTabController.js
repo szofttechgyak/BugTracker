@@ -38,6 +38,20 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     }
   },
 
+  showProjectHistoryDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "showprojecthistorydialog"
+      });
+      this.loadHistoryStore(selected.data.id);
+      this.dialog.show();
+    }
+  },
+
   deleteProject: function() {
     var me = this;
     var selected = this.lookupReference("projectslist-ref").selection;
@@ -202,10 +216,17 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     store.load();
   },
 
-  loadStore: function(type) {
+  loadHistoryStore: function(projectId) {
+    this.loadStore("ProjectHistory", Urls.endpoint("/api/projectHistoryByProjectId/" + projectId));
+  },
+
+  loadStore: function(type, url) {
     var store = this.getViewModel().getStore(type);
     var proxy = store.getProxy();
     proxy.headers.authorization = localStorage.getItem("JWT");
+    if (url != undefined && url != null) {
+      proxy.api.read = url;
+    }
     store.setProxy(proxy);
     store.load();
   }
