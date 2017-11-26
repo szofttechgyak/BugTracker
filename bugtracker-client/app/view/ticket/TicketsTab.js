@@ -4,7 +4,7 @@ Ext.define('Bugtracker.view.ticket.TicketsTab', {
 
 	requires: ["Ext.button.Button", "Ext.Viewport", "Ext.data.Model", "Urls"],
 	
-	controller: "ticket.ticketstabcontroller",
+	// controller: "ticket.ticketstabcontroller",
 	
 	listeners: {
 		render: "onRender"

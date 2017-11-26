@@ -54,6 +54,13 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
                 colspan: 5
             },
             {
+				xtype : 'button',
+				text : 'Create Ticket',
+				margin: '0px 2px 5px 0px',
+                handler : 'showNewTicketDialog',
+                projId : me.projectId
+			},
+            {
                 xtype: "button",
                 text: "Show ticket history",
                 margin: "0px 2px 5px 0px",
