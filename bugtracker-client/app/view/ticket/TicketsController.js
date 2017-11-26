@@ -49,6 +49,23 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       });
       this.dialog.destroy();
     },
+
+    onTicketClick: function(record, element, rowIndex, e, eOpts) {
+      alert('Feature not implemented')
+      // var view = this.getView();
+      // this.dialog = view.add({
+      //   xtype: "userprojectdetails",
+      //   projectId : element.data.id,
+      //   title: element.data.projectName,
+      //   approver: element.data.defaultApprover,
+      //   developer: element.data.defaultDeveloper,
+      //   s1: element.data.s1Time,
+      //   s2: element.data.s2Time,
+      //   s3: element.data.s3Time,
+      //   description: element.data.projectDescription,
+      // });
+      // this.dialog.show();	
+    }
   
     // onRender: function() {
     //   this.loadTicketStore();
