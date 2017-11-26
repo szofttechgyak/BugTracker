@@ -1,12 +1,14 @@
-Ext.define("Bugtracker.view.ticket.TicketsTabController", {
+Ext.define("Bugtracker.view.ticket.TicketsController", {
     extend: "Ext.app.ViewController",
   
-    alias: "controller.ticket.ticketstabcontroller",
+    alias: "controller.ticket.ticketscontroller",
 
-    showNewTicketDialog: function() {
+    // showNewTicketDialog: function(button, projId) {
+    showNewTicketDialog: function(button, e, args) {
       var view = this.getView();
       this.dialog = view.add({
-        xtype: "newticketdialog"
+        xtype: "newticketdialog",
+        projectId: button.projId
       });
       this.dialog.show();	
     },
@@ -19,7 +21,7 @@ Ext.define("Bugtracker.view.ticket.TicketsTabController", {
         ticketType : Ext.getCmp("tickettype").getValue(),
         owner: {"id": localStorage.getItem("id")},
         reporter: {"id": localStorage.getItem("id")},
-        project: {"id": Ext.getCmp("project").getValue()},
+        project: {"id": this.dialog.projectId},
         // owner : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
         // reporter : Ext.getStore('allusersstore').findRecord('userName',localStorage.getItem("username")).data,
                           // projectName : Ext.getStore('userprojectsstore').findRecord('id',Ext.getCmp("projectname").getValue()).data,
@@ -48,36 +50,36 @@ Ext.define("Bugtracker.view.ticket.TicketsTabController", {
       this.dialog.destroy();
     },
   
-    onRender: function() {
-      this.loadTicketStore();
-      this.loadProjectStore();
-    },
+    // onRender: function() {
+    //   this.loadTicketStore();
+    //   this.loadProjectStore();
+    // },
   
-    loadTicketStore: function(panel, eOpts) {
-      this.loadStore("Tickets");
-    },
+    // loadTicketStore: function(panel, eOpts) {
+    //   this.loadStore("Tickets");
+    // },
 
-    loadProjectStore: function(panel, eOpts) {
-      this.loadStore("Projects");
-    },
+    // loadProjectStore: function(panel, eOpts) {
+    //   this.loadStore("Projects");
+    // },
   
-    loadStore: function(type) {
-      var store = this.getViewModel().getStore(type);
-      var proxy = store.getProxy();
-      proxy.headers.authorization = localStorage.getItem("JWT");
-      store.setProxy(proxy);
-      store.load();
-    },
+    // loadStore: function(type) {
+    //   var store = this.getViewModel().getStore(type);
+    //   var proxy = store.getProxy();
+    //   proxy.headers.authorization = localStorage.getItem("JWT");
+    //   store.setProxy(proxy);
+    //   store.load();
+    // },
 
-    clearFiltering: function()
-    {
-      var store = this.getViewModel().getStore("Tickets");
-      store.clearFilter();
-    },
+    // clearFiltering: function()
+    // {
+    //   var store = this.getViewModel().getStore("Tickets");
+    //   store.clearFilter();
+    // },
 
-    filterStore: function()
-    {
-      var store = this.getViewModel().getStore("Tickets");
-      store.filter('reporter', localStorage.getItem('username'));
-    }
+    // filterStore: function()
+    // {
+    //   var store = this.getViewModel().getStore("Tickets");
+    //   store.filter('reporter', localStorage.getItem('username'));
+    // }
   });

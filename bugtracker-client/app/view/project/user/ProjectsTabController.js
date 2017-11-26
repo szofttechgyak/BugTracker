@@ -1,5 +1,5 @@
 Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
-  extend: "Ext.app.ViewController",
+  extend: "Bugtracker.view.ticket.TicketsController",
   alias: "controller.project.user.projectstabcontroller",
 
   requires: ["Bugtracker.view.project.common.ProjectHistoryDialog"],
@@ -68,6 +68,7 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
     var view = this.getView();
     this.dialog = view.add({
       xtype: "userprojectdetails",
+      projectId : element.data.id,
       title: element.data.projectName,
       approver: element.data.defaultApprover,
       developer: element.data.defaultDeveloper,

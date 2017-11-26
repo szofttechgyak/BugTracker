@@ -26,15 +26,15 @@ Ext.define('Bugtracker.view.ticket.NewTicketDialog', {
 				id : 'tickettype',
 				fieldLabel : 'Ticket type'
 			},
-			{
-				xtype : 'projectselector',
-				name : 'project',
-				id : 'project',
-				fieldLabel : 'Project',
-				bind: {
-				  store: "{Projects}"
-				}
-			},
+			// {
+			// 	xtype : 'projectselector',
+			// 	name : 'project',
+			// 	id : 'project',
+			// 	fieldLabel : 'Project',
+			// 	bind: {
+			// 	  store: "{Projects}"
+			// 	}
+			// },
 			{
 				xtype : 'priorityselector',
 				name : 'priority',
@@ -60,5 +60,9 @@ Ext.define('Bugtracker.view.ticket.NewTicketDialog', {
 								this.up('window').destroy();
 							}
 						} ]
-			} ]
+			} ],
+	
+	initComponent: function () {
+		this.callParent();
+	}
 });

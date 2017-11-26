@@ -17,6 +17,7 @@ Ext.define('Bugtracker.view.ticket.TicketsList', {
         ],
     },
     listeners: {
-        activate: 'clearFiltering'
+        activate: 'clearFiltering',
+        rowdblclick: 'onTicketClick'
     }
 });
