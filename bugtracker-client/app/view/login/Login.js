@@ -13,7 +13,8 @@ Ext.define('Bugtracker.view.login.Login', {
     closable: false,
     autoShow: true,
 	draggable: false,
-	resizable: false,
+    resizable: false,
+    defaultButton: 'loginButton',
 
     items: {
         xtype: 'form',
@@ -41,6 +42,7 @@ Ext.define('Bugtracker.view.login.Login', {
         }],
         buttons: [{
             text: 'Login',
+            reference: 'loginButton',
             formBind: true,
             listeners: {
                 click: 'onLoginClick'

@@ -3,9 +3,10 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
   
     xtype: "userprojectdetails",
     floating: true,
-    width: '80%',
-    y: '1%',
-    region : 'center',
+    centered: true,
+    width: '70%',
+    y: 50,
+    modal: true,
     requires: [
         'Ext.layout.container.Table'
     ],
@@ -13,13 +14,14 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
     layout: {
         type: 'table',
         columns: 5,
-        tdAttrs: { style: 'width: 100%; padding: 10px; vertical-align: top;' }
+        tdAttrs: { style: 'padding: 5px; vertical-align: top;' }
     },
 
     defaults: {
         xtype: 'panel',
-        autoHeight: true,
-        bodyPadding: 10
+        width: 200,
+        autoHeight: false,
+        bodyPadding: 5
     },
 
     initComponent: function () {
@@ -52,8 +54,23 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
                 colspan: 5
             },
             {
+				xtype : 'button',
+				text : 'Create Ticket',
+				margin: '0px 2px 5px 0px',
+                handler : 'showNewTicketDialog',
+                projId : me.projectId
+			},
+            {
+                xtype: "button",
+                text: "Show ticket history",
+                margin: "0px 2px 5px 0px",
+                handler: "showTicketHistoryDialog",
+                colspan: 5
+            },
+            {
                 title: 'Tickets',
                 xtype: 'ticketslist',
+                id: 'ticketslist-id',
                 bind: {
                     store: "{Tickets}"
                 },

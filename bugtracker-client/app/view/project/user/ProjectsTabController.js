@@ -1,29 +1,65 @@
 Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
-  extend: "Ext.app.ViewController",
-
+  extend: "Bugtracker.view.ticket.TicketsController",
   alias: "controller.project.user.projectstabcontroller",
+
+  requires: ["Bugtracker.view.project.common.ProjectHistoryDialog"],
 
   onRender: function() {
     this.loadProjectStore();
   },
 
+  showTicketHistoryDialog: function() {
+    var selected = Ext.getCmp('ticketslist-id').selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected ticket!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "showtickethistorydialog"
+      });
+      this.loadTicketHistoryStore(selected.data.id);
+      this.dialog.show();
+    }
+  },
+
+  showProjectHistoryDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "showprojecthistorydialog"
+      });
+      this.loadProjectHistoryStore(selected.data.id);
+      this.dialog.show();
+    }
+  },
+
   loadProjectStore: function(panel, eOpts) {
-    this.loadStore('Projects', "/api/assignedProjects/" + localStorage.getItem("id"))
+    this.loadStore("Projects", Urls.endpoint("/api/assignedProjects/" + localStorage.getItem("id")));
   },
 
   loadTicketsStore: function(panel, eOpts) {
-    this.loadStore("Tickets", '/api/tickets');
+    var projectId = this.lookupReference("projectslist-ref").selection.id;
+    this.loadStore("Tickets", Urls.endpoint("/api/ticketsByProject/" + projectId));
   },
 
-  loadProjectTicketsStore: function(id) {
-    this.loadStore('Tickets', "/api/ticketsByProject/" + id)
+  loadTicketHistoryStore: function(ticketId) {
+    this.loadStore("TicketHistory", Urls.endpoint("/api/ticketHistoryByticketId/" + ticketId));
   },
 
-  loadStore: function(type, endpoint) {
+  loadProjectHistoryStore: function(projectId) {
+    this.loadStore("ProjectHistory", Urls.endpoint("/api/projectHistoryByProjectId/" + projectId));
+  },
+
+  loadStore: function(type, url) {
     var store = this.getViewModel().getStore(type);
     var proxy = store.getProxy();
     proxy.headers.authorization = localStorage.getItem("JWT");
-    proxy.api.read = Urls.endpoint(endpoint),
+    if (url != undefined && url != null) {
+      proxy.api.read = url;
+    }
     store.setProxy(proxy);
     store.load();
   },
@@ -33,6 +69,7 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
     this.loadProjectTicketsStore(element.data.id);
     this.dialog = view.add({
       xtype: "userprojectdetails",
+      projectId : element.data.id,
       title: element.data.projectName,
       approver: element.data.defaultApprover,
       developer: element.data.defaultDeveloper,

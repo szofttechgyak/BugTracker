@@ -12,6 +12,9 @@ Ext.define('Bugtracker.view.main.AdminMainModel', {
         },
         Users: {
           type: "users"
+        },
+        ProjectHistory: {
+          type: "projecthistory"
         }
       },
 
