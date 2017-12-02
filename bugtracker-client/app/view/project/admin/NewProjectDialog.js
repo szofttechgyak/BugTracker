@@ -4,6 +4,7 @@ Ext.define("Bugtracker.view.project.admin.NewProjectDialog", {
   title: "Create Project",
   floating: true,
   centered: true,
+  y: '20%',
   width: 300,
   modal: true,
   items: [
