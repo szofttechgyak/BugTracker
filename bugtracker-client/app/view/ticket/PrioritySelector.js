@@ -13,6 +13,5 @@ Ext.define('Bugtracker.view.ticket.PrioritySelector', {
             {"priority":"S2"},
             {"priority":"S3"}
             ]
-    }),
-    renderTo: Ext.getBody()
+    })
 })
