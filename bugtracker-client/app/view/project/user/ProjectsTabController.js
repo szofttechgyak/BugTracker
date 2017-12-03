@@ -62,11 +62,11 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
     }
     store.setProxy(proxy);
     store.load();
-  },
+  },  
 
   onProjectClick: function(record, element, rowIndex, e, eOpts) {
     var view = this.getView();
-    this.loadProjectTicketsStore(element.data.id);
+    this.loadTicketsStore(element.data.id);
     this.dialog = view.add({
       xtype: "userprojectdetails",
       projectId : element.data.id,
