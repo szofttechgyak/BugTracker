@@ -18,6 +18,9 @@ Ext.define('Bugtracker.view.main.UserMainModel', {
         },
         ProjectHistory: {
           type: "projecthistory"
+        },
+        TicketLifecycle: {
+          type: "lifecycle"
         }
       },
 

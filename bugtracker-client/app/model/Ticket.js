@@ -41,8 +41,8 @@ Ext.define("Ticket", {
       type: "string"
     },
     {
-      name: "status",
-      type: "auto"
+      name: "currentStatus",
+      type: "string"
     },
     {
       name: "comment",
