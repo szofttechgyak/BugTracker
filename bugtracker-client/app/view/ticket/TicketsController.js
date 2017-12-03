@@ -51,52 +51,26 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     },
 
     onTicketClick: function(record, element, rowIndex, e, eOpts) {
-      alert('Feature not implemented')
-      // var view = this.getView();
-      // this.dialog = view.add({
-      //   xtype: "userprojectdetails",
-      //   projectId : element.data.id,
-      //   title: element.data.projectName,
-      //   approver: element.data.defaultApprover,
-      //   developer: element.data.defaultDeveloper,
-      //   s1: element.data.s1Time,
-      //   s2: element.data.s2Time,
-      //   s3: element.data.s3Time,
-      //   description: element.data.projectDescription,
-      // });
-      // this.dialog.show();	
+      var view = this.getView();
+      var parent = this.lookupReference('project-details-ref');
+      this.dialog = view.add({
+        xtype: "ticketdetails",
+        projectId : element.data.id,
+        title: element.data.ticketName,
+        type: element.data.ticketType,
+        owner: element.data.owner,
+        reporter: element.data.reporter,
+        status: element.data.status,
+        comment: element.data.comment,
+        spentTime: element.data.spentTime,
+        description: element.data.ticketDescription,
+        parentWindow: parent
+      });
+      parent.hide();
+      this.dialog.show();	
+    },
+
+    beforecloseTicketDetails: function(panel, eOpts) {
+      panel.parentWindow.show();
     }
-  
-    // onRender: function() {
-    //   this.loadTicketStore();
-    //   this.loadProjectStore();
-    // },
-  
-    // loadTicketStore: function(panel, eOpts) {
-    //   this.loadStore("Tickets");
-    // },
-
-    // loadProjectStore: function(panel, eOpts) {
-    //   this.loadStore("Projects");
-    // },
-  
-    // loadStore: function(type) {
-    //   var store = this.getViewModel().getStore(type);
-    //   var proxy = store.getProxy();
-    //   proxy.headers.authorization = localStorage.getItem("JWT");
-    //   store.setProxy(proxy);
-    //   store.load();
-    // },
-
-    // clearFiltering: function()
-    // {
-    //   var store = this.getViewModel().getStore("Tickets");
-    //   store.clearFilter();
-    // },
-
-    // filterStore: function()
-    // {
-    //   var store = this.getViewModel().getStore("Tickets");
-    //   store.filter('reporter', localStorage.getItem('username'));
-    // }
   });
