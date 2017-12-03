@@ -26,6 +26,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
     },
 
     listeners: {
+        onRender: 'onRenderTicketDetails',
         beforeclose: 'beforecloseTicketDetails'
     },
 
@@ -42,7 +43,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Type',
-                html: me.ticketType
+                html: me.type
             },
             {
                 title: 'Status',
@@ -50,7 +51,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Spent time',
-                html: me.spentTime
+                html: me.spentTime.toString()
             },
             {
                 title: 'Description',

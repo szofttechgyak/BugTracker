@@ -53,14 +53,15 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     onTicketClick: function(record, element, rowIndex, e, eOpts) {
       var view = this.getView();
       var parent = this.lookupReference('project-details-ref');
+      console.log(element.data);
       this.dialog = view.add({
         xtype: "ticketdetails",
-        projectId : element.data.id,
+        ticketID : element.data.id,
         title: element.data.ticketName,
         type: element.data.ticketType,
         owner: element.data.owner,
         reporter: element.data.reporter,
-        status: element.data.status,
+        status: element.data.currentStatus,
         comment: element.data.comment,
         spentTime: element.data.spentTime,
         description: element.data.ticketDescription,
@@ -72,5 +73,26 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     beforecloseTicketDetails: function(panel, eOpts) {
       panel.parentWindow.show();
+    },
+
+    loadLifecycleStore: function(userID, ticketID) {
+      this.loadStore("TicketLifecycle", Urls.endpoint('/api/getAllowedChanges?userId=' + userID + '&ticketID=' + ticketID));
+    },
+  
+    loadStore: function(type, url) {
+      var store = this.getViewModel().getStore(type);
+      var proxy = store.getProxy();
+      proxy.headers.authorization = localStorage.getItem("JWT");
+      if (url != undefined && url != null) {
+        proxy.api.read = url;
+      }
+      store.setProxy(proxy);
+      store.load();
+    },
+
+    onRenderTicketDetails: function() {
+      var userID = localStorage.getItem("id");
+      var ticketID = this.dialog.ticketID;
+      this.loadLifecycleStore(userID, ticketID);
     }
   });
