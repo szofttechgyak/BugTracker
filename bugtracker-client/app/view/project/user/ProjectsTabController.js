@@ -53,16 +53,16 @@ Ext.define("Bugtracker.view.project.user.ProjectsTabController", {
     this.loadStore("ProjectHistory", Urls.endpoint("/api/projectHistoryByProjectId/" + projectId));
   },
 
-  loadStore: function(type, url) {
-    var store = this.getViewModel().getStore(type);
-    var proxy = store.getProxy();
-    proxy.headers.authorization = localStorage.getItem("JWT");
-    if (url != undefined && url != null) {
-      proxy.api.read = url;
-    }
-    store.setProxy(proxy);
-    store.load();
-  },  
+  // loadStore: function(type, url) {
+  //   var store = this.getViewModel().getStore(type);
+  //   var proxy = store.getProxy();
+  //   proxy.headers.authorization = localStorage.getItem("JWT");
+  //   if (url != undefined && url != null) {
+  //     proxy.api.read = url;
+  //   }
+  //   store.setProxy(proxy);
+  //   store.load();
+  // },  
 
   onProjectClick: function(record, element, rowIndex, e, eOpts) {
     var view = this.getView();

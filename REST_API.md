@@ -703,7 +703,7 @@ Nincs
   "path": "/api/addStatus"
 }
 ```
-# Hibajegy / Igény státuszának létrehozása
+# Hibajegy / Igény státuszának modositasa
 
 ## HTTP kérés formája
 

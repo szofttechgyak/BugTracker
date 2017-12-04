@@ -26,7 +26,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
     },
 
     listeners: {
-        onRender: 'onRenderTicketDetails',
+        beforerender: 'onRenderTicketDetails',
         beforeclose: 'beforecloseTicketDetails'
     },
 
@@ -59,6 +59,51 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 collapsible: true,
                 colspan: 5
             },
+            {
+				xtype : 'form',
+				title : 'Manage ticket',
+                margin: '0px 2px 5px 0px',
+                width: '100%',
+                colspan: 5,
+                items: 
+                [
+                    {
+                        xtype : 'ticketstateselector',
+                        name : 'ticketstate',
+                        id : 'ticketstate',
+                        fieldLabel : 'Ticket state',
+                        allowBlank: false,
+                        bind: {
+                            store: "{TicketLifecycle}"
+                        }
+                    },
+                    {
+                        xtype : 'ticketownerselector',
+                        name : 'ticketowner',
+                        id : 'ticketowner',
+                        fieldLabel : 'Ticket owner',
+                        allowBlank: false,
+                        bind: {
+                            store: "{AssignableUsers}"
+                        }
+                    },
+                    {
+                        xtype : 'toolbar',
+                        docked : 'bottom',
+                        items : 
+                        [
+                            '->',
+                            {
+                                xtype : 'button',
+                                text : 'Submit',
+                                iconCls : 'x-fa fa-check',
+                                formBind : true,
+                                handler : 'updateTicket'
+                            }
+                        ]
+                    }
+                ]
+			},
             // {
 			// 	xtype : 'button',
 			// 	text : 'Create Ticket',
