@@ -76,7 +76,8 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     },
 
     loadLifecycleStore: function(userID, ticketID) {
-      this.loadStore("TicketLifecycle", Urls.endpoint('/api/getAllowedChanges?userId=' + userID + '&ticketID=' + ticketID));
+      var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
+      this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
   
     loadStore: function(type, url) {
@@ -88,11 +89,49 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       }
       store.setProxy(proxy);
       store.load();
+      console.log(store);
     },
 
     onRenderTicketDetails: function() {
       var userID = localStorage.getItem("id");
       var ticketID = this.dialog.ticketID;
       this.loadLifecycleStore(userID, ticketID);
+    },
+
+    onStateSelected: function(combo, record, eOpts) {
+      var roleName = record.data.role;
+      var projectId = this.lookupReference('project-details-ref').projectId;
+      var endpoint = '/api/getUsersInRole/' + projectId + '?role=' + roleName;
+      console.log(endpoint);
+      this.loadStore("AssignableUsers", Urls.endpoint(endpoint));
+    },
+
+    updateTicket: function() {
+      var me = this;
+      var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
+      var ticket = {
+        user: newUserID,
+        
+      };
+    },
+
+    getUserID: function(username){
+      var _id = null;
+      Ext.Ajax.request 
+          ({ 
+            async: false,
+            url: Urls.endpoint('/api/userByUserName/') + username, 
+            method: 'GET',    
+            
+            headers: {
+              'authorization' : localStorage.getItem("JWT")
+            },
+            
+            success: function(response) 
+            { 
+              _id = Ext.decode(response.responseText).id;
+            }
+          });
+      return _id;
     }
   });

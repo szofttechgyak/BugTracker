@@ -20,7 +20,10 @@ Ext.define('Bugtracker.view.main.UserMainModel', {
           type: "projecthistory"
         },
         TicketLifecycle: {
-          type: "lifecycle"
+          type: "ticketlifecycle"
+        },
+        AssignableUsers: {
+          type: 'assignableusers'
         }
       },
 

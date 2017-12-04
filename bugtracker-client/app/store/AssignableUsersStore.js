@@ -1,9 +1,9 @@
-Ext.define("Bugtracker.store.LifecycleStore", {
+Ext.define("Bugtracker.store.AssignableUsersStore", {
     extend: "Ext.data.Store",
-    alias: "store.lifecycle",
+    alias: "store.assignableusers",
     autoLoad: false,
     autoSync: true,
-    model: "TicketState",
+    model: "User",
   
     requires: ["Urls"],
   
@@ -23,3 +23,4 @@ Ext.define("Bugtracker.store.LifecycleStore", {
       }
     }
   });
+  
