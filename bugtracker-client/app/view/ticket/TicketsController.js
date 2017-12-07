@@ -77,6 +77,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     loadLifecycleStore: function(userID, ticketID) {
       var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
+      console.log(endpoint);
       this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
   
@@ -109,10 +110,39 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     updateTicket: function() {
       var me = this;
       var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
+      // {
+      //   "owner": {
+      //   "id": 27
+      //   },
+      //   "reporter": {
+      //   "id": 27
+      //   },
+      //   "project": {
+      //   "id": 5
+      //   },
+        
+      //   "spentTime": 100,
+      //   "currentStatus": "In progress 1"
+      //   }
       var ticket = {
-        user: newUserID,
+        owner: newUserID,
         
       };
+      Ext.Ajax.request({
+        url: Urls.endpoint("/api/updateStatus/"),
+        method: "POST",
+        jsonData: ticket,
+        headers: {
+          authorization: localStorage.getItem("JWT")
+        },
+        success: function(response) {
+          me.loadStore("Tickets", null);
+          Ext.MessageBox.alert("Ok", "Ticket successfully updated");
+        },
+        failure: function(response) {
+          Ext.MessageBox.alert("Error", "Cannot update ticket");
+        }
+      });
     },
 
     getUserID: function(username){
