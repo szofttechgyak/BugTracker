@@ -62,6 +62,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         owner: element.data.owner,
         reporter: element.data.reporter,
         status: element.data.currentStatus,
+        project: element.data.project,
         comment: element.data.comment,
         spentTime: element.data.spentTime,
         description: element.data.ticketDescription,
@@ -109,7 +110,10 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     updateTicket: function() {
       var me = this;
+      var ticketID = this.dialog.ticketID;
       var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
+      console.log(newUserID);
+      var newStatus = Ext.getCmp("ticketstate").getValue();
       // {
       //   "owner": {
       //   "id": 27
@@ -125,11 +129,15 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       //   "currentStatus": "In progress 1"
       //   }
       var ticket = {
-        owner: newUserID,
-        
+        owner: 
+        {
+          id: newUserID
+        },
+        currentStatus: newStatus,
+        spentTime: 52        
       };
       Ext.Ajax.request({
-        url: Urls.endpoint("/api/updateStatus/"),
+        url: Urls.endpoint("/api/updateTicket/" + ticketID),
         method: "POST",
         jsonData: ticket,
         headers: {
@@ -140,7 +148,15 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           Ext.MessageBox.alert("Ok", "Ticket successfully updated");
         },
         failure: function(response) {
-          Ext.MessageBox.alert("Error", "Cannot update ticket");
+          console.log(response);
+          if (response.status == 401)
+          {
+            Ext.MessageBox.alert("Error", "Insufficient permissions");
+          }
+          else
+          {
+            Ext.MessageBox.alert("Error", "Cannot update ticket");
+          }
         }
       });
     },
