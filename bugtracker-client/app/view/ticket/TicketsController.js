@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.ticket.TicketsController", {
     extend: "Ext.app.ViewController",
-  
+
     alias: "controller.ticket.ticketscontroller",
 
     // showNewTicketDialog: function(button, projId) {
@@ -10,7 +10,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         xtype: "newticketdialog",
         projectId: button.projId
       });
-      this.dialog.show();	
+      this.dialog.show();
     },
 
     createNewTicket: function() {
@@ -69,7 +69,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         parentWindow: parent
       });
       parent.hide();
-      this.dialog.show();	
+      this.dialog.show();
     },
 
     beforecloseTicketDetails: function(panel, eOpts) {
@@ -81,7 +81,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       console.log(endpoint);
       this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
-  
+
     loadStore: function(type, url) {
       var store = this.getViewModel().getStore(type);
       var proxy = store.getProxy();
@@ -100,6 +100,12 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       this.loadLifecycleStore(userID, ticketID);
     },
 
+
+    loadTicketComments: function(panel, eOpts) {
+      var ticketID = this.dialog.ticketID;
+      this.loadStore("Comments", Urls.endpoint("/api/getCommentsForTicket/" + ticketID));
+    },
+
     onStateSelected: function(combo, record, eOpts) {
       var roleName = record.data.assigneeRole;
       var projectId = this.lookupReference('project-details-ref').projectId;
@@ -116,7 +122,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       console.log(newUserID);
       var newStatus = Ext.getCmp("ticketstate").getValue();
       var ticket = {
-        owner: 
+        owner:
         {
           id: newUserID
         },
@@ -125,7 +131,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           id: projectId
         },
         currentStatus: newStatus,
-        spentTime: 52        
+        spentTime: 52
       };
       Ext.Ajax.request({
         url: Urls.endpoint("/api/updateTicket/" + ticketID),
@@ -154,18 +160,18 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     getUserID: function(username){
       var _id = null;
-      Ext.Ajax.request 
-          ({ 
+      Ext.Ajax.request
+          ({
             async: false,
-            url: Urls.endpoint('/api/userByUserName/') + username, 
-            method: 'GET',    
-            
+            url: Urls.endpoint('/api/userByUserName/') + username,
+            method: 'GET',
+
             headers: {
               'authorization' : localStorage.getItem("JWT")
             },
-            
-            success: function(response) 
-            { 
+
+            success: function(response)
+            {
               _id = Ext.decode(response.responseText).id;
             }
           });

@@ -20,7 +20,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
 
     defaults: {
         xtype: 'panel',
-        width: 150,
+        width: 200,
         autoHeight: false,
         bodyPadding: 5
     },
@@ -103,7 +103,23 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                         ]
                     }
                 ]
-			},
+            },
+            {
+                {
+                    title: 'Comments',
+                    xtype: 'CommentsList',
+                    id: 'commentslist-id',
+                    bind: {
+                        store: "{Comments}"
+                    },
+                    listeners: {
+                        render: "loadCommentsStore"
+                    },
+                    width: '100%',
+                    collapsible: true,
+                    colspan: 5
+                }
+            }
             // {
 			// 	xtype : 'button',
 			// 	text : 'Create Ticket',
