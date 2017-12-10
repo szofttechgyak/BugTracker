@@ -2,7 +2,8 @@ Ext.define('Bugtracker.view.ticket.TicketsList', {
     extend: 'Ext.grid.Panel',
     xtype: 'ticketslist',
     title: 'Tickets',
-    height : Ext.getBody().getViewSize().height,
+    maxHeight: '400',
+    autoScroll: true,
     columns: {
         items: [
             { text: 'Name', dataIndex: 'ticketName', flex: 1, align : 'center'},      
@@ -16,6 +17,7 @@ Ext.define('Bugtracker.view.ticket.TicketsList', {
         ],
     },
     listeners: {
-        activate: 'clearFiltering'
+        activate: 'clearFiltering',
+        rowdblclick: 'onTicketClick'
     }
 });

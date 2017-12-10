@@ -13,19 +13,19 @@ Ext.define("Bugtracker.view.project.admin.ProjectsList", {
       align: "center"
     },
     {
-      text: "S1 Time",
+      text: "S1 Time (in hours)",
       dataIndex: "s1Time",
       flex: 1,
       align: "center"
     },
     {
-      text: "S2 Time",
+      text: "S2 Time (in hours)",
       dataIndex: "s2Time",
       flex: 1,
       align: "center"
     },
     {
-      text: "S3 Time",
+      text: "S3 Time (in hours)",
       dataIndex: "s3Time",
       flex: 1,
       align: "center"

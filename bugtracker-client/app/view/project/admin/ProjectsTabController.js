@@ -1,7 +1,8 @@
 Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   extend: "Ext.app.ViewController",
-
   alias: "controller.project.admin.projectstabcontroller",
+
+  requires: ["Bugtracker.view.project.common.ProjectHistoryDialog"],
 
   showNewProjectDialog: function() {
     var view = this.getView();
@@ -14,13 +15,40 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
   showUpdateProjectDialog: function() {
     var selected = this.lookupReference("projectslist-ref").selection;
     if (selected === null) {
-      Ext.MessageBox.alert("Error", "No selected project!");
+      Ext.MessageBox.alert("Error", "No selected project");
     } else {
       var view = this.getView();
       this.dialog = view.add({
         xtype: "updateprojectdialog"
       });
       this.setProject(this.dialog, selected.data);
+      this.dialog.show();
+    }
+  },
+
+  showAssignUserDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "assignuserdialog"
+      });
+      this.dialog.show();
+    }
+  },
+
+  showProjectHistoryDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "showprojecthistorydialog"
+      });
+      this.loadHistoryStore(selected.data.id);
       this.dialog.show();
     }
   },
@@ -39,7 +67,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
         },
         success: function(response) {
           me.loadProjectStore();
-          Ext.MessageBox.alert("Ok", "Project successfully deleted!");
+          Ext.MessageBox.alert("Ok", "Project successfully deleted");
         },
         failure: function(response) {
           Ext.MessageBox.alert("Error", "Cannot delete project");
@@ -48,7 +76,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     }
   },
 
-  createNewProject: function() {
+  createNewProject: function(btn, event) {
     var me = this;
     var project = {
       projectName: Ext.getCmp("projectname").getValue(),
@@ -73,7 +101,7 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       },
       success: function(response) {
         me.loadProjectStore();
-        Ext.MessageBox.alert("Ok", "Project successfully created!");
+        Ext.MessageBox.alert("Ok", "Project successfully created");
       },
       failure: function(response) {
         Ext.MessageBox.alert("Error", "Cannot create project");
@@ -107,12 +135,48 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
       },
       success: function(response) {
         me.loadProjectStore();
-        Ext.MessageBox.alert("Ok", "Project successfully updated!");
+        Ext.MessageBox.alert("Ok", "Project successfully updated");
       },
       failure: function(response) {
-        Ext.MessageBox.alert("Error", "Cannot update project!");
+        Ext.MessageBox.alert("Error", "Cannot update project");
       }
     });
+    this.dialog.destroy();
+  },
+
+  assignToProject: function() {
+    var me = this;
+    var selected = this.lookupReference("projectslist-ref").selection;
+    var projectUser = {
+      project: {
+        id: selected.id
+      },
+      user: {
+        id: this.getViewModel()
+          .getStore("Users")
+          .findRecord("id", Ext.getCmp("selecteduser").getValue()).data.id,
+      },
+      role: Ext.getCmp("userrole").getValue()
+    };
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project");
+    } else {
+      Ext.Ajax.request({
+        url: Urls.endpoint("/api/addProjectUser"),
+        jsonData: projectUser,
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("JWT")
+        },
+        success: function(response) {
+          me.loadProjectStore();
+          Ext.MessageBox.alert("Ok", "Successfully assigned to project");
+        },
+        failure: function(response) {
+          Ext.MessageBox.alert("Error", "Cannot assign to project");
+        }
+      });
+    }
     this.dialog.destroy();
   },
 
@@ -148,10 +212,22 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     this.loadStore("Users");
   },
 
-  loadStore: function(type) {
+  loadRolesStore: function(panel, eOpts) {
+    var store = this.getViewModel().getStore("Roles");
+    store.load();
+  },
+
+  loadHistoryStore: function(projectId) {
+    this.loadStore("ProjectHistory", Urls.endpoint("/api/projectHistoryByProjectId/" + projectId));
+  },
+
+  loadStore: function(type, url) {
     var store = this.getViewModel().getStore(type);
     var proxy = store.getProxy();
     proxy.headers.authorization = localStorage.getItem("JWT");
+    if (url != undefined && url != null) {
+      proxy.api.read = url;
+    }
     store.setProxy(proxy);
     store.load();
   }

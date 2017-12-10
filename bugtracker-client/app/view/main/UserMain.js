@@ -14,17 +14,19 @@ Ext.define('Bugtracker.view.main.UserMain', {
 
     items: [{
         title: 'My Projects',
-        iconCls: 'fa-home',
+        iconCls: 'fa-newspaper-o',
         items: [{
             xtype: 'userprojectstab'
         }]
-    }, {
-        title: 'Tickets',
-        iconCls: 'fa-ticket',
-        items: [{
-            xtype: 'ticketstab'
-        }]
-    }, {
+    }, 
+    // {
+    //     title: 'Tickets',
+    //     iconCls: 'fa-ticket',
+    //     items: [{
+    //         xtype: 'ticketstab'
+    //     }]
+    // }, 
+    {
         title: 'Settings',
         iconCls: 'fa-cog',
         bind: {

@@ -353,6 +353,54 @@ Nincs
 }
 ```
 
+# Felhasználóhoz rendelt projektek lekérése
+`GET http://host/bugtracker/api/assignedProjects/id`
+
+## A lekérdezés paraméterei
+
+  * **id:** a felhasználó azonosítója
+
+## HTTP státusz kódok
+
+  * **200 OK:** sikeresen visszakaptuk a felhasználóhoz rendelt projektek listáját
+  * **401 UNAUTHORIZED:** nincs megfelelő jog a lekérdezés végrehajtására
+
+## Válasz 
+- Sikerült
+```json
+[
+  {
+    "id": 5,
+    "projectName": "Bugtracker",
+    "projectDescription": "Bugtracker Project",
+    "defaultApprover": {
+      "id": 27,
+      "userName": "kiraly",
+      "emailAddress": "alex@alex"
+    },
+    "defaultDeveloper": {
+      "id": 12,
+      "userName": "bec1ke",
+      "emailAddress": "beci@gmail.com"
+    },
+    "s1Time": 2,
+    "s2Time": 5,
+    "s3Time": 7
+  }
+]
+```
+- Nem sikerült
+```json
+{
+  "timestamp": 1509911823555,
+  "status": 401,
+  "error": "Unauthorized",
+  "exception": "exception",
+  "message": "exception message",
+  "path": "/api/assignedProjects/27"
+}
+```
+
 #  Hibajegy / Igény létrehozása
 
 ## HTTP kérés formája
@@ -487,6 +535,75 @@ Nincs
   "path": "/api/ticket/1"
 }
 ```
+
+# Projekthez tartozó hibajegyek megtekintése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/ticketsByProject/id`
+
+## A lekérdezés paraméterei
+
+  * **id:** a projekt azonosítója
+
+## HTTP státusz kódok
+
+  * **200 OK:** az erőforrás rendelkezésre áll
+  * **404 NOTFOUND:** az erőforrás nem található 
+ 
+## Válasz 
+- Sikerült : A lekért dokumentum tartalmazza a projekthez tartozó hibajegyeket
+```json
+[
+  {
+    "id": 8,
+    "ticketName": "UI is slow",
+    "ticketType": "Feature request",
+    "owner": {
+      "id": 34,
+      "userName": "user",
+      "emailAddress": "user@bugtracker.com"
+    },
+    "reporter": {
+      "id": 34,
+      "userName": "user",
+      "emailAddress": "user@bugtracker.com"
+    },
+    "project": {
+      "id": 12,
+      "projectName": "TestProject2",
+      "projectDescription": "2 This is a test project",
+      "defaultApprover": {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex"
+      },
+      "defaultDeveloper": {
+        "id": 29,
+        "userName": "Marcsi2",
+        "emailAddress": "Marcsi@gmail.com"
+      },
+      "s1Time": 2,
+      "s2Time": 5,
+      "s3Time": 7
+    },
+    "priority": "B",
+    "spentTime": 0,
+    "ticketDescription": "The UI is slow. Please investigate it."
+  }
+]
+```
+- Nem sikerült
+```json
+{
+  "timestamp": 1509911823555,
+  "status": 404,
+  "error": "Not Found",
+  "exception": "exception",
+  "message": "exception message",
+  "path": "/api/ticketsByProject/12"
+}
+```
   
 # Hibajegyhez / Igényhez megjegyzés fűzése
 
@@ -586,7 +703,7 @@ Nincs
   "path": "/api/addStatus"
 }
 ```
-# Hibajegy / Igény státuszának létrehozása
+# Hibajegy / Igény státuszának modositasa
 
 ## HTTP kérés formája
 

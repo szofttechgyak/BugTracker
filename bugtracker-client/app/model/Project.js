@@ -40,7 +40,7 @@ Ext.define("Project", {
       type: "auto"
     },
     {
-      name: "history",
+      name: "projectUser",
       type: "auto"
     }
   ]
