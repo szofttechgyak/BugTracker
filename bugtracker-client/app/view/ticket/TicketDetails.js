@@ -60,8 +60,8 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 colspan: 5
             },
             {
-				xtype : 'form',
-				title : 'Manage ticket',
+        				xtype : 'form',
+        				title : 'Manage ticket',
                 margin: '0px 2px 5px 0px',
                 width: '100%',
                 colspan: 5,
@@ -111,7 +111,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                     store: "{Comments}"
                 },
                 listeners: {
-                    render: "loadCommentsStore"
+                    render: "loadTicketComments"
                 },
                 width: '100%',
                 collapsible: true,
