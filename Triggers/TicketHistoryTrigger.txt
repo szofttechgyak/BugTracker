@@ -1,0 +1,41 @@
+CREATE trigger TicketHistoryTrigger                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        utf8                             utf8_unicode_ci                  utf8_unicode_ci                                            
+after UPDATE on Ticket                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+for each row 
+BEGIN
+  IF( NEW.priority <> OLD.priority )
+  THEN
+    INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+      VALUES(now(), 'priority', NEW.priority, OLD.priority, NEW.ticketId );
+  END IF; 
+  
+  IF( NEW.spentTime <> OLD.spentTime )
+  THEN
+     INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+     VALUES(now(), 'spentTime', NEW.spentTime, OLD.spentTime, NEW.ticketId );
+  END IF;
+
+  IF( NEW.ticketDescription <> OLD.ticketDescription )
+  THEN
+    INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+      VALUES(now(), 'ticketDescription', NEW.ticketDescription, OLD.ticketDescription, NEW.ticketId );
+  END IF;
+  
+  IF( NEW.ticketName <> OLD.ticketName )
+  THEN
+    INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+     VALUES(now(), 'ticketName', NEW.ticketName, OLD.ticketName, NEW.ticketId );
+  END IF;
+  
+  IF( NEW.ticketType <> OLD.ticketType )
+  THEN
+    INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+      VALUES(now(), 'ticketType', NEW.ticketType, OLD.ticketType, NEW.ticketId );
+  END IF;
+  
+    IF( NEW.ownerId <> OLD.ownerId )
+  THEN
+    INSERT INTO TicketHistory( dateOfChange, fieldName, newValue, oldValue, ticketId)
+     VALUES(now(), 'ownerId', NEW.ownerId, OLD.ownerId, NEW.ticketId );
+  END IF;
+  
+END
