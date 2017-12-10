@@ -12,6 +12,5 @@ Ext.define('Bugtracker.view.ticket.TicketTypeSelector', {
             {"type":"Bug"},
             {"type":"Feature request"}
             ]
-    }),
-    renderTo: Ext.getBody()
+    })
 })

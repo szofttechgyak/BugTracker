@@ -2,7 +2,9 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
     extend: "Ext.window.Window",
   
     xtype: "userprojectdetails",
+    reference: 'project-details-ref',
     floating: true,
+    draggable: false,
     centered: true,
     width: '70%',
     y: 50,
@@ -20,7 +22,7 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
     defaults: {
         xtype: 'panel',
         width: 200,
-        autoHeight: false,
+        autoHeight: true,
         bodyPadding: 5
     },
 

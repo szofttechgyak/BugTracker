@@ -51,52 +51,138 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     },
 
     onTicketClick: function(record, element, rowIndex, e, eOpts) {
-      alert('Feature not implemented')
-      // var view = this.getView();
-      // this.dialog = view.add({
-      //   xtype: "userprojectdetails",
-      //   projectId : element.data.id,
-      //   title: element.data.projectName,
-      //   approver: element.data.defaultApprover,
-      //   developer: element.data.defaultDeveloper,
-      //   s1: element.data.s1Time,
-      //   s2: element.data.s2Time,
-      //   s3: element.data.s3Time,
-      //   description: element.data.projectDescription,
-      // });
-      // this.dialog.show();	
+      var view = this.getView();
+      var parent = this.lookupReference('project-details-ref');
+      console.log(element.data);
+      this.dialog = view.add({
+        xtype: "ticketdetails",
+        ticketID : element.data.id,
+        title: element.data.ticketName,
+        type: element.data.ticketType,
+        owner: element.data.owner,
+        reporter: element.data.reporter,
+        status: element.data.currentStatus,
+        project: element.data.project,
+        comment: element.data.comment,
+        spentTime: element.data.spentTime,
+        description: element.data.ticketDescription,
+        parentWindow: parent
+      });
+      parent.hide();
+      this.dialog.show();	
+    },
+
+    beforecloseTicketDetails: function(panel, eOpts) {
+      panel.parentWindow.show();
+    },
+
+    loadLifecycleStore: function(userID, ticketID) {
+      var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
+      console.log(endpoint);
+      this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
+    },
+  
+    loadStore: function(type, url) {
+      var store = this.getViewModel().getStore(type);
+      var proxy = store.getProxy();
+      proxy.headers.authorization = localStorage.getItem("JWT");
+      if (url != undefined && url != null) {
+        proxy.api.read = url;
+      }
+      store.setProxy(proxy);
+      store.load();
+      console.log(store);
+    },
+
+    onRenderTicketDetails: function() {
+      var userID = localStorage.getItem("id");
+      var ticketID = this.dialog.ticketID;
+      this.loadLifecycleStore(userID, ticketID);
+    },
+
+    onStateSelected: function(combo, record, eOpts) {
+      var roleName = record.data.role;
+      var projectId = this.lookupReference('project-details-ref').projectId;
+      var endpoint = '/api/getUsersInRole/' + projectId + '?role=' + roleName;
+      console.log(endpoint);
+      this.loadStore("AssignableUsers", Urls.endpoint(endpoint));
+    },
+
+    updateTicket: function() {
+      var me = this;
+      var ticketID = this.dialog.ticketID;
+      var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
+      var projectId = this.lookupReference('project-details-ref').projectId;
+      console.log(newUserID);
+      var newStatus = Ext.getCmp("ticketstate").getValue();
+      // {
+      //   "owner": {
+      //   "id": 27
+      //   },
+      //   "reporter": {
+      //   "id": 27
+      //   },
+      //   "project": {
+      //   "id": 5
+      //   },
+        
+      //   "spentTime": 100,
+      //   "currentStatus": "In progress 1"
+      //   }
+      var ticket = {
+        owner: 
+        {
+          id: newUserID
+        },
+        project:
+        {
+          id: projectId
+        },
+        currentStatus: newStatus,
+        spentTime: 52        
+      };
+      Ext.Ajax.request({
+        url: Urls.endpoint("/api/updateTicket/" + ticketID),
+        method: "POST",
+        jsonData: ticket,
+        headers: {
+          authorization: localStorage.getItem("JWT")
+        },
+        success: function(response) {
+          me.loadStore("Tickets", null);
+          Ext.MessageBox.alert("Ok", "Ticket successfully updated");
+        },
+        failure: function(response) {
+          console.log(response);
+          if (response.status == 401)
+          {
+            Ext.MessageBox.alert("Error", "Insufficient permissions");
+          }
+          else
+          {
+            Ext.MessageBox.alert("Error", "Cannot update ticket");
+          }
+        }
+      });
+    },
+
+    getUserID: function(username){
+      var _id = null;
+      Ext.Ajax.request 
+          ({ 
+            async: false,
+            url: Urls.endpoint('/api/userByUserName/') + username, 
+            method: 'GET',    
+            
+            headers: {
+              'authorization' : localStorage.getItem("JWT")
+            },
+            
+            success: function(response) 
+            { 
+              _id = Ext.decode(response.responseText).id;
+            }
+          });
+      return _id;
     }
-  
-    // onRender: function() {
-    //   this.loadTicketStore();
-    //   this.loadProjectStore();
-    // },
-  
-    // loadTicketStore: function(panel, eOpts) {
-    //   this.loadStore("Tickets");
-    // },
-
-    // loadProjectStore: function(panel, eOpts) {
-    //   this.loadStore("Projects");
-    // },
-  
-    // loadStore: function(type) {
-    //   var store = this.getViewModel().getStore(type);
-    //   var proxy = store.getProxy();
-    //   proxy.headers.authorization = localStorage.getItem("JWT");
-    //   store.setProxy(proxy);
-    //   store.load();
-    // },
-
-    // clearFiltering: function()
-    // {
-    //   var store = this.getViewModel().getStore("Tickets");
-    //   store.clearFilter();
-    // },
-
-    // filterStore: function()
-    // {
-    //   var store = this.getViewModel().getStore("Tickets");
-    //   store.filter('reporter', localStorage.getItem('username'));
-    // }
   });
