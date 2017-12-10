@@ -101,7 +101,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     },
 
     onStateSelected: function(combo, record, eOpts) {
-      var roleName = record.data.role;
+      var roleName = record.data.assigneeRole;
       var projectId = this.lookupReference('project-details-ref').projectId;
       var endpoint = '/api/getUsersInRole/' + projectId + '?role=' + roleName;
       console.log(endpoint);
