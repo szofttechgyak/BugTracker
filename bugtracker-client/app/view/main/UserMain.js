@@ -26,11 +26,12 @@ Ext.define('Bugtracker.view.main.UserMain', {
     //         xtype: 'ticketstab'
     //     }]
     // }, 
-    {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{bogus}'
-        }
-    }]
+    // {
+    //     title: 'Settings',
+    //     iconCls: 'fa-cog',
+    //     bind: {
+    //         html: '{bogus}'
+    //     }
+    // }
+    ]
 });
