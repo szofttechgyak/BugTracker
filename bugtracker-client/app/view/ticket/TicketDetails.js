@@ -105,20 +105,17 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 ]
             },
             {
-                {
-                    title: 'Comments',
-                    xtype: 'CommentsList',
-                    id: 'commentslist-id',
-                    bind: {
-                        store: "{Comments}"
-                    },
-                    listeners: {
-                        render: "loadCommentsStore"
-                    },
-                    width: '100%',
-                    collapsible: true,
-                    colspan: 5
-                }
+                xtype: 'CommentsList',
+                id: 'commentslist-id',
+                bind: {
+                    store: "{Comments}"
+                },
+                listeners: {
+                    render: "loadCommentsStore"
+                },
+                width: '100%',
+                collapsible: true,
+                colspan: 5
             }
             // {
 			// 	xtype : 'button',
