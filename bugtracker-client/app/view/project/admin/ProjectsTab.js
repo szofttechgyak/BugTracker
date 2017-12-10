@@ -47,6 +47,12 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTab", {
         },
         {
           xtype: "button",
+          text: "Show assigned users",
+          margin: "0px 2px 5px 0px",
+          handler: "showAssignedUsersDialog"
+        },
+        {
+          xtype: "button",
           text: "Show history",
           margin: "0px 2px 5px 0px",
           handler: "showProjectHistoryDialog"

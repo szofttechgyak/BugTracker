@@ -53,7 +53,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     onTicketClick: function(record, element, rowIndex, e, eOpts) {
       var view = this.getView();
       var parent = this.lookupReference('project-details-ref');
-      console.log(element.data);
       this.dialog = view.add({
         xtype: "ticketdetails",
         ticketID : element.data.id,
@@ -62,6 +61,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         owner: element.data.owner,
         reporter: element.data.reporter,
         status: element.data.currentStatus,
+        project: element.data.project,
         comment: element.data.comment,
         spentTime: element.data.spentTime,
         description: element.data.ticketDescription,
@@ -77,7 +77,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     loadLifecycleStore: function(userID, ticketID) {
       var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
-      console.log(endpoint);
       this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
   
@@ -90,7 +89,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       }
       store.setProxy(proxy);
       store.load();
-      console.log(store);
     },
 
     onRenderTicketDetails: function() {
@@ -100,36 +98,35 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     },
 
     onStateSelected: function(combo, record, eOpts) {
-      var roleName = record.data.role;
+      var roleName = record.data.assigneeRole;
       var projectId = this.lookupReference('project-details-ref').projectId;
       var endpoint = '/api/getUsersInRole/' + projectId + '?role=' + roleName;
-      console.log(endpoint);
       this.loadStore("AssignableUsers", Urls.endpoint(endpoint));
     },
 
     updateTicket: function() {
       var me = this;
-      var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
-      // {
-      //   "owner": {
-      //   "id": 27
-      //   },
-      //   "reporter": {
-      //   "id": 27
-      //   },
-      //   "project": {
-      //   "id": 5
-      //   },
-        
-      //   "spentTime": 100,
-      //   "currentStatus": "In progress 1"
-      //   }
+      var ticketID = this.dialog.ticketID;
+      var newOwner = Ext.getCmp("ticketowner").getValue();
+      var newOwnerID = me.getUserID(newOwner);
+      var projectId = this.lookupReference('project-details-ref').projectId;
+      var newStatus = Ext.getCmp("ticketstate").getValue();
+      var currentSpentTime = this.dialog.spentTime;
+      var spent = Ext.getCmp("spentTimeField").getValue();
       var ticket = {
-        owner: newUserID,
-        
+        owner: 
+        {
+          id: newOwnerID
+        },
+        project:
+        {
+          id: projectId
+        },
+        currentStatus: newStatus,
+        spentTime: spent        
       };
       Ext.Ajax.request({
-        url: Urls.endpoint("/api/updateStatus/"),
+        url: Urls.endpoint("/api/updateTicket/" + ticketID),
         method: "POST",
         jsonData: ticket,
         headers: {
@@ -137,10 +134,25 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         },
         success: function(response) {
           me.loadStore("Tickets", null);
+          me.dialog.owner = newOwner;
+          Ext.getCmp("owner").update(newOwner);
+          Ext.getCmp("status").update(newStatus);
+          var newSpentTime = parseInt(currentSpentTime) + parseInt(spent)
+          Ext.getCmp("currentspenttime").update(newSpentTime);
+          me.onRenderTicketDetails();
+          
           Ext.MessageBox.alert("Ok", "Ticket successfully updated");
         },
         failure: function(response) {
-          Ext.MessageBox.alert("Error", "Cannot update ticket");
+          console.log(response);
+          if (response.status == 401)
+          {
+            Ext.MessageBox.alert("Error", "Insufficient permissions");
+          }
+          else
+          {
+            Ext.MessageBox.alert("Error", "Cannot update ticket");
+          }
         }
       });
     },

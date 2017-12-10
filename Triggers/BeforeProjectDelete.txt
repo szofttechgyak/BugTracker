@@ -1,0 +1,12 @@
+CREATE TRIGGER before_project_delete
+BEFORE DELETE
+   ON Project FOR EACH ROW
+
+BEGIN
+   
+   delete from ProjectHistory where projectId = OLD.projectId;
+   delete from ProjectUser where projectId = OLD.projectId;
+   delete from Status where ticketId in (select ticketId from Ticket where projectId = OLD.projectId);
+   delete from TicketHistory where TicketId in (select ticketId from Ticket where projectId = OLD.projectId);
+   delete from Ticket where projectId = OLD.projectId; 
+  end;
