@@ -115,20 +115,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       var projectId = this.lookupReference('project-details-ref').projectId;
       console.log(newUserID);
       var newStatus = Ext.getCmp("ticketstate").getValue();
-      // {
-      //   "owner": {
-      //   "id": 27
-      //   },
-      //   "reporter": {
-      //   "id": 27
-      //   },
-      //   "project": {
-      //   "id": 5
-      //   },
-        
-      //   "spentTime": 100,
-      //   "currentStatus": "In progress 1"
-      //   }
       var ticket = {
         owner: 
         {

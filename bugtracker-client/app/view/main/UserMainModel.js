@@ -24,6 +24,9 @@ Ext.define('Bugtracker.view.main.UserMainModel', {
         },
         AssignableUsers: {
           type: 'assignableusers'
+        },
+        AssignedUsers : {
+          type: "assignedusers"
         }
       },
 
