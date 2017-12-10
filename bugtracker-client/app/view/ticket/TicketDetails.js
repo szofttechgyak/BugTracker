@@ -39,7 +39,8 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Owner',
-                html: me.owner
+                html: me.owner,
+                id: 'owner'
             },
             {
                 title: 'Type',
@@ -47,11 +48,13 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Status',
-                html: me.status
+                html: me.status,
+                id: 'status'
             },
             {
                 title: 'Spent time',
-                html: me.spentTime.toString()
+                html: me.spentTime,
+                id: 'currentspenttime'
             },
             {
                 title: 'Description',
@@ -86,6 +89,16 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                         bind: {
                             store: "{AssignableUsers}"
                         }
+                    },
+                    {
+                        xtype: "numberfield",
+                        name: "Time spent on ticket",
+                        id: "spentTimeField",
+                        fieldLabel: "Spent time",
+                        minvalue: 0,
+                        allowBlank: false,
+                        blankText: 'Set time',
+                        emptyText : 'in hours'
                     },
                     {
                         xtype : 'toolbar',
