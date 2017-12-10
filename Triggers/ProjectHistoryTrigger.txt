@@ -1,0 +1,46 @@
+CREATE trigger ProjectHistoryTrigger                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        utf8                             utf8_unicode_ci                  utf8_unicode_ci                                            
+after UPDATE on Project                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+for each row  
+BEGIN
+  IF( NEW.ProjectDescription <> OLD.ProjectDescription ) 
+  THEN
+    INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 'ProjectDescription', NEW.ProjectDescription, OLD.ProjectDescription, NEW.projectId );
+  END IF; 
+  
+  IF( NEW.ProjectName <> OLD.ProjectName )
+  THEN
+     INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 'ProjectName', NEW.ProjectName, OLD.ProjectName, NEW.projectId );
+  END IF;
+
+  IF( NEW.s1Time <> OLD.s1Time )
+  THEN
+    INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 's1Time', NEW.s1Time, OLD.s1Time, NEW.projectId );
+  END IF;
+  
+  IF( NEW.s2Time <> OLD.s2Time )
+  THEN
+    INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 's2Time', NEW.s2Time, OLD.s2Time, NEW.projectId );
+  END IF;
+  
+  IF( NEW.s3Time <> OLD.s3Time )
+  THEN
+     INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 's3Time', NEW.s3Time, OLD.s3Time, NEW.projectId );
+  END IF;
+  
+    IF( NEW.defaultApproverId <> OLD.defaultApproverId )
+  THEN
+     INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+      VALUES(now(), 'defaultApproverId', NEW.defaultApproverId, OLD.defaultApproverId, NEW.projectId );
+  END IF;
+  
+  IF( NEW.defaultDeveloperId <> OLD.defaultDeveloperId )
+  THEN
+     INSERT INTO ProjectHistory( dateOfChange, fieldName, newValue, oldValue, projectId)
+       VALUES(now(), 'defaultDeveloperId', NEW.defaultDeveloperId, OLD.defaultDeveloperId, NEW.projectId );
+  END IF;
+END
