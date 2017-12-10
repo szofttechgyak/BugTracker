@@ -626,3 +626,380 @@ Nincs
   "path": "/api/updateStatus"
 }
 ```
+
+# Hibajegy / Igény -hez rendelt userek lekérése csoportositva
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/getUserRolesByProject`
+
+## HTTP státusz kódok
+
+  * **200 OK:** megtalálta a keresett sorokat
+  * **404 NOT FOUND:** nem található megadott azonosítójú projektbenhez rendelt felhasználó
+## A lekérdezés paraméterei
+
+  * **ProjectId:** a projekt azonosítója
+
+## Válasz 
+- Sikerült
+**200 OK**
+```json
+[
+  {
+    "roleName": "Customer",
+    "users": [
+      {
+        "id": 46,
+        "userName": "elte",
+        "emailAddress": "elte",
+        "password": "elte",
+        "admin": false
+      }
+    ]
+  },
+  {
+    "roleName": "Developer",
+    "users": [
+      {
+        "id": 44,
+        "userName": "mike",
+        "emailAddress": "asdasd",
+        "password": "123",
+        "admin": false
+      }
+    ]
+  },
+  {
+    "roleName": "Approver",
+    "users": [
+      {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex",
+        "password": "123",
+        "admin": false
+      }
+    ]
+  }
+]
+```
+# Project History lekérése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/projectHistory`
+
+## HTTP státusz kódok
+
+  * **200 OK:** megtalálta a keresett sorokat
+  * **404 NOT FOUND:** nem található a projektekhez history
+
+## Válasz 
+- Sikerült
+**200 OK**
+```json
+[
+  {
+    "id": 1,
+    "project": {
+      "id": 4,
+      "projectName": "Project1 2 Updated",
+      "projectDescription": "This is an 2 updated project",
+      "defaultApprover": {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex",
+        "password": "123",
+        "admin": false
+      },
+      "defaultDeveloper": {
+        "id": 29,
+        "userName": "Marcsi2",
+        "emailAddress": "Marcsi@gmail.com",
+        "password": "12345",
+        "admin": false
+      },
+      "s1Time": 10,
+      "s2Time": 5,
+      "s3Time": 7
+    },
+    "dateOfChange": "2017-11-19",
+    "fieldName": "s3Time",
+    "oldValue": "5",
+    "newValue": "5"
+  },
+  {
+    "id": 2,
+    "project": {
+      "id": 4,
+      "projectName": "Project1 2 Updated",
+      "projectDescription": "This is an 2 updated project",
+      "defaultApprover": {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex",
+        "password": "123",
+        "admin": false
+      },
+      "defaultDeveloper": {
+        "id": 29,
+        "userName": "Marcsi2",
+        "emailAddress": "Marcsi@gmail.com",
+        "password": "12345",
+        "admin": false
+      },
+      "s1Time": 10,
+      "s2Time": 5,
+      "s3Time": 7
+    },
+    "dateOfChange": "2017-11-19",
+    "fieldName": "s1Time",
+    "oldValue": "5",
+    "newValue": "10"
+  }
+]
+```
+
+# Adott Project History sorainak lekérése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/projectHistory/projectId`
+
+## HTTP státusz kódok
+
+  * **200 OK:** megtalálta a keresett sorokat
+  * **404 NOT FOUND:** nem található a megadott projekthez history
+
+## Válasz 
+- Sikerült
+**200 OK**
+```json
+{
+  "id": 5,
+  "project": {
+    "id": 38,
+    "projectName": "dsadas",
+    "projectDescription": "aasdasd",
+    "defaultApprover": {
+      "id": 11,
+      "userName": "Pistaka",
+      "emailAddress": "Pista@gmail.com",
+      "password": "123456",
+      "admin": false
+    },
+    "defaultDeveloper": {
+      "id": 11,
+      "userName": "Pistaka",
+      "emailAddress": "Pista@gmail.com",
+      "password": "123456",
+      "admin": false
+    },
+    "s1Time": 10,
+    "s2Time": 10,
+    "s3Time": 10
+  },
+  "dateOfChange": "2017-11-20",
+  "fieldName": "s1Time",
+  "oldValue": "1",
+  "newValue": "2"
+}
+```
+# Hibajegy / Igény History lekérése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/ticketHistory`
+
+## HTTP státusz kódok
+
+  * **200 OK:** megtalálta a keresett sorokat
+  * **404 NOT FOUND:** nem található a hibajegy/igényekhez history
+
+## Válasz 
+- Sikerült
+**200 OK**
+```json
+[
+  {
+    "id": 1,
+    "ticket": {
+      "id": 3,
+      "ticketName": "2 TicketTestName",
+      "ticketType": "Bug",
+      "owner": {
+        "id": 12,
+        "userName": "bec1ke",
+        "emailAddress": "beci@gmail.com",
+        "password": "123",
+        "admin": false
+      },
+      "reporter": {
+        "id": 11,
+        "userName": "Pistaka",
+        "emailAddress": "Pista@gmail.com",
+        "password": "123456",
+        "admin": false
+      },
+      "project": {
+        "id": 4,
+        "projectName": "Project1 2 Updated",
+        "projectDescription": "This is an 2 updated project",
+        "defaultApprover": {
+          "id": 27,
+          "userName": "kiraly",
+          "emailAddress": "alex@alex",
+          "password": "123",
+          "admin": false
+        },
+        "defaultDeveloper": {
+          "id": 29,
+          "userName": "Marcsi2",
+          "emailAddress": "Marcsi@gmail.com",
+          "password": "12345",
+          "admin": false
+        },
+        "s1Time": 10,
+        "s2Time": 5,
+        "s3Time": 7
+      },
+      "priority": "B",
+      "spentTime": 7,
+      "ticketDescription": " 2 TestDescription",
+      "currentStatus": null
+    },
+    "dateOfChange": "2017-11-19",
+    "fieldName": "priority",
+    "oldValue": "C",
+    "newValue": "B"
+  },
+  {
+    "id": 2,
+    "ticket": {
+      "id": 24,
+      "ticketName": "Alex tesztel",
+      "ticketType": "Bug",
+      "owner": {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex",
+        "password": "123",
+        "admin": false
+      },
+      "reporter": {
+        "id": 27,
+        "userName": "kiraly",
+        "emailAddress": "alex@alex",
+        "password": "123",
+        "admin": false
+      },
+      "project": {
+        "id": 5,
+        "projectName": "Bugtracker",
+        "projectDescription": "Bugtracker Project",
+        "defaultApprover": {
+          "id": 27,
+          "userName": "kiraly",
+          "emailAddress": "alex@alex",
+          "password": "123",
+          "admin": false
+        },
+        "defaultDeveloper": {
+          "id": 12,
+          "userName": "bec1ke",
+          "emailAddress": "beci@gmail.com",
+          "password": "123",
+          "admin": false
+        },
+        "s1Time": 2,
+        "s2Time": 5,
+        "s3Time": 7
+      },
+      "priority": "C",
+      "spentTime": 1,
+      "ticketDescription": "Postman TestDescription",
+      "currentStatus": "In progress"
+    },
+    "dateOfChange": "2017-11-26",
+    "fieldName": "priority",
+    "oldValue": "S1",
+    "newValue": "C"
+  }
+]
+```
+
+# Adott Hibajegy / Igény History sorainak lekérése
+
+## HTTP kérés formája
+
+`GET http://host/bugtracker/api/ticketHistory/ticketId`
+
+## HTTP státusz kódok
+
+  * **200 OK:** megtalálta a keresett sorokat
+  * **404 NOT FOUND:** nem található a megadott Hibajegy / Igény -hez history
+
+## Válasz 
+- Sikerült
+**200 OK**
+```json
+{
+  "id": 10,
+  "ticket": {
+    "id": 46,
+    "ticketName": "huhu",
+    "ticketType": "Bug",
+    "owner": {
+      "id": 44,
+      "userName": "mike",
+      "emailAddress": "asdasd",
+      "password": "123",
+      "admin": false
+    },
+    "reporter": {
+      "id": 46,
+      "userName": "elte",
+      "emailAddress": "elte",
+      "password": "elte",
+      "admin": false
+    },
+    "project": {
+      "id": 48,
+      "projectName": "SzofttechGyak",
+      "projectDescription": "LOL",
+      "defaultApprover": {
+        "id": 46,
+        "userName": "elte",
+        "emailAddress": "elte",
+        "password": "elte",
+        "admin": false
+      },
+      "defaultDeveloper": {
+        "id": 46,
+        "userName": "elte",
+        "emailAddress": "elte",
+        "password": "elte",
+        "admin": false
+      },
+      "s1Time": 1,
+      "s2Time": 2,
+      "s3Time": 3
+    },
+    "priority": "S1",
+    "spentTime": 52,
+    "ticketDescription": "123",
+    "currentStatus": "In progress"
+  },
+  "dateOfChange": "2017-12-07",
+  "fieldName": "ownerId",
+  "oldValue": "46",
+  "newValue": "44"
+}
+```
+
+
+
+
+
+
