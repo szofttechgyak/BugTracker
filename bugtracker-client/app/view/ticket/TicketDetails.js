@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.ticket.TicketDetails", {
     extend: "Ext.window.Window",
-  
+
     xtype: "ticketdetails",
     floating: true,
     draggable: false,
@@ -20,7 +20,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
 
     defaults: {
         xtype: 'panel',
-        width: 200,
+        width: 150,
         autoHeight: false,
         bodyPadding: 5
     },
@@ -65,7 +65,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 margin: '0px 2px 5px 0px',
                 width: '100%',
                 colspan: 5,
-                items: 
+                items:
                 [
                     {
                         xtype : 'ticketstateselector',
@@ -90,7 +90,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                     {
                         xtype : 'toolbar',
                         docked : 'bottom',
-                        items : 
+                        items :
                         [
                             '->',
                             {
