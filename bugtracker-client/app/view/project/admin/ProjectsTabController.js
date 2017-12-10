@@ -39,6 +39,20 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
     }
   },
 
+  showAssignedUsersDialog: function() {
+    var selected = this.lookupReference("projectslist-ref").selection;
+    if (selected === null) {
+      Ext.MessageBox.alert("Error", "No selected project!");
+    } else {
+      var view = this.getView();
+      this.dialog = view.add({
+        xtype: "assignedusersdialog"
+      });
+      this.loadAssignedUserStore(selected.data.id);
+      this.dialog.show();
+    }
+  },
+
   showProjectHistoryDialog: function() {
     var selected = this.lookupReference("projectslist-ref").selection;
     if (selected === null) {
@@ -219,6 +233,10 @@ Ext.define("Bugtracker.view.project.admin.ProjectsTabController", {
 
   loadHistoryStore: function(projectId) {
     this.loadStore("ProjectHistory", Urls.endpoint("/api/projectHistoryByProjectId/" + projectId));
+  },
+
+  loadAssignedUserStore: function(projectId) {
+    this.loadStore("AssignedUsers", Urls.endpoint("/api/getUserRolesByProject?projectId=" +  projectId));
   },
 
   loadStore: function(type, url) {
