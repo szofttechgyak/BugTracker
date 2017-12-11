@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.ticket.TicketDetails", {
     extend: "Ext.window.Window",
-  
+
     xtype: "ticketdetails",
     floating: true,
     draggable: false,
@@ -39,7 +39,8 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Owner',
-                html: me.owner
+                html: me.owner,
+                id: 'owner'
             },
             {
                 title: 'Type',
@@ -47,11 +48,13 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
             },
             {
                 title: 'Status',
-                html: me.status
+                html: me.status,
+                id: 'status'
             },
             {
                 title: 'Spent time',
-                html: me.spentTime.toString()
+                html: me.spentTime,
+                id: 'currentspenttime'
             },
             {
                 title: 'Description',
@@ -60,12 +63,19 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 colspan: 5
             },
             {
-				xtype : 'form',
-				title : 'Manage ticket',
+                xtype: "button",
+                text: "Add comment",
+                margin: "0px 2px 5px 0px",
+                handler: "showNewCommentDialog",
+                colspan: 5
+            },
+            {
+        				xtype : 'form',
+        				title : 'Manage ticket',
                 margin: '0px 2px 5px 0px',
                 width: '100%',
                 colspan: 5,
-                items: 
+                items:
                 [
                     {
                         xtype : 'ticketstateselector',
@@ -88,9 +98,19 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                         }
                     },
                     {
+                        xtype: "numberfield",
+                        name: "Time spent on ticket",
+                        id: "spentTimeField",
+                        fieldLabel: "Spent time",
+                        minvalue: 0,
+                        allowBlank: false,
+                        blankText: 'Set time',
+                        emptyText : 'in hours'
+                    },
+                    {
                         xtype : 'toolbar',
                         docked : 'bottom',
-                        items : 
+                        items :
                         [
                             '->',
                             {
@@ -103,7 +123,21 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                         ]
                     }
                 ]
-			},
+            },
+            {
+                title: 'Comments',
+                xtype: 'commentslist',
+                id: 'commentslist-id',
+                bind: {
+                    store: "{Comments}"
+                },
+                listeners: {
+                    render: "loadTicketComments"
+                },
+                width: '100%',
+                collapsible: true,
+                colspan: 5
+            }
             // {
 			// 	xtype : 'button',
 			// 	text : 'Create Ticket',
