@@ -31,11 +31,11 @@ Ext.define("Bugtracker.view.project.user.ProjectDetails", {
         this.items = [
             {
                 title: 'Developer',
-                html: me.approver
+                html: me.developer
             },
             {
                 title: 'Approver',
-                html: me.developer
+                html: me.approver
             },
             {
                 title: 'S1',
