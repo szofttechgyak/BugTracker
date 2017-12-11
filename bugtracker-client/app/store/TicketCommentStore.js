@@ -14,7 +14,7 @@ Ext.define("Bugtracker.store.TicketCommentStore", {
       authorization: localStorage.getItem("JWT")
     },
 
-    url: Urls.endpoint("/api/getCommentsForTicket"),
+    url: Urls.endpoint("/api/comments"),
     reader: {
       type: "json"
     },
