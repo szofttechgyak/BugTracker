@@ -105,6 +105,47 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       this.loadStore("Comments", Urls.endpoint("/api/getCommentsForTicket/" + ticketID));
     },
 
+    showNewCommentDialog: function(button, e, args) {
+      var view = this.getView();
+      var ticketId = this.dialog.ticketID;
+      this.dialog = view.add({
+        xtype: "newcommentdialog",
+        projectId: button.projId,
+        ticketId: ticketId
+      });
+      this.dialog.show();
+    },
+
+    addNewComment: function() {
+      var me = this;
+      var dt = new Date('1/10/2007 03:05:01 PM GMT-0600');
+      var comment = {
+        owner : {"id": localStorage.getItem("id")},
+        description : Ext.getCmp("commentdescription").getValue(),
+        ticket: me.dialog.ticketId,
+        date: Ext.Date.format(dt, 'Y-m-d')
+      };
+
+      Ext.Ajax.request({
+        url : Urls.endpoint("/api/addComment"),
+        method : 'POST',
+        jsonData : comment,
+        headers: {
+          'authorization' : localStorage.getItem("JWT")
+        },
+        success : function(response) {
+          me.loadStore("Comments");
+          Ext.MessageBox.alert('Ok',
+              'Comment successfully added');
+        },
+        failure : function(response) {
+          Ext.MessageBox.alert('Error',
+              'Cannot add comment');
+        }
+      });
+      this.dialog.destroy();
+    },
+
     onStateSelected: function(combo, record, eOpts) {
       var roleName = record.data.assigneeRole;
       var projectId = this.lookupReference('project-details-ref').projectId;
@@ -131,7 +172,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           id: projectId
         },
         currentStatus: newStatus,
-        spentTime: spent        
+        spentTime: spent
       };
       Ext.Ajax.request({
         url: Urls.endpoint("/api/updateTicket/" + ticketID),
@@ -148,7 +189,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           var newSpentTime = parseInt(currentSpentTime) + parseInt(spent)
           Ext.getCmp("currentspenttime").update(newSpentTime);
           me.onRenderTicketDetails();
-          
+
           Ext.MessageBox.alert("Ok", "Ticket successfully updated");
         },
         failure: function(response) {

@@ -63,6 +63,13 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 colspan: 5
             },
             {
+                xtype: "button",
+                text: "Add comment",
+                margin: "0px 2px 5px 0px",
+                handler: "showNewCommentDialog",
+                colspan: 5
+            },
+            {
         				xtype : 'form',
         				title : 'Manage ticket',
                 margin: '0px 2px 5px 0px',
