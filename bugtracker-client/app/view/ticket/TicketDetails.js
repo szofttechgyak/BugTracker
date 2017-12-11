@@ -105,7 +105,8 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 ]
             },
             {
-                xtype: 'CommentsList',
+                title: 'Comments',
+                xtype: 'commentslist',
                 id: 'commentslist-id',
                 bind: {
                     store: "{Comments}"
