@@ -89,6 +89,8 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       }
       store.setProxy(proxy);
       store.load();
+      console.log(type);
+      console.log(store.data);
     },
 
     onRenderTicketDetails: function() {

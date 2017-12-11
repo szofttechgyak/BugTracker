@@ -7,7 +7,7 @@ Ext.define("CommentEntry", {
       mapping: "owner.userName"
     },
     {
-      name: "comment",
+      name: "description",
       type: "auto"
     }
   ]
