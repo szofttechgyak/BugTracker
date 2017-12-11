@@ -9,6 +9,10 @@ Ext.define("CommentEntry", {
     {
       name: "description",
       type: "auto"
+    },
+    {
+      name: "date",
+      type: "auto"
     }
   ]
 });

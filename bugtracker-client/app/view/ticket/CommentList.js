@@ -7,7 +7,8 @@ Ext.define('Bugtracker.view.ticket.CommentsList', {
     columns: {
         items: [
             { text: 'Owner', dataIndex: 'owner', flex: 1, align : 'center' },
-            { text: 'Comment', dataIndex: 'description', flex: 5, align : 'left', cellWrap: true }
+            { text: 'Comment', dataIndex: 'description', flex: 5, align : 'left', cellWrap: true },
+            { text: 'Date', dataIndex: 'date', flex: 1, align : 'center' },
         ],
     }
 });
