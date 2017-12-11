@@ -121,7 +121,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       var comment = {
         owner : {"id": localStorage.getItem("id")},
         description : Ext.getCmp("commentdescription").getValue(),
-        ticket: me.dialog.ticketId
+        ticket: {"id": me.dialog.ticketId}
       };
 
       Ext.Ajax.request({
