@@ -53,7 +53,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
     onTicketClick: function(record, element, rowIndex, e, eOpts) {
       var view = this.getView();
       var parent = this.lookupReference('project-details-ref');
-      console.log(element.data);
       this.dialog = view.add({
         xtype: "ticketdetails",
         ticketID : element.data.id,
@@ -78,7 +77,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     loadLifecycleStore: function(userID, ticketID) {
       var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
-      console.log(endpoint);
       this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
 
@@ -91,7 +89,6 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       }
       store.setProxy(proxy);
       store.load();
-      console.log(store);
     },
 
     onRenderTicketDetails: function() {
@@ -110,28 +107,29 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       var roleName = record.data.assigneeRole;
       var projectId = this.lookupReference('project-details-ref').projectId;
       var endpoint = '/api/getUsersInRole/' + projectId + '?role=' + roleName;
-      console.log(endpoint);
       this.loadStore("AssignableUsers", Urls.endpoint(endpoint));
     },
 
     updateTicket: function() {
       var me = this;
       var ticketID = this.dialog.ticketID;
-      var newUserID = me.getUserID(Ext.getCmp("ticketowner").getValue());
+      var newOwner = Ext.getCmp("ticketowner").getValue();
+      var newOwnerID = me.getUserID(newOwner);
       var projectId = this.lookupReference('project-details-ref').projectId;
-      console.log(newUserID);
       var newStatus = Ext.getCmp("ticketstate").getValue();
+      var currentSpentTime = this.dialog.spentTime;
+      var spent = Ext.getCmp("spentTimeField").getValue();
       var ticket = {
         owner:
         {
-          id: newUserID
+          id: newOwnerID
         },
         project:
         {
           id: projectId
         },
         currentStatus: newStatus,
-        spentTime: 52
+        spentTime: spent        
       };
       Ext.Ajax.request({
         url: Urls.endpoint("/api/updateTicket/" + ticketID),
@@ -142,6 +140,13 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         },
         success: function(response) {
           me.loadStore("Tickets", null);
+          me.dialog.owner = newOwner;
+          Ext.getCmp("owner").update(newOwner);
+          Ext.getCmp("status").update(newStatus);
+          var newSpentTime = parseInt(currentSpentTime) + parseInt(spent)
+          Ext.getCmp("currentspenttime").update(newSpentTime);
+          me.onRenderTicketDetails();
+          
           Ext.MessageBox.alert("Ok", "Ticket successfully updated");
         },
         failure: function(response) {
