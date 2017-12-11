@@ -3,7 +3,7 @@ Ext.define("Bugtracker.store.CommentsStore", {
   alias: "store.comments",
   autoLoad: false,
   autoSync: true,
-  model: "Comment",
+  model: "CommentEntry",
 
   requires: ["Urls"],
 
