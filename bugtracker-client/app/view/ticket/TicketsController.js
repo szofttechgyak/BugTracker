@@ -118,12 +118,10 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     addNewComment: function() {
       var me = this;
-      var dt = new Date('1/10/2007 03:05:01 PM GMT-0600');
       var comment = {
         owner : {"id": localStorage.getItem("id")},
         description : Ext.getCmp("commentdescription").getValue(),
-        ticket: me.dialog.ticketId,
-        date: Ext.Date.format(dt, 'Y-m-d')
+        ticket: me.dialog.ticketId
       };
 
       Ext.Ajax.request({
