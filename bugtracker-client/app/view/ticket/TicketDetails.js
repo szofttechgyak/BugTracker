@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.ticket.TicketDetails", {
     extend: "Ext.window.Window",
-  
+
     xtype: "ticketdetails",
     floating: true,
     draggable: false,
@@ -63,12 +63,19 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                 colspan: 5
             },
             {
-				xtype : 'form',
-				title : 'Manage ticket',
+                xtype: "button",
+                text: "Add comment",
+                margin: "0px 2px 5px 0px",
+                handler: "showNewCommentDialog",
+                colspan: 5
+            },
+            {
+        				xtype : 'form',
+        				title : 'Manage ticket',
                 margin: '0px 2px 5px 0px',
                 width: '100%',
                 colspan: 5,
-                items: 
+                items:
                 [
                     {
                         xtype : 'ticketstateselector',
@@ -103,7 +110,7 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                     {
                         xtype : 'toolbar',
                         docked : 'bottom',
-                        items : 
+                        items :
                         [
                             '->',
                             {
@@ -116,7 +123,21 @@ Ext.define("Bugtracker.view.ticket.TicketDetails", {
                         ]
                     }
                 ]
-			},
+            },
+            {
+                title: 'Comments',
+                xtype: 'commentslist',
+                id: 'commentslist-id',
+                bind: {
+                    store: "{Comments}"
+                },
+                listeners: {
+                    render: "loadTicketComments"
+                },
+                width: '100%',
+                collapsible: true,
+                colspan: 5
+            }
             // {
 			// 	xtype : 'button',
 			// 	text : 'Create Ticket',

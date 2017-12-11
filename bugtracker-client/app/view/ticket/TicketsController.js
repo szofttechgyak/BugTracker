@@ -1,6 +1,6 @@
 Ext.define("Bugtracker.view.ticket.TicketsController", {
     extend: "Ext.app.ViewController",
-  
+
     alias: "controller.ticket.ticketscontroller",
 
     // showNewTicketDialog: function(button, projId) {
@@ -10,7 +10,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         xtype: "newticketdialog",
         projectId: button.projId
       });
-      this.dialog.show();	
+      this.dialog.show();
     },
 
     createNewTicket: function() {
@@ -68,7 +68,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
         parentWindow: parent
       });
       parent.hide();
-      this.dialog.show();	
+      this.dialog.show();
     },
 
     beforecloseTicketDetails: function(panel, eOpts) {
@@ -79,7 +79,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       var endpoint = '/api/getAllowedChanges?userId=' + userID + '&ticketId=' + ticketID;
       this.loadStore("TicketLifecycle", Urls.endpoint(endpoint));
     },
-  
+
     loadStore: function(type, url) {
       var store = this.getViewModel().getStore(type);
       var proxy = store.getProxy();
@@ -89,12 +89,59 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       }
       store.setProxy(proxy);
       store.load();
+      console.log(type);
+      console.log(store.data);
     },
 
     onRenderTicketDetails: function() {
       var userID = localStorage.getItem("id");
       var ticketID = this.dialog.ticketID;
       this.loadLifecycleStore(userID, ticketID);
+    },
+
+
+    loadTicketComments: function(panel, eOpts) {
+      var ticketID = this.dialog.ticketID;
+      this.loadStore("Comments", Urls.endpoint("/api/getCommentsForTicket/" + ticketID));
+    },
+
+    showNewCommentDialog: function(button, e, args) {
+      var view = this.getView();
+      var ticketId = this.dialog.ticketID;
+      this.dialog = view.add({
+        xtype: "newcommentdialog",
+        projectId: button.projId,
+        ticketId: ticketId
+      });
+      this.dialog.show();
+    },
+
+    addNewComment: function() {
+      var me = this;
+      var comment = {
+        owner : {"id": localStorage.getItem("id")},
+        description : Ext.getCmp("commentdescription").getValue(),
+        ticket: {"id": me.dialog.ticketId}
+      };
+
+      Ext.Ajax.request({
+        url : Urls.endpoint("/api/addComment"),
+        method : 'POST',
+        jsonData : comment,
+        headers: {
+          'authorization' : localStorage.getItem("JWT")
+        },
+        success : function(response) {
+          me.loadStore("Comments");
+          Ext.MessageBox.alert('Ok',
+              'Comment successfully added');
+        },
+        failure : function(response) {
+          Ext.MessageBox.alert('Error',
+              'Cannot add comment');
+        }
+      });
+      this.dialog.destroy();
     },
 
     onStateSelected: function(combo, record, eOpts) {
@@ -114,7 +161,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
       var currentSpentTime = this.dialog.spentTime;
       var spent = Ext.getCmp("spentTimeField").getValue();
       var ticket = {
-        owner: 
+        owner:
         {
           id: newOwnerID
         },
@@ -123,7 +170,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           id: projectId
         },
         currentStatus: newStatus,
-        spentTime: spent        
+        spentTime: spent
       };
       Ext.Ajax.request({
         url: Urls.endpoint("/api/updateTicket/" + ticketID),
@@ -140,7 +187,7 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
           var newSpentTime = parseInt(currentSpentTime) + parseInt(spent)
           Ext.getCmp("currentspenttime").update(newSpentTime);
           me.onRenderTicketDetails();
-          
+
           Ext.MessageBox.alert("Ok", "Ticket successfully updated");
         },
         failure: function(response) {
@@ -159,18 +206,18 @@ Ext.define("Bugtracker.view.ticket.TicketsController", {
 
     getUserID: function(username){
       var _id = null;
-      Ext.Ajax.request 
-          ({ 
+      Ext.Ajax.request
+          ({
             async: false,
-            url: Urls.endpoint('/api/userByUserName/') + username, 
-            method: 'GET',    
-            
+            url: Urls.endpoint('/api/userByUserName/') + username,
+            method: 'GET',
+
             headers: {
               'authorization' : localStorage.getItem("JWT")
             },
-            
-            success: function(response) 
-            { 
+
+            success: function(response)
+            {
               _id = Ext.decode(response.responseText).id;
             }
           });
