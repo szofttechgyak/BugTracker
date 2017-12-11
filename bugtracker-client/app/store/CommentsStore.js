@@ -1,4 +1,4 @@
-Ext.define("Bugtracker.store.TicketCommentStore", {
+Ext.define("Bugtracker.store.CommentsStore", {
   extend: "Ext.data.Store",
   alias: "store.comments",
   autoLoad: false,
