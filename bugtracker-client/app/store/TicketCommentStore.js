@@ -1,9 +1,9 @@
 Ext.define("Bugtracker.store.TicketCommentStore", {
   extend: "Ext.data.Store",
-  alias: "store.ticketcomment",
+  alias: "store.comments",
   autoLoad: false,
   autoSync: true,
-  model: "CommentEntry",
+  model: "Comment",
 
   requires: ["Urls"],
 
@@ -14,7 +14,7 @@ Ext.define("Bugtracker.store.TicketCommentStore", {
       authorization: localStorage.getItem("JWT")
     },
 
-    url: Urls.endpoint("/api/comments"),
+    url: Urls.endpoint("/api/getCommentsForTicket"),
     reader: {
       type: "json"
     },
